@@ -1,10 +1,10 @@
-'<?php
+<?php
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTypeTable extends Migration
+class CreateStatusPayment extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateTypeTable extends Migration
      */
     public function up()
     {
-        Schema::create('type', function (Blueprint $table) {
+        Schema::create('status_payment', function (Blueprint $table) {
             $table->id();
-            $table->string('type_name')->comment('ชื่อชนิดหิน');
+            $table->string('status_payment_name')->comment('ชื่อสถานะชำระเงิน');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ class CreateTypeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('type');
+        Schema::dropIfExists('status_payment');
     }
 }
