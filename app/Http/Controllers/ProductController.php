@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -10,6 +10,8 @@ class ProductController extends Controller
         return view('admin.type');
     }
     public function product(){
-        return view('admin.product');
+        $product = product::all();
+        // $product = Product::all();
+        return view('admin.product', compact('product'));
     }
 }
