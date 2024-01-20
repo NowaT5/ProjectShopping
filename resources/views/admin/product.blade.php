@@ -2,38 +2,88 @@
 
 @section('Productlist', 'page')
 @section('content')
-<h2 class="text text-center py-2">รายการสินค้า</h2>
-<table class="table table-striped-columns">
-    <thead>
-      <tr>
-        <th scope="col">id</th>
-        <th scope="col">ชื่อสินค้า</th>
-        <th scope="col">ราคา</th>
-        <th scope="col">รูปสินค้า</th>
-        <th scope="col">จำนวนสินค้า</th>
-        <th scope="col">type_id</th>
-        <th scope="col">product_type_id</th>
-      </tr>
-    </thead>
-    <tbody class="table-group-divider">
-      <tr>
-        <th scope="row">1</th>
-        <td>test</td>
-        <td>test</td>
-        <td>001</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>test</td>
-        <td>test</td>
-        <td>002</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>test</td>
-        <td>test</td>
-        <td>101</td>
-      </tr>
-    </tbody>
-  </table>
+    <section class="content">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">รายการสินค้า
+                    <button type="button" class="btn bg-gradient-primary" id="Create">
+                        <i class="fa fa-plus"></i> เพิ่มสินค้า
+                    </button>
+                </h3>
+            </div>
+
+            <div class="card-body">
+                <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6"></div>
+                        <div class="col-sm-12 col-md-6"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table id="example2" class="table table-bordered table-hover dataTable dtr-inline"
+                                aria-describedby="example2_info">
+                                <thead>
+                                    <tr>
+                                        <th>id</th>
+                                        <th>ชื่อสินค้า </th>
+                                        <th>ราคา</th>
+                                        <th>รูปสินค้า</th>
+                                        <th>จำนวนสินค้า</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($product as $dd )
+                                    <tr>
+                                        <td>{{$dd->id}}</td>
+                                        <td>{{$dd->product_name}}</td>
+                                        <td>{{$dd->product_price}}</td>
+                                        <td>{{$dd->product_image}}</td>
+                                        <td>{{$dd->product_stock}}</td>
+                                        <td> <a href="" role="button" class="btn btn-sm btn-warning">Edit</a>
+                                            <button type="button" class="btn btn-sm btn-danger delete-item" data-id = "">Delete</button>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    {{-- <div class="row">
+                        <div class="col-sm-12 col-md-5">
+                            <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Showing 1 to
+                                10 of
+                                57 entries</div>
+                        </div>
+                        <div class="col-sm-12 col-md-7">
+                            <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
+                                <ul class="pagination">
+                                    <li class="paginate_button page-item previous disabled" id="example2_previous"><a
+                                            href="#" aria-controls="example2" data-dt-idx="0" tabindex="0"
+                                            class="page-link">Previous</a>
+                                    </li>
+                                    <li class="paginate_button page-item active"><a href="#" aria-controls="example2"
+                                            data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
+                                    <li class="paginate_button page-item "><a href="#" aria-controls="example2"
+                                            data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
+                                    <li class="paginate_button page-item "><a href="#" aria-controls="example2"
+                                            data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
+                                    <li class="paginate_button page-item "><a href="#" aria-controls="example2"
+                                            data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
+                                    <li class="paginate_button page-item "><a href="#" aria-controls="example2"
+                                            data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
+                                    <li class="paginate_button page-item "><a href="#" aria-controls="example2"
+                                            data-dt-idx="6" tabindex="0" class="page-link">6</a></li>
+                                    <li class="paginate_button page-item next" id="example2_next"><a href="#"
+                                            aria-controls="example2" data-dt-idx="7" tabindex="0"
+                                            class="page-link">Next</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div> --}}
+                </div>
+            </div>
+        </div>
+    </section>
 @endsection

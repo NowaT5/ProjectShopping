@@ -47,7 +47,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{route('user')}}" class="nav-link">
-                        <i class="nav-icon fas fa-chart-pie "></i>
+                        <i class="nav-icon fas fa-address-card"></i>
                         <p>
                             User
                         </p>
@@ -55,7 +55,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{route('employee')}}" class="nav-link">
-                        <i class="nav-icon fas fa-chart-pie "></i>
+                        <i class="nav-icon fas fa-user-tie "></i>
                         <p>
                             พนักงาน
                         </p>
@@ -63,7 +63,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{route('type')}}" class="nav-link">
-                        <i class="nav-icon fas fa-chart-pie "></i>
+                        <i class="nav-icon fas fa-apple-alt "></i>
                         <p>
                             ประเภทสินค้า
                         </p>
@@ -71,7 +71,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{route('product')}}" class="nav-link">
-                        <i class="nav-icon fas fa-chart-pie "></i>
+                        <i class="nav-icon fas fa-shopping-cart"></i>
                         <p>
                             สินค้า
                         </p>
@@ -79,7 +79,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{route('order')}}" class="nav-link">
-                        <i class="nav-icon fas fa-chart-pie "></i>
+                        <i class="nav-icon fas fa-dumpster "></i>
                         <p>
                             คำสั่งซื้อ
                         </p>
@@ -87,12 +87,41 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{route('detail')}}" class="nav-link">
-                        <i class="nav-icon fas fa-chart-pie "></i>
+                        <i class="nav-icon fas fa-truck "></i>
                         <p>
                             รายละเอียดคำสั่งซื้อ
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fa fa-shopping-basket"></i>
+                      <p>
+                        รายการสินค้าทั้งหมด
+                        <i class="fas fa-angle-left right"></i>
+                      </p>
+                    </a>
+                    <ul class="nav nav-treeview" style="display: none;">
+                      <li class="nav-item">
+                        <a href="#" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>ประเภทสินค้า</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="#" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>รายละเอียดสินค้า</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="#" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>รายการจำนวนสินค้า</p>
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
