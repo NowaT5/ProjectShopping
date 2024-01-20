@@ -30,6 +30,7 @@ Route::get('/product',[ProductController::class,'product'])->name('product');
 Route::get('/employee',[AdminController::class,'employee'])->name('employee');
 Route::get('/order',[OrderController::class,'order'])->name('order');
 Route::get('/detail',[OrderController::class,'detail'])->name('detail');
+Route::get('/change/{id}',[OrderController::class,'change'])->name('change');
 
 //Route Page เอาไว้แสดงหน้าของ Page เท่านั้น
 Route::get('/page',[PageUserController::class,'index'])->name('Home');

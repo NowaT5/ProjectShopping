@@ -41,4 +41,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    //ดึงข้อมูลลูกค้า
+    public function user()
+    {
+        return $this->belongsTo(user::class);
+    }
+
 }

@@ -5,11 +5,10 @@
     <section class="content">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">รายการสินค้า
+                <h2 class="text text-center py-2">รายการสินค้า</h2>
                     <button type="button" class="btn bg-gradient-primary" id="Create">
                         <i class="fa fa-plus"></i> เพิ่มสินค้า
                     </button>
-                </h3>
             </div>
 
             <div class="card-body">
@@ -33,17 +32,20 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($product as $dd )
-                                    <tr>
-                                        <td>{{$dd->id}}</td>
-                                        <td>{{$dd->product_name}}</td>
-                                        <td>{{$dd->product_price}}</td>
-                                        <td>{{$dd->product_image}}</td>
-                                        <td>{{$dd->product_stock}}</td>
-                                        <td> <a href="" role="button" class="btn btn-sm btn-warning">Edit</a>
-                                            <button type="button" class="btn btn-sm btn-danger delete-item" data-id = "">Delete</button>
-                                        </td>
-                                    </tr>
+                                    @foreach ($product as $dd)
+                                        <tr>
+                                            <td>{{ $dd->id }}</td>
+                                            <td>{{ $dd->product_name }}</td>
+                                            <td>{{ $dd->product_price }}</td>
+                                            <td>{{ $dd->product_image }}</td>
+                                            <td>{{ $dd->product_stock }}</td>
+                                            <td>
+                                                <a href="#" role="button" class="btn btn-sm btn-warning">Edit</a>
+                                                {{-- <a href="#" role="button" class="btn btn-sm btn-danger">Delete</a> --}}
+                                                <button type="button" class="btn btn-sm btn-danger delete-item"
+                                                    data-id = "">Delete</button>
+                                            </td>
+                                        </tr>
                                     @endforeach
                                 </tbody>
                             </table>

@@ -2,35 +2,34 @@
 
 @section('Type_product', 'page')
 @section('content')
-    <h2 class="text text-center py-2">ประเภทสินค้า</h2>
-    <table class="table table-striped-columns">
-        <thead>
-          <tr>
-            <th scope="col">id</th>
-            <th scope="col">ประเภทสินค้า</th>
-            <th scope="col">สินค้า</th>
-            <th scope="col">รหัสสินค้า</th>
-          </tr>
-        </thead>
-        <tbody class="table-group-divider">
-          <tr>
-            <th scope="row">1</th>
-            <td>วัตถุดิบ</td>
-            <td>หยกพม่า</td>
-            <td>001</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>วัตถุดิบ</td>
-            <td>เอ็นยืด</td>
-            <td>002</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>กำไร</td>
-            <td>กำไรหินฮาวไลท์</td>
-            <td>101</td>
-          </tr>
-        </tbody>
-      </table>
+    <section class="content">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="text text-center py-2">ประเภทสินค้า</h2>
+                <button type="button" class="btn btn-sm btn-primary" id="Create">
+                    <i class="fa fa-plus"></i> เพิ่มประเภทสินค้า
+                </button>
+            </div>
+            <table class="table table-striped-columns">
+                <thead>
+                    <tr>
+                        <th scope="col">id</th>
+                        <th scope="col">ประเภทสินค้า</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($product_type as $dd)
+                        <tr>
+                            <td>{{ $dd->id }}</td>
+                            <td>{{ $dd->product_type_name }}</td>
+                            <td><a href="#" role="button" class="btn btn-sm btn-warning">Edit</a>
+                                <button type="button" class="btn btn-sm btn-danger delete-item"
+                                    data-id = "">Delete</button>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </section>
 @endsection
