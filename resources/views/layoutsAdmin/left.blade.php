@@ -38,10 +38,58 @@
                 <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                 <li class="nav-item">
-                    <a href="" class="nav-link">
+                    <a href="{{route('page')}}" class="nav-link">
                         <i class="nav-icon fas fa-chart-pie "></i>
                         <p>
                             แดชบอร์ด
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('user')}}" class="nav-link">
+                        <i class="nav-icon fas fa-chart-pie "></i>
+                        <p>
+                            User
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('employee')}}" class="nav-link">
+                        <i class="nav-icon fas fa-chart-pie "></i>
+                        <p>
+                            พนักงาน
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('type')}}" class="nav-link">
+                        <i class="nav-icon fas fa-chart-pie "></i>
+                        <p>
+                            ประเภทสินค้า
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('product')}}" class="nav-link">
+                        <i class="nav-icon fas fa-chart-pie "></i>
+                        <p>
+                            สินค้า
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('order')}}" class="nav-link">
+                        <i class="nav-icon fas fa-chart-pie "></i>
+                        <p>
+                            คำสั่งซื้อ
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('detail')}}" class="nav-link">
+                        <i class="nav-icon fas fa-chart-pie "></i>
+                        <p>
+                            รายละเอียดคำสั่งซื้อ
                         </p>
                     </a>
                 </li>
