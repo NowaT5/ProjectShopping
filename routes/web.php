@@ -4,6 +4,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PageUserController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,3 +22,6 @@ use App\Http\Controllers\AdminController;
 // });
 Route::get('/',[LoginController::class,'index'])->name('login');
 Route::get('/admin',[AdminController::class,'index'])->name('page');
+
+//Route Page เอาไว้แสดงหน้าของ Page เท่านั้น
+Route::get('/page',[PageUserController::class,'index'])->name('Home');
