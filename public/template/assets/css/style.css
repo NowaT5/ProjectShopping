@@ -83,7 +83,7 @@ h6,
 }
 
 #header.header-scrolled {
-  background: rgba(30, 67, 86, 0.8);
+  background: #ffdead;
   height: 60px;
 }
 
@@ -99,7 +99,7 @@ h6,
 
 #header .logo h1 a,
 #header .logo h1 a:hover {
-  color: #fff;
+  color: #684324;
   text-decoration: none;
 }
 
@@ -117,7 +117,7 @@ h6,
 # Navigation Menu
 --------------------------------------------------------------*/
 /**
-* Desktop Navigation 
+* Desktop Navigation
 */
 .navbar {
   padding: 0;
@@ -143,7 +143,7 @@ h6,
   padding: 10px 0 10px 30px;
   font-family: "Open Sans", sans-serif;
   font-size: 14px;
-  color: #fff;
+  color: #000000;
   white-space: nowrap;
   transition: 0.3s;
 }
@@ -159,7 +159,7 @@ h6,
 .navbar .active,
 .navbar .active:focus,
 .navbar li:hover>a {
-  color: #a2cce3;
+  color: #8ec3f5;
 }
 
 .navbar .dropdown ul {
@@ -228,7 +228,7 @@ h6,
 }
 
 /**
-* Mobile Navigation 
+* Mobile Navigation
 */
 .mobile-nav-toggle {
   color: #fff;
@@ -348,7 +348,7 @@ h6,
   top: 0;
   width: 130%;
   height: 95%;
-  background: linear-gradient(to right, rgba(30, 67, 86, 0.8), rgba(30, 67, 86, 0.6)), url("../img/hero-bg.jpg") center top no-repeat;
+  background: url("../img/back.jpg") center top no-repeat;
   z-index: 0;
   border-radius: 0 0 50% 50%;
   transform: translateX(-50%) rotate(0deg);
@@ -361,7 +361,7 @@ h6,
   top: 0;
   width: 130%;
   height: 96%;
-  background: #68A4C4;
+  background: #ffdead;
   opacity: 0.3;
   z-index: 0;
   border-radius: 0 0 50% 50%;
@@ -381,7 +381,7 @@ h6,
 }
 
 #hero h2 {
-  color: #fff;
+  color: #000000;
   margin-bottom: 30px;
   font-size: 48px;
   font-weight: 700;
@@ -391,7 +391,7 @@ h6,
   width: 80%;
   animation-delay: 0.4s;
   margin: 0 auto 30px auto;
-  color: #fff;
+  color: #000000;
 }
 
 #hero .carousel-control-prev,
@@ -2143,15 +2143,15 @@ section {
 # Footer
 --------------------------------------------------------------*/
 #footer {
-  background: #0b212d;
+  background: #ffdead;
   padding: 0 0 30px 0;
-  color: #fff;
+  color: #000000;
   font-size: 14px;
 }
 
 #footer .footer-newsletter {
   padding: 50px 0;
-  background: #0d2735;
+  background: #ffdead;
 }
 
 #footer .footer-newsletter h4 {
@@ -2160,12 +2160,12 @@ section {
   padding: 0;
   line-height: 1;
   font-weight: 600;
-  color: #a2cce3;
+  color: #644119;
 }
 
 #footer .footer-newsletter form {
   margin-top: 30px;
-  background: #fff;
+  background: #ffffff;
   padding: 6px 10px;
   position: relative;
   border-radius: 50px;
@@ -2187,8 +2187,8 @@ section {
   font-size: 16px;
   padding: 0 20px;
   margin: 3px;
-  background: #68A4C4;
-  color: #fff;
+  background: #ffdead;
+  color: #000000;
   transition: 0.3s;
   border-radius: 50px;
 }
@@ -2198,7 +2198,7 @@ section {
 }
 
 #footer .footer-top {
-  background: #0d2735;
+  background: #ffdead;
   border-top: 1px solid #17455e;
   border-bottom: 1px solid #123649;
   padding: 60px 0 30px 0;
@@ -2213,7 +2213,7 @@ section {
   margin: 0 0 20px 0;
   padding: 2px 0 2px 0;
   line-height: 1;
-  color: #a2cce3;
+  color: #e3c5a2;
   font-weight: 600;
 }
 
@@ -2222,14 +2222,14 @@ section {
   line-height: 24px;
   margin-bottom: 0;
   font-family: "Roboto", sans-serif;
-  color: #fff;
+  color: #000000;
 }
 
 #footer .footer-top .social-links a {
   font-size: 18px;
   display: inline-block;
   background: #1e4356;
-  color: #fff;
+  color: #ffffff;
   line-height: 1;
   padding: 8px 0;
   margin-right: 4px;
@@ -2241,15 +2241,15 @@ section {
 }
 
 #footer .footer-top .social-links a:hover {
-  background: #68A4C4;
-  color: #fff;
+  background: #644119;
+  color: #ffffff;
   text-decoration: none;
 }
 
 #footer .footer-top h4 {
   font-size: 18px;
   font-weight: 600;
-  color: #a2cce3;
+  color: #644119;
   position: relative;
   padding-bottom: 12px;
 }
@@ -2266,7 +2266,7 @@ section {
 
 #footer .footer-top .footer-links ul i {
   padding-right: 2px;
-  color: #a2cce3;
+  color: #644119;
   font-size: 18px;
   line-height: 1;
 }
@@ -2282,14 +2282,14 @@ section {
 }
 
 #footer .footer-top .footer-links ul a {
-  color: #fff;
+  color: #000000;
   transition: 0.3s;
   display: inline-block;
   line-height: 1;
 }
 
 #footer .footer-top .footer-links ul a:hover {
-  color: #a2cce3;
+  color: #644119;
 }
 
 #footer .footer-top .footer-contact {
@@ -2309,9 +2309,13 @@ section {
   padding-top: 10px;
   text-align: center;
   font-size: 13px;
-  color: #fff;
+  color: #000000;
 }
 
 #footer .credits a {
-  color: #a2cce3;
+  color: #644119;
 }
+.card .card-img-top {
+    height: 140px;
+    width: 140px;
+  }
