@@ -10,12 +10,12 @@
             <table class="table table-striped-columns">
                 <thead>
                     <tr>
-                        <th scope="col">OR_id</th>
+                        <th scope="col">#</th>
                         <th scope="col">วันที่</th>
-                        <th scope="col">User_id</th>
-                        <th scope="col">Payment_img</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">สลิปชำระเงิน</th>
                         <th scope="col">สถานะการชำระเงิน</th>
-                        <th scope="col">Emp_id</th>
+                        <th scope="col">พนักงานที่ดูแล</th>
                     </tr>
                 </thead>
                 <tbody>

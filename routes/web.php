@@ -22,7 +22,11 @@ use App\Http\Controllers\OrderController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+// Route ของ login และ Register
 Route::get('/',[LoginController::class,'index'])->name('login');
+Route::get('/registers',[LoginController::class,'register'])->name('register');
+
+//Route ส่วนของ admin ทั้งหมด
 Route::get('/admin',[AdminController::class,'index'])->name('page');
 Route::get('/user',[AdminController::class,'user'])->name('user');
 Route::get('/type',[ProductController::class,'type'])->name('type');

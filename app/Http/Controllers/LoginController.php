@@ -10,4 +10,8 @@ class LoginController extends Controller
     {
         return view('loginUser.index');
     }
+    public function register()
+    {
+        return view('loginUser.register');
+    }
 }

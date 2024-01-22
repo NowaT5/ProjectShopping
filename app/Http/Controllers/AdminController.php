@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Employee;
+use App\Models\Emtype;
 use App\Models\User;
 
 use Illuminate\Http\Request;
@@ -17,6 +18,8 @@ class AdminController extends Controller
     }
     public function employee(){
         $employee = employee::all();
+
         return view('admin.employee',compact('employee'));
     }
+
 }

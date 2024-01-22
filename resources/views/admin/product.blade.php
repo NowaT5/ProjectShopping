@@ -23,7 +23,7 @@
                                 aria-describedby="example2_info">
                                 <thead>
                                     <tr>
-                                        <th>id</th>
+                                        <th>#</th>
                                         <th>ชื่อสินค้า </th>
                                         <th>ราคา</th>
                                         <th>รูปสินค้า</th>
@@ -32,7 +32,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($product as $dd)  
+                                    @foreach ($product as $dd)
                                         <tr>
                                             <td>{{ $dd->id }}</td>
                                             <td>{{ $dd->product_name }}</td>
