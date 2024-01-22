@@ -11,11 +11,11 @@
             <table class="table table-striped-columns">
                 <thead>
                     <tr>
-                        <th scope="col">User_id</th>
+                        <th scope="col">#</th>
                         <th scope="col">ชื่อ</th>
                         <th scope="col">นามสกุล</th>
                         <th scope="col">อายุ</th>
-                        <th scope="col">User_name</th>
+                        <th scope="col">Username</th>
                         <th scope="col">ที่อยู่</th>
                         <th scope="col">แขวง/ตำบล</th>
                         <th scope="col">เขต/อำเภอ</th>

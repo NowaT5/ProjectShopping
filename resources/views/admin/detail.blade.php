@@ -6,11 +6,11 @@
 <table class="table table-striped-columns">
     <thead>
       <tr>
-        <th scope="col">ORD_id</th>
+        <th scope="col">#</th>
         <th scope="col">จำนวน</th>
         <th scope="col">ราคา</th>
-        <th scope="col">OR_id</th>
-        <th scope="col">Product_id</th>
+        <th scope="col">ออเดอร์</th>
+        <th scope="col">สินค้า</th>
       </tr>
     </thead>
     <tbody class="table-group-divider">

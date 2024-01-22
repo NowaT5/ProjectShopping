@@ -13,8 +13,9 @@
             <table class="table table-striped-columns">
                 <thead>
                     <tr>
-                        <th scope="col">id</th>
+                        <th scope="col">#</th>
                         <th scope="col">ประเภทสินค้า</th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
