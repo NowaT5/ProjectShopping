@@ -10,9 +10,10 @@ class Order extends Model
     use HasFactory;
     public function order()
     {
-        return $this->belongsTo(order::class);
+        return $this->belongsTo(order::class, 'status_payment_id');
     }
-    protected $fillable=[
-        'status_payment_id'
-    ];
+    
+    // protected $fillable=[
+    //     'status_payment_id'
+    // ];
 }

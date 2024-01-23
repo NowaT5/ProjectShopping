@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Status_payment extends Model
+class Detail_Order extends Model
 {
     use HasFactory;
-    // public function status()
-    // {
-    //     return $this->belongsTo(status_payment::class);
-    // }
+    public function order_detail()
+    {
+        return $this->belongsTo(order_detail::class);
+    }
 }
