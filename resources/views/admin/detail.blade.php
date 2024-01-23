@@ -14,26 +14,36 @@
                         <th scope="col">#</th>
                         <th scope="col">จำนวน</th>
                         <th scope="col">ราคา</th>
-                        <th scope="col">ออเดอร์</th>
-                        <th scope="col">สินค้า</th>
+                        <th scope="col">เลขที่ออเดอร์</th>
+                        <th scope="col">รหัสสินค้า</th>
                     </tr>
                 </thead>
-                <tbody class="table-group-divider">
-                    @foreach ($order_detail as $dd)
+                @foreach ($order_detail as $dd)
+                    @php
+                        $product = DB::table('products')->where('id', $dd->product_id)->first();
+                        $order = DB::table('orders')->where('id', $dd->order_id)->first();
+                    @endphp
                         <tr>
                             <td>{{ $dd->id }}</td>
                             <td>{{ $dd->quantity }}</td>
                             <td>{{ $dd->price }}</td>
-                            <td>{{ $dd->order_id }}</td>
-                            <td>{{ $dd->product_id }}</td>
-                            <td>{{ $dd->employee_id }}</td>
+                            <td>{{ $order->id }}</td>
+                            <td>{{ $product->id }}</td>
+                            {{-- <td>
+                              @if ($dd->status_payment_id == true)
+                                  {{-- <a href="#" class="btn btn-success">ชำระเงิน</a> 
+                                  <a href="{{route('change',$dd->status_payment_id)}}" class="btn btn-success">ชำระเงิน</a>
+                              @else
+                                  {{-- <a href="#" class="btn btn-secondary">On hold</a> 
+                                  <a href="{{route('change',$dd->status_payment_id)}}" class="btn btn-secondary">On hold</a>
+                              @endif 
+                            </td>--}}
                             <td><a href="#" role="button" class="btn btn-sm btn-warning">Edit</a>
                                 <button type="button" class="btn btn-sm btn-danger delete-item"
                                     data-id = "">Delete</button>
                             </td>
                         </tr>
                     @endforeach
-                </tbody>
             </table>
         </div>
     </section>

@@ -6,14 +6,13 @@
         <div class="card">
             <div class="card-header">
                 <h2 class="text text-center py-2">พนักงาน</h2>
-                <button type="button" class="btn btn-sm btn-primary" id="Create">
-                    <i class="fa fa-plus"></i> เพิ่มพนักงาน
-                </button>
+                <a href="{{ route('newemp') }}" role="button" class="btn btn-sm btn-primary"><i
+                        class="fa fa-plus"></i>เพิ่มพนักงาน</a>
             </div>
             <table class="table table-striped-columns">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
+                        <th scope="col">id</th>
                         <th scope="col">ชื่อ</th>
                         <th scope="col">นามสกุล</th>
                         <th scope="col">อายุ</th>
@@ -26,12 +25,12 @@
                 </thead>
                 <tbody>
                     @foreach ($employee as $dd)
-                    @php
-                        $emtype = DB::table('emtypes')->where('id', $dd->emtype_id)->first();
-                    @endphp
-
+                        @php
+                            $emtype = DB::table('emtypes')
+                                ->where('id', $dd->emtype_id)
+                                ->first();
+                        @endphp
                         <tr>
-
                             <td>{{ $dd->id }}</td>
                             <td>{{ $dd->fname }}</td>
                             <td>{{ $dd->lname }}</td>

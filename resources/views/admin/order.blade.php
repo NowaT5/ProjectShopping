@@ -10,7 +10,7 @@
             <table class="table table-striped-columns">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
+                        <th scope="col">id</th>
                         <th scope="col">วันที่</th>
                         <th scope="col">Username</th>
                         <th scope="col">สลิปชำระเงิน</th>

@@ -7,6 +7,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PageUserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\DetailOrderController;
+use App\Http\Controllers\NewEmployeeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,8 +35,9 @@ Route::get('/type',[ProductController::class,'type'])->name('type');
 Route::get('/product',[ProductController::class,'product'])->name('product');
 Route::get('/employee',[AdminController::class,'employee'])->name('employee');
 Route::get('/order',[OrderController::class,'order'])->name('order');
-Route::get('/detail',[OrderController::class,'detail'])->name('detail');
+Route::get('/detail',[DetailOrderController::class,'detailorder'])->name('detail');
 Route::get('/change/{id}',[OrderController::class,'change'])->name('change');
+Route::get('/employee/newemp',[NewEmployeeController::class,'newemp'])->name('newemp');
 
 //Route Page เอาไว้แสดงหน้าของ Page เท่านั้น
 Route::get('/page',[PageUserController::class,'index'])->name('Home');

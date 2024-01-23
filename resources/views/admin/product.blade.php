@@ -6,9 +6,9 @@
         <div class="card">
             <div class="card-header">
                 <h2 class="text text-center py-2">รายการสินค้า</h2>
-                    <button type="button" class="btn bg-gradient-primary" id="Create">
-                        <i class="fa fa-plus"></i> เพิ่มสินค้า
-                    </button>
+                <button type="button" class="btn bg-gradient-primary" id="Create">
+                    <i class="fa fa-plus"></i> เพิ่มสินค้า
+                </button>
             </div>
 
             <div class="card-body">
@@ -23,22 +23,33 @@
                                 aria-describedby="example2_info">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
+                                        <th>id</th>
                                         <th>ชื่อสินค้า </th>
                                         <th>ราคา</th>
                                         <th>รูปสินค้า</th>
                                         <th>จำนวนสินค้า</th>
-                                        <th></th>
+                                        <th>type_id</th>
+                                        <th>product_type_id</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($product as $dd)
+                                        @php
+                                            $product_type = DB::table('product_types')
+                                                ->where('id', $dd->product_type_id)
+                                                ->first();
+                                            $type = DB::table('types')
+                                                ->where('id', $dd->type_id)
+                                                ->first();
+                                        @endphp
                                         <tr>
                                             <td>{{ $dd->id }}</td>
                                             <td>{{ $dd->product_name }}</td>
                                             <td>{{ $dd->product_price }}</td>
                                             <td>{{ $dd->product_image }}</td>
                                             <td>{{ $dd->product_stock }}</td>
+                                            <td>{{ $type->type_name }}</td>
+                                            <td>{{ $product_type->product_type_name}}</td>
                                             <td>
                                                 <a href="#" role="button" class="btn btn-sm btn-warning">Edit</a>
                                                 {{-- <a href="#" role="button" class="btn btn-sm btn-danger">Delete</a> --}}

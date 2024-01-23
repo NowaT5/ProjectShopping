@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Detail_Order extends Model
+class Type extends Model
 {
     use HasFactory;
-    public function order_detail()
+    public function type()
     {
-        return $this->belongsTo(order_detail::class);
+        return $this->belongsTo(type::class);
     }
 }
