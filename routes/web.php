@@ -37,7 +37,12 @@ Route::get('/employee',[AdminController::class,'employee'])->name('employee');
 Route::get('/order',[OrderController::class,'order'])->name('order');
 Route::get('/detail',[DetailOrderController::class,'detailorder'])->name('detail');
 Route::get('/change/{id}',[OrderController::class,'change'])->name('change');
-Route::get('/employee/newemp',[NewEmployeeController::class,'newemp'])->name('newemp');
+Route::post('/employee/newemp',[AdminController::class,'newemp'])->name('newemp');
+Route::get('/employee/{id}/edit',[AdminController::class,'editemp'])->name('editemp');
+
+// Route::get('/employee/{id}/edit', 'EmployeeController@edit')->name('employee.edit');
+// Route::put('/employee/{id}', 'EmployeeController@update')->name('employee.update');
+
 
 //Route Page เอาไว้แสดงหน้าของ Page เท่านั้น
 Route::get('/page',[PageUserController::class,'index'])->name('Home');

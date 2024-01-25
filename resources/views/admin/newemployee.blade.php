@@ -13,18 +13,16 @@
                         <h5>ชื่อ</h5>
                         <input type="text" class="form-control" placeholder="Enter Name">
                     </label>
-                    
+
                 </div>
                 <div class="col-sm-6">
                     <label>
-                    <h5>นามสกุล</h5>
-                    <input type="text" class="form-control" placeholder=" ">
+                        <h5>นามสกุล</h5>
+                        <input type="text" class="form-control" placeholder=" ">
                     </label>
-                    
+
                 </div>
             </div>
-
-
         </div>
     </section>
 @endsection
