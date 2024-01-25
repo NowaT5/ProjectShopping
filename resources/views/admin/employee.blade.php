@@ -45,7 +45,7 @@
                                 <button type="button" class="btn btn-sm btn-warning" data-toggle="modal"
                                     data-target="#exampleModal-edit-xl">Edit</button>
                                 <button type="button" class="btn btn-sm btn-danger delete-item"
-                                    data-id = "">Delete</button>
+                                    data-id = "" onclick="Delemp()">Delete </button>
                             </td>
                         </tr>
                         {{-- Edit --}}
@@ -153,7 +153,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="/newemp">
+                    <form method="POST">
                         @csrf
                         <div class="col-md-12">
                             <div class="row">
@@ -175,27 +175,29 @@
                             <div class="row">
                                 <div class="col">
                                     <label for="age" class="col-form-label">อายุ</label>
-                                    <input type="text" class="form-control" placeholder="Age" id="age">
+                                    <input type="text" name="age" class="form-control" placeholder="Age">
                                 </div>
                                 <div class="col">
                                     <label for="phone" class="col-form-label">เบอร์โทรศัพท์</label>
-                                    <input type="text" class="form-control" placeholder="Phone" id="phone">
+                                    <input type="text" name="phone" class="form-control" placeholder="Phone"
+                                        name="phone">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="username" class="col-form-label">Username</label>
-                                    <input type="text" class="form-control" placeholder="Username" id="username">
+                                    <input type="text" name="username" class="form-control" placeholder="Username">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="password" class="col-form-label">Password</label>
-                                    <input type="text" class="form-control" placeholder="Password" id="password">
+                                    <input type="text" name="password" class="form-control" placeholder="Password"
+                                        name="password">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col">
                                     <label for="emtype_id">ตำแหน่ง</label>
-                                    <select class="form-control" id="emtype_id">
+                                    <select class="form-control" name="emtype_id">
                                         <option value="">กรุณาเลือก..</option>
                                         <option value="1">SuperAdmin</option>
                                         <option value="2">Admin</option>
@@ -209,7 +211,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal"
                         onclick="ClosePage()">Close</button>
-                    <button type="submit" class="btn btn-primary" onclick="newemp()">Save</button>
+                    <button type="submit" class="btn btn-primary" onclick="Newemp()">Save</button>
                 </div>
             </div>
         </div>
@@ -238,10 +240,22 @@
             modal.find('.modal-body input').val(recipient)
         })
 
-        function ClosePage() {
-            // ทำการ redirect หรือ navigate ไปยังหน้า employee เมื่อปุ่มถูกคลิก
+        function Delemp() {
+            // ทำการ redirect หรือ navigate ไปยังหน้า Delemp เมื่อปุ่มถูกคลิก
             window.location.href =
-                "{{ route('employee') }}"; // เปลี่ยน 'url ของหน้า employee' เป็น URL ของหน้า employee ของคุณ
+                "{{ route('product') }}";
+        }
+
+        function ClosePage() {
+            // ปิดการทำงาน
+            window.location.href =
+                "{{ route('employee') }}";
+        }
+
+        function Newemp(Request $request) {
+            // ทำการ redirect ไป Newemp
+            window.location.href =
+                "{{ route('newemp') }}";
         }
     </script>
 @endsection

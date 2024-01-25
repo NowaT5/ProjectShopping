@@ -44,5 +44,10 @@ class AdminController extends Controller
         $editemp = Employee::findOrFail($id);
         return view('admin.employee', compact('editemp'));
     }
+    public function delemp($id)
+    {
+        DB::table('employees')->where('id',$id)->delete();
+        return redirect('/employee');
+    }
 
 }
