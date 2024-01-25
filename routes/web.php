@@ -46,3 +46,6 @@ Route::get('/employee/{id}/edit',[AdminController::class,'editemp'])->name('edit
 
 //Route Page เอาไว้แสดงหน้าของ Page เท่านั้น
 Route::get('/page',[PageUserController::class,'index'])->name('Home');
+Route::get('/about',[PageUserController::class,'about'])->name('About');
+Route::get('/portfolio',[PageUserController::class,'portfolio'])->name('Portfolio');
+Route::get('/portfoliodetails',[PageUserController::class,'portfoliodetails'])->name('Portfoliodetails');
