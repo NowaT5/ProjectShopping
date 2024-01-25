@@ -10,4 +10,16 @@ class PageUserController extends Controller
     {
         return view('user.page');
     }
+    public function about()
+    {
+        return view('user.about');
+    }
+    public function portfolio()
+    {
+        return view('user.portfolio');
+    }
+    public function portfoliodetails()
+    {
+        return view('user.portfoliodetails');
+    }
 }

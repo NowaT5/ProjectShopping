@@ -9,15 +9,16 @@
 
         <nav id="navbar" class="navbar">
             <ul>
-                <li><a class="active " href="">Home</a></li>
-                <li><a href="">About</a></li>
-                <li class="dropdown"><a href="#"><span>Product</span> <i class="bi bi-chevron-down"></i></a>
+                <li><a class="active " href="{{route('Home')}}">Home</a></li>
+                <li><a href="{{route('About')}}">About</a></li>
+                <li><a href="{{route('Portfolio')}}">Portfolio</a></li>
+                {{-- <li class="dropdown"><a href="#"><span>Product</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
                         <li class="dropdown"><a href="#"><span>หินอเมทิสต์</span></a></li>
                         <li class="dropdown"><a href="#"><span>หินอควอมารีน</span></a></li>
                         <li class="dropdown"><a href="#"><span>หินทับทิม</span></a></li>
                     </ul>
-                </li>
+                </li> --}}
                 <li><a href="">Services</a></li>
                 <li class="dropdown"><a href="">Proflie</a>
                     <ul>
