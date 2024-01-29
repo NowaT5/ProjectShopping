@@ -34,12 +34,14 @@ Route::get('/user',[AdminController::class,'user'])->name('user');
 Route::get('/type',[ProductController::class,'type'])->name('type');
 Route::get('/product',[ProductController::class,'product'])->name('product');
 Route::get('/employee',[AdminController::class,'employee'])->name('employee');
+Route::get('/employee/edit/{id}',[AdminController::class,'edit'])->name('employee.edit');
+Route::get('/employee/delete/{id}',[AdminController::class,'delemp'])->name('employee.delemp');
+
 Route::get('/order',[OrderController::class,'order'])->name('order');
 Route::get('/detail',[DetailOrderController::class,'detailorder'])->name('detail');
 Route::get('/change/{id}',[OrderController::class,'change'])->name('change');
 Route::post('/employee/newemp',[AdminController::class,'newemp'])->name('newemp');
 Route::get('/delemp/{id}',[AdminController::class,'delemp'])->name('delemp');
-
 // Route::get('/employee/{id}/edit', 'EmployeeController@edit')->name('employee.edit');
 // Route::put('/employee/{id}', 'EmployeeController@update')->name('employee.update');
 
