@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Emtype extends Model
 {
     use HasFactory;
-    // public function emtype()
-    // {
-    //     return $this->belongsTo(emtype::class);
-    // }
+    public function emtype()
+    {
+        return $this->belongsTo(emtype::class);
+    }
 
 }

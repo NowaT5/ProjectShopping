@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Employee;
 use App\Models\Emtype;
 use App\Models\User;
@@ -10,44 +11,50 @@ use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         return view('admin.index');
     }
-    public function user(){
+    public function user()
+    {
         $user = user::all();
-        return view('admin.user',compact('user'));
+        return view('admin.user', compact('user'));
     }
-    public function employee(){
-         $employee = DB::table('employees')->get();
-        return view('admin.employee',compact('employee'));
+    public function employee()
+    {
+        $employee = DB::table('employees')->get();
+        return view('admin.employee', compact('employee'));
     }
-    public function emptype(){
+    public function emptype()
+    {
         $emtypes = DB::table('emtypes')->get();
-       return view('admin.employee',compact('emtypes'));
-   }
+        return view('admin.employee', compact('emtypes'));
+    }
     public function newemp(Request $requst)
     {
         $requst->validate([
-            'fname'=>'required',
-            'lname'=>'required'
+            'fname' => 'required',
+            'lname' => 'required'
         ]);
-        $data=[
-            'fname'=>$request->fname,
-            'lname'=>$request->lname
+        $data = [
+            'fname' => $request->fname,
+            'lname' => $request->lname
         ];
         dd($data);
         // $employee = Employee::findOrFail($id);
         // return view('employee.edit', compact('employee'));
     }
-    public function editemp($id)
+    public function edit($id)
     {
         $editemp = Employee::findOrFail($id);
         return view('admin.employee', compact('editemp'));
     }
+
     public function delemp($id)
     {
-        DB::table('employees')->where('id',$id)->delete();
-        return redirect('/employee');
-    }
+        Log::info('Deleting employee with ID: ' . $id);
+        DB::table('employees')->where('id', $id)->delete();
 
+        return redirect(view('admin.employee'));
+    }
 }
