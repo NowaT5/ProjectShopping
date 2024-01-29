@@ -1,6 +1,6 @@
 @extends('layoutsAdmin.app')
 
-@section('Employee', 'page')
+@section('title', 'Employee')
 @section('content')
     <section class="content">
         <div class="card">
@@ -8,8 +8,7 @@
                 <h2 class="text text-center py-2">พนักงาน</h2>
                 {{-- <a href="{{ route('newemp') }}" role="button" class="btn btn-sm btn-primary"><i
                         class="fa fa-plus"></i>เพิ่มพนักงาน</a> --}}
-                <button type="button" class="btn btn-primary" data-toggle="modal"
-                    data-target="#exampleModal-new-xl">เพิ่มพนักงาน</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addEmpModal">เพิ่มพนักงาน</button>
             </div>
             <table class="table table-striped-columns">
                 <thead>
@@ -28,11 +27,11 @@
                 <tbody>
                     @foreach ($employee as $dd)
                         @csrf
-                            @php
-                                $emtype = DB::table('emtypes')
-                                    ->where('id', $dd->emtype_id)
-                                    ->first();
-                            @endphp
+                        @php
+                            $emtype = DB::table('emtypes')
+                                ->where('id', $dd->emtype_id)
+                                ->first();
+                        @endphp
                         <tr>
                             <td>{{ $dd->id }}</td>
                             <td>{{ $dd->fname }}</td>
@@ -135,8 +134,10 @@
             </table>
         </div>
     </section>
-    {{-- เพิ่มพนักงาน --}}
-    <div class="modal fade" id="exampleModal-new-xl" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    {{-- End Edit --}}
+
+    {{-- เพิ่มพนักงาน Modal --}}
+    <div class="modal fade" id="addEmpModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -154,16 +155,18 @@
                                 <div class="col-md-6">
                                     <label for="fname" class="col-form-label">ชื่อ</label>
                                     <input type="text" name="fname" class="form-control" placeholder="First name">
-                                    @error('fname')
+
+                                    {{-- error เช็คชื่อ --}}
+                                    {{-- @error('fname')
                                         <div class="my-2">
                                             <span>{{ $message }}</span>
                                         </div>
-                                    @enderror
+                                    @enderror --}}
                                 </div>
 
                                 <div class="col-md-6">
                                     <label for="lname" class="col-form-label">นามสกุล</label>
-                                    <input type="text" class="form-control" placeholder="Last name" id="lname">
+                                    <input type="text" name="lname" class="form-control" placeholder="Last name">
                                 </div>
                             </div>
                             <div class="row">
@@ -203,111 +206,109 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                        onclick="ClosePage()">Close</button>
-                    <button type="submit" class="btn btn-primary" onclick="Newemp()">Save</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary add_emp" >Save</button>
                 </div>
             </div>
         </div>
     </div>
+    {{-- สิ้นสุดเพิ่มพนักงาน Modal --}}
+@endsection
 
+@section('scripts')
+<script>
+    $(document).ready(function(){
+        $(document).on('click', '.add_emp' function(e){
+                e.preventDefault();
+                console.log("hello");
+        });
+    });
+    // $('#exampleModal-new-xl').on('show.bs.modal', function(event) {
+    //     var button = $(event.relatedTarget) // Button that triggered the modal
+    //     var recipient = button.data('whatever') // Extract info from data-* attributes
+    //     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+    //     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    //     var modal = $(this)
+    //     modal.find('.modal-title').text('New message to ' + recipient)
+    //     modal.find('.modal-body input').val(recipient)
+    // })
+    // $('#editModal{{ $dd->id }}').on('show.bs.modal', function(event) {
+    //     var button = $(event.relatedTarget) // Button that triggered the modal
+    //     var recipient = button.data('whatever') // Extract info from data-* attributes
+    //     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+    //     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    //     var modal = $(this)
+    //     modal.find('.modal-title').text('New message to ' + recipient)
+    //     modal.find('.modal-body input').val(recipient)
+    // })
 
+    // function Delemp() {
+    //     // ทำการ redirect หรือ navigate ไปยังหน้า Delemp เมื่อปุ่มถูกคลิก
+    //     window.location.href =
+    //         "{{ route('product') }}";
+    // }
 
+    // function Newemp(Request $request) {
+    //     // ทำการ redirect ไป Newemp
+    //     window.location.href =
+    //         "{{ route('newemp') }}";
+    // }
+</script>
+<script>
+    function openEditModal(employeeId) {
+        // ดึงข้อมูลของ employee และตำแหน่ง (emtype) จาก API หรือส่วนอื่น ๆ
+        // และนำมาแสดงใน Modal แก้ไข
 
-    <script>
-        $('#exampleModal-new-xl').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget) // Button that triggered the modal
-            var recipient = button.data('whatever') // Extract info from data-* attributes
-            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-            var modal = $(this)
-            modal.find('.modal-title').text('New message to ' + recipient)
-            modal.find('.modal-body input').val(recipient)
-        })
-        $('#editModal{{ $dd->id }}').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget) // Button that triggered the modal
-            var recipient = button.data('whatever') // Extract info from data-* attributes
-            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-            var modal = $(this)
-            modal.find('.modal-title').text('New message to ' + recipient)
-            modal.find('.modal-body input').val(recipient)
-        })
+        // ตัวอย่างการใช้ Axios สำหรับดึงข้อมูลจาก API
+        axios.get(`/api/employees/${employeeId}`)
+            .then(response => {
+                const employeeData = response.data;
+                // นำข้อมูลมาแสดงใน Modal
+                document.getElementById('editModal{{ $dd->id }}-emtype_id').innerHTML = '';
+                for (const emtype of employeeData.emtypes) {
+                    const option = document.createElement('option');
+                    option.value = emtype.id;
+                    option.text = emtype.emtype_name;
+                    document.getElementById('editModal{{ $dd->id }}-emtype_id').appendChild(option);
+                }
+                // ... แสดงข้อมูลอื่น ๆ ตามที่ต้องการ
+            })
+            .catch(error => {
+                console.error('Error fetching employee data:', error);
+            });
 
-        function Delemp() {
-            // ทำการ redirect หรือ navigate ไปยังหน้า Delemp เมื่อปุ่มถูกคลิก
-            window.location.href =
-                "{{ route('product') }}";
+        // เปิด Modal
+        $('#editModal{{ $dd->id }}').modal('show');
+    }
+</script>
+<!-- ที่ไฟล์ script ของคุณ -->
+
+<script>
+    function Delemp(button) {
+        // ดึงค่า ID จากปุ่ม Delete ที่ถูกคลิก
+        var employeeId = button.getAttribute('data-id');
+
+        // ข้อความยืนยันการลบ
+        var confirmMessage = "คุณแน่ใจที่จะลบข้อมูลนี้หรือไม่?";
+
+        // ถามผู้ใช้ยืนยัน
+        if (confirm(confirmMessage)) {
+            // ส่งคำขอลบไปยัง URL ที่กำหนด
+            fetch('/employee/delete/' + employeeId, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}', // ส่ง token ไปใน header
+                },
+            }).then(response => {
+                if (response.ok) {
+                    // หากลบเสร็จสิ้น, ทำการ refresh หน้าหลังจากลบ
+                    location.reload();
+                } else {
+                    // กรณีเกิดข้อผิดพลาดในการลบ
+                    console.error('เกิดข้อผิดพลาดในการลบข้อมูล');
+                }
+            });
         }
-
-        function ClosePage() {
-            // ปิดการทำงาน
-            window.location.href =
-                "{{ route('employee') }}";
-        }
-
-        function Newemp(Request $request) {
-            // ทำการ redirect ไป Newemp
-            window.location.href =
-                "{{ route('newemp') }}";
-        }
-    </script>
-    <script>
-        function openEditModal(employeeId) {
-            // ดึงข้อมูลของ employee และตำแหน่ง (emtype) จาก API หรือส่วนอื่น ๆ
-            // และนำมาแสดงใน Modal แก้ไข
-
-            // ตัวอย่างการใช้ Axios สำหรับดึงข้อมูลจาก API
-            axios.get(`/api/employees/${employeeId}`)
-                .then(response => {
-                    const employeeData = response.data;
-                    // นำข้อมูลมาแสดงใน Modal
-                    document.getElementById('editModal{{ $dd->id }}-emtype_id').innerHTML = '';
-                    for (const emtype of employeeData.emtypes) {
-                        const option = document.createElement('option');
-                        option.value = emtype.id;
-                        option.text = emtype.emtype_name;
-                        document.getElementById('editModal{{ $dd->id }}-emtype_id').appendChild(option);
-                    }
-                    // ... แสดงข้อมูลอื่น ๆ ตามที่ต้องการ
-                })
-                .catch(error => {
-                    console.error('Error fetching employee data:', error);
-                });
-
-            // เปิด Modal
-            $('#editModal{{ $dd->id }}').modal('show');
-        }
-    </script>
-    <!-- ที่ไฟล์ script ของคุณ -->
-    <script>
-        function Delemp(button) {
-            // ดึงค่า ID จากปุ่ม Delete ที่ถูกคลิก
-            var employeeId = button.getAttribute('data-id');
-
-            // ข้อความยืนยันการลบ
-            var confirmMessage = "คุณแน่ใจที่จะลบข้อมูลนี้หรือไม่?";
-
-            // ถามผู้ใช้ยืนยัน
-            if (confirm(confirmMessage)) {
-                // ส่งคำขอลบไปยัง URL ที่กำหนด
-                fetch('/employee/delete/' + employeeId, {
-                    method: 'DELETE',
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}', // ส่ง token ไปใน header
-                    },
-                }).then(response => {
-                    if (response.ok) {
-                        // หากลบเสร็จสิ้น, ทำการ refresh หน้าหลังจากลบ
-                        location.reload();
-                    } else {
-                        // กรณีเกิดข้อผิดพลาดในการลบ
-                        console.error('เกิดข้อผิดพลาดในการลบข้อมูล');
-                    }
-                });
-            }
-        }
-    </script>
-
-
+    }
+</script>
 @endsection
