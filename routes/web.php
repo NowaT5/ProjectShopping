@@ -34,6 +34,8 @@ Route::get('/user',[AdminController::class,'user'])->name('user');
 Route::get('/type',[ProductController::class,'type'])->name('type');
 Route::get('/product',[ProductController::class,'product'])->name('product');
 Route::get('/employee',[AdminController::class,'employee'])->name('employee');
+Route::post('/addemp',[AdminController::class,'addemp']);
+
 Route::get('/employee/edit/{id}',[AdminController::class,'edit'])->name('employee.edit');
 Route::get('/employee/delete/{id}',[AdminController::class,'delemp'])->name('employee.delemp');
 

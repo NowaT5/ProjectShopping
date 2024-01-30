@@ -17,11 +17,11 @@ class CreateEmployee extends Migration
             $table->id();
             $table->string('fname');
             $table->string('lname');
-            $table->char('username');
+            $table->string('username');
             $table->string('password');
-            $table->char('phone');
-            $table->char('age');
-            $table->char('gender');
+            $table->string('phone');
+            $table->string('age');
+            $table->string('gender');
             $table->string('emtype_id');
             $table->timestamps();
         });

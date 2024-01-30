@@ -3,12 +3,15 @@
 @section('title', 'Employee')
 @section('content')
     <section class="content">
+        <div id='succes_message'></div>
         <div class="card">
+            <div id="success_message"></div>
             <div class="card-header">
                 <h2 class="text text-center py-2">พนักงาน</h2>
                 {{-- <a href="{{ route('newemp') }}" role="button" class="btn btn-sm btn-primary"><i
-                        class="fa fa-plus"></i>เพิ่มพนักงาน</a> --}}
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addEmpModal">เพิ่มพนักงาน</button>
+                            class="fa fa-plus"></i>เพิ่มพนักงาน</a> --}}
+                <button type="button" class="btn btn-primary" data-toggle="modal"
+                    data-target="#addEmpModal">เพิ่มพนักงาน</button>
             </div>
             <table class="table table-striped-columns">
                 <thead>
@@ -141,6 +144,7 @@
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
+
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">เพิ่มพนักงาน</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -150,6 +154,7 @@
                 <div class="modal-body">
                     <form method="POST">
                         @csrf
+                        <ul></ul>
                         <div class="col-md-12">
                             <div class="row">
                                 <div class="col-md-6">
@@ -159,7 +164,7 @@
                                     {{-- error เช็คชื่อ --}}
                                     {{-- @error('fname')
                                         <div class="my-2">
-                                            <span>{{ $message }}</span>
+                                            <label for="saveform_errList" class="col-form-label"></label>
                                         </div>
                                     @enderror --}}
                                 </div>
@@ -207,7 +212,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary add_emp" >Save</button>
+                    <button type="button" class="btn btn-primary add_emp">Save</button>
                 </div>
             </div>
         </div>
@@ -216,44 +221,84 @@
 @endsection
 
 @section('scripts')
-<script>
-    $(document).ready(function(){
-        $(document).on('click', '.add_emp' function(e){
+    <script>
+        $(document).ready(function() {
+            $(document).on('click', '.add_emp', function(e) {
                 e.preventDefault();
-                console.log("hello");
+                var data = {
+                    'fname': $('.fname').val(),
+                    'lname': $('.lname').val(),
+                    'age': $('.age').val(),
+                    'username': $('.username').val(),
+                    'password': $('.password').val(),
+                    'emtype_id': $('.emtype_id').val(),
+                }
+                // console.log(data);
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    type: "POSt",
+                    url: "/addemp",
+                    data: data,
+                    dataType: "json",
+                    success: function(response) {
+                        // console.log(response.errors.name);
+                        if (response.status == 400) //เช็คว่าป้อนข้อมูลหรือเปล่า
+                        {
+                            $('#saveform_errList').html("");
+                            $('#saveform_errList').addClass('alert alert-danger');
+                            $.each(response.errors, function(key, err_values) {
+                                $('#saveform_errList').append('<li>' + err_values +
+                                    '<li>');
+                            });
+                        } else {
+                            // save สำเร็จ
+                            $('#saveform_errList').html("");
+                            $('#succes_message').addClass('alert alert-success')
+                            $('#succes_message').text(response.message)
+                            $('#addEmpModal').madal('hide');
+                            $('#addEmpModal').find('input').val("");
+                        }
+                    }
+                });
+            });
         });
-    });
-    // $('#exampleModal-new-xl').on('show.bs.modal', function(event) {
-    //     var button = $(event.relatedTarget) // Button that triggered the modal
-    //     var recipient = button.data('whatever') // Extract info from data-* attributes
-    //     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-    //     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-    //     var modal = $(this)
-    //     modal.find('.modal-title').text('New message to ' + recipient)
-    //     modal.find('.modal-body input').val(recipient)
-    // })
-    // $('#editModal{{ $dd->id }}').on('show.bs.modal', function(event) {
-    //     var button = $(event.relatedTarget) // Button that triggered the modal
-    //     var recipient = button.data('whatever') // Extract info from data-* attributes
-    //     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-    //     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-    //     var modal = $(this)
-    //     modal.find('.modal-title').text('New message to ' + recipient)
-    //     modal.find('.modal-body input').val(recipient)
-    // })
+    </script>
+@endsection
+{{-- // $('#exampleModal-new-xl').on('show.bs.modal', function(event) {
+        //     var button = $(event.relatedTarget) // Button that triggered the modal
+        //     var recipient = button.data('whatever') // Extract info from data-* attributes
+        //     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        //     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        //     var modal = $(this)
+        //     modal.find('.modal-title').text('New message to ' + recipient)
+        //     modal.find('.modal-body input').val(recipient)
+        // })
+        // $('#editModal{{ $dd->id }}').on('show.bs.modal', function(event) {
+        //     var button = $(event.relatedTarget) // Button that triggered the modal
+        //     var recipient = button.data('whatever') // Extract info from data-* attributes
+        //     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        //     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        //     var modal = $(this)
+        //     modal.find('.modal-title').text('New message to ' + recipient)
+        //     modal.find('.modal-body input').val(recipient)
+        // })
 
-    // function Delemp() {
-    //     // ทำการ redirect หรือ navigate ไปยังหน้า Delemp เมื่อปุ่มถูกคลิก
-    //     window.location.href =
-    //         "{{ route('product') }}";
-    // }
+        // function Delemp() {
+        //     // ทำการ redirect หรือ navigate ไปยังหน้า Delemp เมื่อปุ่มถูกคลิก
+        //     window.location.href =
+        //         "{{ route('product') }}";
+        // }
 
-    // function Newemp(Request $request) {
-    //     // ทำการ redirect ไป Newemp
-    //     window.location.href =
-    //         "{{ route('newemp') }}";
-    // }
-</script>
+        // function Newemp(Request $request) {
+        //     // ทำการ redirect ไป Newemp
+        //     window.location.href =
+        //         "{{ route('newemp') }}";
+        // } --}}
+
 <script>
     function openEditModal(employeeId) {
         // ดึงข้อมูลของ employee และตำแหน่ง (emtype) จาก API หรือส่วนอื่น ๆ
@@ -311,4 +356,3 @@
         }
     }
 </script>
-@endsection

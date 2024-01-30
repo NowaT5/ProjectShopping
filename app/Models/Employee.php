@@ -20,7 +20,6 @@ class Employee extends Model
         'password',
         'phone',
         'age',
-        'gender',
         'emtype_id',
     ];
 }
