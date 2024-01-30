@@ -33,15 +33,17 @@ class AdminController extends Controller
     }
 
     // เพิ่มพนักงาน เวอร์ชั่นล่าสุด
-    public function addemp(Request $request){
+    public function addemp(Request $request)
+    {
 
-        //เช็กว่ากรอกข้อมูล
+        // เช็กว่ากรอกข้อมูล
         $validator = Validator::make($request->all(),[
-            'fname' => 'required|max:99',
-            'lname' => 'required|max:99',
-            'age' => 'required|max:99',
-            'username' => 'required|max:20',
-            'password' => 'required|max:20',
+            'fname' => 'required',
+            'lname' => 'required',
+            'age' => 'required',
+            'phone' => 'required',
+            'username' => 'required',
+            'password' => 'required',
             'emtype_id' => 'required',
         ]);
         if($validator->fails()) //ส่งกลับ error
@@ -58,6 +60,7 @@ class AdminController extends Controller
             $newemp->fname = $request->input('fname');
             $newemp->lname = $request->input('lname');
             $newemp->age = $request->input('age');
+            $newemp->phone = $request->input('phone');
             $newemp->username = $request->input('username');
             $newemp->password = $request->input('password');
             $newemp->emtype_id = $request->input('emtype_id');
@@ -69,8 +72,9 @@ class AdminController extends Controller
                 'message'=>'เพิ่มพนักงาน สำเร็จ!',
             ]);
         }
-
     }
+
+
 
 
     // public function newemp(Request $requst)

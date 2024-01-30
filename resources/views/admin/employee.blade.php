@@ -125,8 +125,7 @@
                                         </form>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                                            onclick="ClosePage()">Close</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                         <button type="button" class="btn btn-primary">Save</button>
                                     </div>
                                 </div>
@@ -145,6 +144,8 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
 
+                <ul id="saveform_errList"></ul>
+
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">เพิ่มพนักงาน</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -152,9 +153,8 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST">
+                    <form method="POST" action="{{route("admin.employee")}}">
                         @csrf
-                        <ul></ul>
                         <div class="col-md-12">
                             <div class="row">
                                 <div class="col-md-6">
@@ -212,7 +212,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary add_emp">Save</button>
+                    <button type="submit" class="btn btn-primary add_emp">Save</button>
                 </div>
             </div>
         </div>
@@ -229,6 +229,7 @@
                     'fname': $('.fname').val(),
                     'lname': $('.lname').val(),
                     'age': $('.age').val(),
+                    'phone': $('.phone').val(),
                     'username': $('.username').val(),
                     'password': $('.password').val(),
                     'emtype_id': $('.emtype_id').val(),
@@ -245,7 +246,7 @@
                     data: data,
                     dataType: "json",
                     success: function(response) {
-                        // console.log(response.errors.name);
+                        // console.log(response);
                         if (response.status == 400) //เช็คว่าป้อนข้อมูลหรือเปล่า
                         {
                             $('#saveform_errList').html("");
@@ -254,13 +255,14 @@
                                 $('#saveform_errList').append('<li>' + err_values +
                                     '<li>');
                             });
-                        } else {
+                        } else
+                        {
                             // save สำเร็จ
                             $('#saveform_errList').html("");
                             $('#succes_message').addClass('alert alert-success')
                             $('#succes_message').text(response.message)
                             $('#addEmpModal').madal('hide');
-                            $('#addEmpModal').find('input').val("");
+                            console.log(response);
                         }
                     }
                 });

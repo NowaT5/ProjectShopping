@@ -1,6 +1,6 @@
 @extends('layoutsAdmin.app')
 
-@section('Orderdetail', 'page')
+@section('title', 'newemp')
 @section('content')
     <section class="content">
         <div class="card">
