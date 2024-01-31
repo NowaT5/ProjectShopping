@@ -15,6 +15,7 @@
                         <th scope="col">ชื่อ</th>
                         <th scope="col">นามสกุล</th>
                         <th scope="col">อายุ</th>
+                        <th scope="col">เพศ</th>
                         <th scope="col">Username</th>
                         <th scope="col">ที่อยู่</th>
                         <th scope="col">แขวง/ตำบล</th>
@@ -33,13 +34,13 @@
                             <td>{{ $dd->lname }}</td>
                             <td>{{ $dd->age }}</td>
                             <td>{{ $dd->gender }}</td>
-                            <td>{{ $dd->email }}</td>
                             <td>{{ $dd->username }}</td>
                             <td>{{ $dd->address }}</td>
                             <td>{{ $dd->subdistrict }}</td>
                             <td>{{ $dd->district }}</td>
                             <td>{{ $dd->province }}</td>
                             <td>{{ $dd->zipcode }}</td>
+                            <td>{{ $dd->email }}</td>
                             <td>{{ $dd->phone }}</td>
                             <td>
                             {{-- <a href="#" role="button" class="btn btn-sm btn-warning">Edit</a> --}}
