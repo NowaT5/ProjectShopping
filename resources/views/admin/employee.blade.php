@@ -153,7 +153,8 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="{{route("admin.employee")}}">
+                    {{-- {{route("admin.employee")}} --}}
+                    <form method="POST" action="{{route("employee")}}">
                         @csrf
                         <div class="col-md-12">
                             <div class="row">

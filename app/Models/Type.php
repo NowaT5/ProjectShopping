@@ -10,6 +10,6 @@ class Type extends Model
     use HasFactory;
     public function type()
     {
-        return $this->belongsTo(type::class);
+        return $this->belongsTo(product_type::class, 'types');
     }
 }
