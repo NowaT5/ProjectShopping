@@ -8,10 +8,10 @@
             <div id="success_message"></div>
             <div class="card-header">
                 <h2 class="text text-center py-2">พนักงาน</h2>
-                {{-- <a href="{{ route('newemp') }}" role="button" class="btn btn-sm btn-primary"><i
-                            class="fa fa-plus"></i>เพิ่มพนักงาน</a> --}}
-                <button type="button" class="btn btn-primary" data-toggle="modal"
-                    data-target="#addEmpModal">เพิ่มพนักงาน</button>
+                <a href="{{route('newemp')}}" role="button" class="btn btn-sm btn-primary"><i
+                            class="fa fa-plus"></i>เพิ่มพนักงาน</a>
+                {{-- <button type="button" class="btn btn-primary" data-toggle="modal"
+                    data-target="#addEmpModal">เพิ่มพนักงาน</button> --}}
             </div>
             <table class="table table-striped-columns">
                 <thead>
@@ -125,7 +125,8 @@
                                         </form>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Close</button>
                                         <button type="button" class="btn btn-primary">Save</button>
                                     </div>
                                 </div>
@@ -139,7 +140,7 @@
     {{-- End Edit --}}
 
     {{-- เพิ่มพนักงาน Modal --}}
-    <div class="modal fade" id="addEmpModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    {{-- <div class="modal fade" id="addEmpModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -154,7 +155,7 @@
                 </div>
                 <div class="modal-body">
                     {{-- {{route("admin.employee")}} --}}
-                    <form method="POST" action="{{route("employee")}}">
+                    {{-- <form method="POST" action="{{ route('employee') }}">
                         @csrf
                         <div class="col-md-12">
                             <div class="row">
@@ -162,12 +163,12 @@
                                     <label for="fname" class="col-form-label">ชื่อ</label>
                                     <input type="text" name="fname" class="form-control" placeholder="First name">
 
-                                    {{-- error เช็คชื่อ --}}
-                                    {{-- @error('fname')
+                                    error เช็คชื่อ
+                                    @error('fname')
                                         <div class="my-2">
                                             <label for="saveform_errList" class="col-form-label"></label>
                                         </div>
-                                    @enderror --}}
+                                    @enderror
                                 </div>
 
                                 <div class="col-md-6">
@@ -217,7 +218,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>  --}}
     {{-- สิ้นสุดเพิ่มพนักงาน Modal --}}
 @endsection
 
@@ -256,8 +257,7 @@
                                 $('#saveform_errList').append('<li>' + err_values +
                                     '<li>');
                             });
-                        } else
-                        {
+                        } else {
                             // save สำเร็จ
                             $('#saveform_errList').html("");
                             $('#succes_message').addClass('alert alert-success')
@@ -271,36 +271,6 @@
         });
     </script>
 @endsection
-{{-- // $('#exampleModal-new-xl').on('show.bs.modal', function(event) {
-        //     var button = $(event.relatedTarget) // Button that triggered the modal
-        //     var recipient = button.data('whatever') // Extract info from data-* attributes
-        //     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-        //     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-        //     var modal = $(this)
-        //     modal.find('.modal-title').text('New message to ' + recipient)
-        //     modal.find('.modal-body input').val(recipient)
-        // })
-        // $('#editModal{{ $dd->id }}').on('show.bs.modal', function(event) {
-        //     var button = $(event.relatedTarget) // Button that triggered the modal
-        //     var recipient = button.data('whatever') // Extract info from data-* attributes
-        //     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-        //     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-        //     var modal = $(this)
-        //     modal.find('.modal-title').text('New message to ' + recipient)
-        //     modal.find('.modal-body input').val(recipient)
-        // })
-
-        // function Delemp() {
-        //     // ทำการ redirect หรือ navigate ไปยังหน้า Delemp เมื่อปุ่มถูกคลิก
-        //     window.location.href =
-        //         "{{ route('product') }}";
-        // }
-
-        // function Newemp(Request $request) {
-        //     // ทำการ redirect ไป Newemp
-        //     window.location.href =
-        //         "{{ route('newemp') }}";
-        // } --}}
 
 <script>
     function openEditModal(employeeId) {

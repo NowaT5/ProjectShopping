@@ -15,3 +15,4 @@ class LoginController extends Controller
         return view('loginUser.register');
     }
 }
+
