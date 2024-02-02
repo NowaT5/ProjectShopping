@@ -12,14 +12,15 @@ class Employee extends Model
     {
         return $this->belongsTo(employee::class, 'employee_id');
     }
-    protected $table = 'employee' ;
+    protected $table = 'employees' ;
     protected $fillable = [
         'fname',
         'lname',
+        'age',
+        'gender',
         'username',
         'password',
         'phone',
-        'age',
-        'emtype_id',
+        'emtype_id'
     ];
 }

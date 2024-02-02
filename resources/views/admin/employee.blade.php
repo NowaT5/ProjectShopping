@@ -8,8 +8,7 @@
             <div id="success_message"></div>
             <div class="card-header">
                 <h2 class="text text-center py-2">พนักงาน</h2>
-                <a href="{{route('newemp')}}" role="button" class="btn btn-sm btn-primary"><i
-                            class="fa fa-plus"></i>เพิ่มพนักงาน</a>
+                <a href="/newemp" role="button" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i>เพิ่มพนักงาน</a>
                 {{-- <button type="button" class="btn btn-primary" data-toggle="modal"
                     data-target="#addEmpModal">เพิ่มพนักงาน</button> --}}
             </div>
@@ -47,8 +46,11 @@
                             <td>
                                 <button type="button" class="btn btn-sm btn-warning" data-toggle="modal"
                                     data-target="#editModal{{ $dd->id }}">Edit</button>
-                                <button type="button" class="btn btn-sm btn-danger delete-item"
-                                    data-id = "{{ $dd->id }}" onclick="Delemp(this)">Delete </button>
+                                <a href="{{ route('employee.delemp', $dd->id) }}" class="btn btn-sm btn-danger"
+                                    onclick="return confirm('คุณต้องการลบบทความ {{ $dd->fname }} หรือไม่?')">ลบ</a>
+                                {{-- <button type="button" class="btn btn-sm btn-danger delete-item"
+                                    data-id = "{{ $dd->id }}" onclick="{{ route('employee.delemp') }}">Delete
+                                </button> --}}
                             </td>
                         </tr>
                         {{-- Edit --}}
@@ -139,87 +141,6 @@
     </section>
     {{-- End Edit --}}
 
-    {{-- เพิ่มพนักงาน Modal --}}
-    {{-- <div class="modal fade" id="addEmpModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-
-                <ul id="saveform_errList"></ul>
-
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">เพิ่มพนักงาน</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    {{-- {{route("admin.employee")}} --}}
-                    {{-- <form method="POST" action="{{ route('employee') }}">
-                        @csrf
-                        <div class="col-md-12">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label for="fname" class="col-form-label">ชื่อ</label>
-                                    <input type="text" name="fname" class="form-control" placeholder="First name">
-
-                                    error เช็คชื่อ
-                                    @error('fname')
-                                        <div class="my-2">
-                                            <label for="saveform_errList" class="col-form-label"></label>
-                                        </div>
-                                    @enderror
-                                </div>
-
-                                <div class="col-md-6">
-                                    <label for="lname" class="col-form-label">นามสกุล</label>
-                                    <input type="text" name="lname" class="form-control" placeholder="Last name">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <label for="age" class="col-form-label">อายุ</label>
-                                    <input type="text" name="age" class="form-control" placeholder="Age">
-                                </div>
-                                <div class="col">
-                                    <label for="phone" class="col-form-label">เบอร์โทรศัพท์</label>
-                                    <input type="text" name="phone" class="form-control" placeholder="Phone"
-                                        name="phone">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label for="username" class="col-form-label">Username</label>
-                                    <input type="text" name="username" class="form-control" placeholder="Username">
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="password" class="col-form-label">Password</label>
-                                    <input type="text" name="password" class="form-control" placeholder="Password"
-                                        name="password">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <label for="emtype_id">ตำแหน่ง</label>
-                                    <select class="form-control" name="emtype_id">
-                                        <option value="">กรุณาเลือก..</option>
-                                        <option value="1">SuperAdmin</option>
-                                        <option value="2">Admin</option>
-                                        <option value="3">Manager</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary add_emp">Save</button>
-                </div>
-            </div>
-        </div>
-    </div>  --}}
-    {{-- สิ้นสุดเพิ่มพนักงาน Modal --}}
 @endsection
 
 @section('scripts')
