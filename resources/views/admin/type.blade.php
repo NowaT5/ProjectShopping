@@ -40,8 +40,6 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
 
-                    <ul id="saveform_errList"></ul>
-
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">เพิ่มชนิดสินค้า</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -62,16 +60,16 @@
                                     </div>
                                 </div>
                             </div>
-                    </form>
-                    <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i>
+                        </div>
+                        <input type="submit" value="บันทึก" class="btn btn-success">
+                        {{-- <button type="button" class="btn btn-success my-2 mx-3" id="savedata" value="create">
+                            บันทึก</button> --}}
+                        <button type="button" class="btn btn-default">
                             ยกเลิก</button>
-                        <button type="button" class="btn btn-success" id="savedata" value="create"><i
-                                class="fa fa-save"></i> บันทึก</button>
-                    </div>
-                    <input type="hidden" class="form-control" id="type_id" name="type_id" placeholder=""
-                        autocomplete="off" value="">
                 </div>
+                <input type="hidden" class="form-control" id="type_id" name="type_id" placeholder="" autocomplete="off"
+                    value="">
+                </form>
             </div>
         </div>
         {{-- สิ้นสุดเพิ่มพนักงาน Modal --}}
@@ -79,5 +77,4 @@
 @endsection
 @push('script')
     {{-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script> --}}
-    
 @endpush

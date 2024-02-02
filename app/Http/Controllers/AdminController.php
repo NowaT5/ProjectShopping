@@ -16,20 +16,36 @@ class AdminController extends Controller
     {
         return view('admin.index');
     }
+
     public function user()
     {
         $user = user::all();
         return view('admin.user', compact('user'));
     }
+
     public function employee()
     {
         $employee = DB::table('employees')->get();
         return view('admin.employee', compact('employee'));
     }
+    // ดึงข้อมูลตำแหน่งพนักงาน
     public function emptype()
     {
         $emtypes = DB::table('emtypes')->get();
         return view('admin.employee', compact('emtypes'));
+    }
+
+    // ปรับปรุงรายชื่อพนักงาน
+    public function edit($id)
+    {
+        $editemp = Employee::findOrFail($id);
+        return view('admin.employee', compact('editemp'));
+    }
+
+     // ลบพนักงาน
+     public function delemp($id){
+        Employee::find($id)->delete();
+        return redirect()->back();
     }
 
     // เพิ่มพนักงาน เวอร์ชั่นล่าสุด
@@ -74,9 +90,6 @@ class AdminController extends Controller
     //     }
     // }
 
-
-
-
     // public function newemp(Request $requst)
     // {
     //     $requst->validate([
@@ -91,11 +104,6 @@ class AdminController extends Controller
     //     $employee = Employee::findOrFail($id);
     //     return view('employee.edit', compact('employee'));
     // }
-    public function edit($id)
-    {
-        $editemp = Employee::findOrFail($id);
-        return view('admin.employee', compact('editemp'));
-    }
 
     // public function delemp($id)
     // {
@@ -104,8 +112,5 @@ class AdminController extends Controller
 
     //     return redirect(view('admin.employee'));
     // }
-    public function delemp($id){
-        Employee::find($id)->delete();
-        return redirect()->back();
-    }
+
 }

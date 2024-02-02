@@ -29,11 +29,14 @@
                 <tbody>
                     @foreach ($employee as $dd)
                         @csrf
+
+                        {{-- ดึงข้อมูลตำแหน่งพนักงาน --}}
                         @php
                             $emtype = DB::table('emtypes')
                                 ->where('id', $dd->emtype_id)
                                 ->first();
                         @endphp
+                        
                         <tr>
                             <td>{{ $dd->id }}</td>
                             <td>{{ $dd->fname }}</td>
