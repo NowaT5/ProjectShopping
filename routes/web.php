@@ -43,7 +43,7 @@ Route::get('/newemp',[NewEmployeeController::class,'newemp']); // หน้า�
 Route::post('/addemp',[NewEmployeeController::class,'addemp']); // ปุ่มบันทึก
 Route::get('/employee/delete/{id}',[AdminController::class,'delemp'])->name('employee.delemp'); // ฟังชั่นลบ
 // Route::get('/editemployee/{id}',[AdminController::class,'edit'])->name('employee.edit'); // หน้าปรับปรุงข้อมูล
-// Route::post('/editemployee/{id}',[AdminController::class,'edit'])->name('employee.edit'); // ปุ่ม Edit
+Route::post('/editemp/{id}',[AdminController::class,'editemp'])->name('employee.edit'); // ปุ่ม Edit
 
 // Product route
 Route::get('/type',[ProductController::class,'type'])->name('type'); //รายชื่อชนิดสินค้า

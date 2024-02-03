@@ -12,17 +12,18 @@ use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {
+    // หน้าแดชบอร์ด
     public function index()
     {
         return view('admin.index');
     }
-
+    // แสดงรายชื่อลูกค้า
     public function user()
     {
         $user = user::all();
         return view('admin.user', compact('user'));
     }
-
+    // แสดงรายชื่อพนักงาน
     public function employee()
     {
         $employee = DB::table('employees')->get();
@@ -36,11 +37,11 @@ class AdminController extends Controller
     }
 
     // ปรับปรุงรายชื่อพนักงาน
-    public function edit($id)
-    {
-        $editemp = Employee::findOrFail($id);
-        return view('admin.employee', compact('editemp'));
-    }
+    // public function edit($id)
+    // {
+    //     $editemp = Employee::findOrFail($id);
+    //     return view('admin.employee', compact('editemp'));
+   // }
 
      // ลบพนักงาน
      public function delemp($id){
@@ -48,69 +49,51 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
-    // เพิ่มพนักงาน เวอร์ชั่นล่าสุด
-    // public function addemp(Request $request)
-    // {
+    // อับเดตข้อมูลพนักงาน
+    public function editemp(Request $request,$id) {
+     // // เช็กว่ากรอกข้อมูล
+        // $request->validate([
+        //     'fname' => 'required',
+        //     'lname' => 'required',
+        //     'age' => 'required',
+        //     'phone' => 'required',
+        //     'username' => 'required',
+        //     'password' => 'required',
+        //     'emtype_id' => 'required'
+        // ]);
 
-    //     // เช็กว่ากรอกข้อมูล
-    //     $validator = Validator::make($request->all(),[
-    //         'fname' => 'required',
-    //         'lname' => 'required',
-    //         'age' => 'required',
-    //         'phone' => 'required',
-    //         'username' => 'required',
-    //         'password' => 'required',
-    //         'emtype_id' => 'required',
-    //     ]);
-    //     if($validator->fails()) //ส่งกลับ error
-    //     {
-    //         return response()->json([
-    //             'status'=>400,
-    //             'errors'=>$validator->messages(),
-    //         ]);
-    //     }
-    //     else
-    //     {
-    //         // ส่งข้อมูลไปเก็บ
-    //         $newemp = new Employee;
-    //         $newemp->fname = $request->input('fname');
-    //         $newemp->lname = $request->input('lname');
-    //         $newemp->age = $request->input('age');
-    //         $newemp->phone = $request->input('phone');
-    //         $newemp->username = $request->input('username');
-    //         $newemp->password = $request->input('password');
-    //         $newemp->emtype_id = $request->input('emtype_id');
-    //         $newemp->save();
+        // $employee = DB::table('employees')->where('id', $request->$id);
+        $employee = Employee::find($id);
+        // DB::table('employees')->where('id',$id);
+        // $newemp = [
+            $employee->id  = $request->id;
+            $employee->fname = $request->fname;
+            $employee->lname = $request->lname;
+            $employee->age = $request->age;
+            $employee->gender = $request->gender;
+            $employee->phone = $request->phone;
+            $employee->username = $request->username;
+            $employee->password = $request->password;
+            $employee->emtype_id = $request->emtype_id;
+            $employee->save();
+        //   'lname' => $request->lname,
+        //   'age' => $request->age,
+        //    'gender' => $request->gender,
+        //   'phone' => $request->phone,
+        //   'username' => $request->username,
+        //   'password' => $request->password,
+        //   'emtype_id' => $request->emtype_id,
+        // ];
 
-    //         //แสดงข้อความจัดเก็บสำเร็จ
-    //         return response()->json([
-    //             'status'=>200,
-    //             'message'=>'เพิ่มพนักงาน สำเร็จ!',
-    //         ]);
-    //     }
-    // }
+        // dd($newemp);
 
-    // public function newemp(Request $requst)
-    // {
-    //     $requst->validate([
-    //         'fname' => 'required',
-    //         'lname' => 'required'
-    //     ]);
-    //     $data = [
-    //         'fname' => $request->fname,
-    //         'lname' => $request->lname
-    //     ];
-    //     dd($data);
-    //     $employee = Employee::findOrFail($id);
-    //     return view('employee.edit', compact('employee'));
-    // }
+        // บันทึกการแก้ไขข้อมูลลง DB
+        // Employee::find($id)->save($newemp);
+        // Employee::find($id)->update($newemp);
+        // DB::table('employees')->where('id',$id)->update($newemp); // kongกาก
 
-    // public function delemp($id)
-    // {
-    //     Log::info('Deleting employee with ID: ' . $id);
-    //     DB::table('employees')->where('id', $id)->delete();
-
-    //     return redirect(view('admin.employee'));
-    // }
+        // dd($newemp);
+        return redirect('/employee');
+    }
 
 }

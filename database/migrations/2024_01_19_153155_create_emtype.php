@@ -13,7 +13,7 @@ class CreateEmtype extends Migration
      */
     public function up()
     {
-        Schema::create('emtype', function (Blueprint $table) {
+        Schema::create('emtypes', function (Blueprint $table) {
             $table->id();
             $table->string('emtype_name');
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateEmtype extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('emtype');
+        Schema::dropIfExists('emtypes');
     }
 }
