@@ -29,7 +29,6 @@
                 </thead>
                 <tbody>
                     @foreach ($employee as $dd)
-
                         {{-- ดึงข้อมูลตำแหน่งพนักงาน --}}
                         @php
                             $emtype = DB::table('emtypes')
@@ -81,34 +80,32 @@
                                             <div class="col">
                                                 <label for="fname" class="col-form-label">ชื่อ</label>
                                                 <input type="text" class="form-control" value="{{ $dd->fname }}"
-                                                  name="fname"  id="fname" required>
+                                                    name="fname" id="fname" required>
                                             </div>
                                             <div class="col">
                                                 <label for="lname" class="col-form-label">นามสกุล</label>
                                                 <input type="text" class="form-control" value="{{ $dd->lname }}"
-                                                  name="lname"  id="lname" required>
+                                                    name="lname" id="lname" required>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <label for="age" class="col-form-label">อายุ</label>
                                                 <input type="number" class="form-control" value="{{ $dd->age }}"
-                                                name="age" id="age">
+                                                    name="age" id="age">
                                             </div>
                                             {{-- <div class="col">
                                                 <label for="gender" class="col-form-label">เพศ</label>
                                                 <input type="text" class="form-control" value="{{ $dd->gender }}"
                                                   name="gender"  id="gender"> --}}
 
-                                                {{-- เลือกเพศแบบดรอปดาวน์ --}}
-                                                <div class="col-md-6">
+                                            {{-- เลือกเพศแบบดรอปดาวน์ --}}
+                                            <div class="col-md-6">
                                                 <label for="gender">เพศ</label>
                                                 <select class="form-control" name="gender" id="{{ $dd->id }}">
-                                                <option value="Male"
-                                                        {{ $dd->gender == 'Male' ? 'selected' : '' }}>
+                                                    <option value="Male" {{ $dd->gender == 'Male' ? 'selected' : '' }}>
                                                         Male</option>
-                                                    <option value="Female"
-                                                        {{ $dd->gender == 'Female' ? 'selected' : '' }}>
+                                                    <option value="Female" {{ $dd->gender == 'Female' ? 'selected' : '' }}>
                                                         Female</option>
 
                                                 </select>
@@ -133,8 +130,8 @@
                                             {{-- OLD กากๆ  --}}
                                             <div class="col-md-6">
                                                 <label for="emtype_id" class="col-form-label">ตำแหน่ง</label>
-                                                <select class="form-control"
-                                                   name="emtype_id" id="editModal{{ $dd->id }}-emtype_id" required>
+                                                <select class="form-control" name="emtype_id"
+                                                    id="editModal{{ $dd->id }}-emtype_id" required>
 
                                                     <option value="1"
                                                         {{ $emtype->emtype_name == 'Admin' ? 'selected' : '' }}>
@@ -147,24 +144,24 @@
                                                         Manager</option>
                                                 </select>
                                             </div>
-                                                <!-- เพิ่ม <option> สำหรับตำแหน่งที่มีในฐานข้อมูล -->
+                                            <!-- เพิ่ม <option> สำหรับตำแหน่งที่มีในฐานข้อมูล -->
 
                                             <div class="col-md-6">
                                                 <label for="phone" class="col-form-label">เบอร์โทรศัพท์</label>
                                                 <input type="text" class="form-control" value="{{ $dd->phone }}"
-                                                   name="phone" id="phone">
+                                                    name="phone" id="phone">
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <label for="username" class="col-form-label">Username</label>
                                                 <input type="text" class="form-control" value="{{ $dd->username }}"
-                                                   name="username" id="username" required>
+                                                    name="username" id="username" required>
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="password" class="col-form-label">Password</label>
                                                 <input type="text" class="form-control" value="{{ $dd->password }}"
-                                                  name="password"  id="password" required>
+                                                    name="password" id="password" required>
                                             </div>
                                         </div>
                                         <div>
@@ -172,126 +169,19 @@
                                                 class="btn btn-secondary my-2">ยกเลิก</a>
                                             <button type="submit" class="btn btn-primary">บันทึก</button>
                                         </div>
-                                    {{-- </div> --}}
+                                        {{-- </div> --}}
                                 </form>
-                            {{-- </div>
+                                {{-- </div>
                         </div> --}}
-                        {{-- </tbody> --}}
-                        @endforeach
+                                {{-- </tbody> --}}
+                                @endforeach
             </table>
         </div>
         </div>
+        {{-- End Edit --}}
         </div>
         </div>
     </section>
-    {{-- End Edit --}}
+
 
 @endsection
-
-{{-- @section('scripts')
-    <script>
-        $(document).ready(function() {
-            $(document).on('click', '.add_emp', function(e) {
-                e.preventDefault();
-                var data = {
-                    'fname': $('.fname').val(),
-                    'lname': $('.lname').val(),
-                    'age': $('.age').val(),
-                    'phone': $('.phone').val(),
-                    'username': $('.username').val(),
-                    'password': $('.password').val(),
-                    'emtype_id': $('.emtype_id').val(),
-                }
-                // console.log(data);
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-                $.ajax({
-                    type: "POSt",
-                    url: "/addemp",
-                    data: data,
-                    dataType: "json",
-                    success: function(response) {
-                        // console.log(response);
-                        if (response.status == 400) //เช็คว่าป้อนข้อมูลหรือเปล่า
-                        {
-                            $('#saveform_errList').html("");
-                            $('#saveform_errList').addClass('alert alert-danger');
-                            $.each(response.errors, function(key, err_values) {
-                                $('#saveform_errList').append('<li>' + err_values +
-                                    '<li>');
-                            });
-                        } else {
-                            // save สำเร็จ
-                            $('#saveform_errList').html("");
-                            $('#succes_message').addClass('alert alert-success')
-                            $('#succes_message').text(response.message)
-                            $('#addEmpModal').madal('hide');
-                            console.log(response);
-                        }
-                    }
-                });
-            });
-        });
-    </script>
-@endsection
-
-<script>
-    function openEditModal(employeeId) {
-        // ดึงข้อมูลของ employee และตำแหน่ง (emtype) จาก API หรือส่วนอื่น ๆ
-        // และนำมาแสดงใน Modal แก้ไข
-
-        // ตัวอย่างการใช้ Axios สำหรับดึงข้อมูลจาก API
-        axios.get(`/api/employees/${employeeId}`)
-            .then(response => {
-                const employeeData = response.data;
-                // นำข้อมูลมาแสดงใน Modal
-                document.getElementById('editModal{{ $dd->id }}-emtype_id').innerHTML = '';
-                for (const emtype of employeeData.emtypes) {
-                    const option = document.createElement('option');
-                    option.value = emtype.id;
-                    option.text = emtype.emtype_name;
-                    document.getElementById('editModal{{ $dd->id }}-emtype_id').appendChild(option);
-                }
-                // ... แสดงข้อมูลอื่น ๆ ตามที่ต้องการ
-            })
-            .catch(error => {
-                console.error('Error fetching employee data:', error);
-            });
-
-        // เปิด Modal
-        $('#editModal{{ $dd->id }}').modal('show');
-    }
-</script>
-<!-- ที่ไฟล์ script ของคุณ -->
-
-<script>
-    function Delemp(button) {
-        // ดึงค่า ID จากปุ่ม Delete ที่ถูกคลิก
-        var employeeId = button.getAttribute('data-id');
-
-        // ข้อความยืนยันการลบ
-        var confirmMessage = "คุณแน่ใจที่จะลบข้อมูลนี้หรือไม่?";
-
-        // ถามผู้ใช้ยืนยัน
-        if (confirm(confirmMessage)) {
-            // ส่งคำขอลบไปยัง URL ที่กำหนด
-            fetch('/employee/delete/' + employeeId, {
-                method: 'DELETE',
-                headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}', // ส่ง token ไปใน header
-                },
-            }).then(response => {
-                if (response.ok) {
-                    // หากลบเสร็จสิ้น, ทำการ refresh หน้าหลังจากลบ
-                    location.reload();
-                } else {
-                    // กรณีเกิดข้อผิดพลาดในการลบ
-                    console.error('เกิดข้อผิดพลาดในการลบข้อมูล');
-                }
-            });
-        }
-    }
-</script> --}}

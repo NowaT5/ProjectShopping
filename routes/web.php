@@ -45,11 +45,19 @@ Route::get('/employee/delete/{id}',[AdminController::class,'delemp'])->name('emp
 // Route::get('/editemployee/{id}',[AdminController::class,'edit'])->name('employee.edit'); // หน้าปรับปรุงข้อมูล
 Route::post('/editemp/{id}',[AdminController::class,'editemp'])->name('employee.edit'); // ปุ่ม Edit
 
-// Product route
-Route::get('/type',[ProductController::class,'type'])->name('type'); //รายชื่อชนิดสินค้า
-Route::get('/newtype',[ProductController::class,'newtype']); // หน้ากรอกข้อมูล
+// type route
+Route::get('/type',[ProductController::class,'type'])->name('type'); // หน้าชนิดสินค้า
 Route::post('/addtype',[ProductController::class,'addtype']); // ปุ่มบันทึก
-//Route::get('/category',[ProductController::class,'category'])->name('category'); // รายชื่อประเภทสินค้า
+Route::post('/edittype/{id}',[ProductController::class,'edittype'])->name('type.edit'); // ปุ่มบันทึกแก้ไข
+Route::get('/deltype/{id}',[ProductController::class,'deltype'])->name('deltype'); // ปุ่มลบ
+
+// Category route
+Route::get('/producttype',[ProductController::class,'product_type'])->name('producttype'); // หน้าประเภทสินค้า
+Route::post('/addproducttype',[ProductController::class,'add_product_type']); // ปุ่มบันทึก
+Route::post('/editproducttype/{id}',[ProductController::class,'edit_product_type'])->name('editproducttype.edit'); // ปุ่มบันทึกแก้ไข
+Route::get('/delproducttype/{id}',[ProductController::class,'del_product_type'])->name('del.producttype'); // ปุ่มลบ
+
+// product detail route
 Route::get('/product',[ProductController::class,'product'])->name('product'); //แสดงรายการสินค้า
 
 // Route Order

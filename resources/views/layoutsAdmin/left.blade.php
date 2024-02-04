@@ -35,6 +35,7 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                 data-accordion="false">
+
                 <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                 <li class="nav-item">
@@ -61,8 +62,8 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
+                <li class="nav-item ">
+                    <a href="#" class="nav-link active">
                         <i class="nav-icon fas fa-apple-alt"></i>
                         <p>
                             รายการสินค้าทั้งหมด
@@ -79,7 +80,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{route('producttype')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>ประเภทสินค้า</p>
                             </a>
@@ -111,7 +112,7 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fa fa-shopping-basket"></i>
                         <p>
@@ -139,7 +140,7 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
