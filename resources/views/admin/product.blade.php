@@ -34,22 +34,25 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($product as $dd)
-                                        @php
+                                    @foreach ($types as $dd1)
+                                    @foreach ($product_type as $dd2)
+
+                                        {{-- @php
                                             $product_type = DB::table('product_types')
                                                 ->where('id', $dd->product_type_id)
                                                 ->first();
                                             $type = DB::table('types')
                                                 ->where('id', $dd->type_id)
                                                 ->first();
-                                        @endphp
+                                        @endphp --}}
                                         <tr>
                                             <td>{{ $dd->id }}</td>
                                             <td>{{ $dd->product_name }}</td>
                                             <td>{{ $dd->product_price }}</td>
                                             <td>{{ $dd->product_image }}</td>
                                             <td>{{ $dd->product_stock }}</td>
-                                            <td>{{ $type->type_name }}</td>
-                                            <td>{{ $product_type->product_type_name}}</td>
+                                            <td>{{ $dd1->type_name }}</td>
+                                            <td>{{ $dd2->product_type_name}}</td>
                                             <td>
                                                 <a href="#" role="button" class="btn btn-sm btn-warning">Edit</a>
                                                 {{-- <a href="#" role="button" class="btn btn-sm btn-danger">Delete</a> --}}
@@ -57,6 +60,8 @@
                                                     data-id = "">Delete</button>
                                             </td>
                                         </tr>
+                                    @endforeach
+                                    @endforeach
                                     @endforeach
                                 </tbody>
                             </table>

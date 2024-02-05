@@ -116,8 +116,8 @@
                                                     id="gender">
                                             </div> --}}
                                         </div>
-                                        <div class="row">
-                                            {{-- <div class="col-md-6">
+
+                                        {{-- <div class="col-md-6">
                                                 <label for="emtype_id" class="col-form-label">ตำแหน่ง</label>
                                                 <select class="form-control" value="{{$emtype->id}}" name="emtype_id" required>
                                                     <option value="">กรุณาเลือก..</option>
@@ -127,7 +127,8 @@
                                                 </select>
                                             </div> --}}
 
-                                            {{-- OLD กากๆ  --}}
+                                        {{-- OLD กากๆ  --}}
+                                        <div class="row">
                                             <div class="col-md-6">
                                                 <label for="emtype_id" class="col-form-label">ตำแหน่ง</label>
                                                 <select class="form-control" name="emtype_id"

@@ -28,6 +28,7 @@
                                 ->where('id', $dd->type_id)
                                 ->first();
                         @endphp
+
                         <tr>
                             <td>{{ $dd->id }}</td>
                             <td>{{ $dd->product_type_name }}</td>
@@ -39,7 +40,7 @@
                                 {{-- <td><a href="#edittypeModal{{ $dd->id }}" role="button" class="btn btn-sm btn-warning">Edit</a> --}}
 
                                 <a href="{{ route('del.producttype', $dd->id) }}" class="btn btn-sm btn-danger"
-                                    onclick="return confirm('คุณต้องการลบ {{ $dd->product_types_name }} หรือไม่?')">ลบ</a>
+                                    onclick="return confirm('คุณต้องการลบ {{ $dd->product_type_name }} หรือไม่?')">ลบ</a>
                                 {{-- <button type="button" class="btn btn-sm btn-danger delete-item"
                                 data-id = "">Delete</button> --}}
                             </td>
@@ -54,7 +55,6 @@
             aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">เพิ่มชนิดสินค้า</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -112,31 +112,45 @@
                         <div class="modal-body">
                             <div class="box-body">
                                 <div class="form-group row">
-                                    <label for="inputEmail3"
+                                    <label for="product_type_name"
                                         class="col-sm-4 col-form-label text-right">ชื่อชนิดสินค้า</label>
                                     <div class="col-sm-6">
                                         <input type="text" class="form-control" value="{{ $dd->product_type_name }}"
-                                            id="type_name" name="type_name" required>
+                                            id="product_type_name" name="product_type_name" required>
                                         <p class="text-danger mt-1 name_err"></p>
                                     </div>
 
                                     <div class="form-group row">
                                         <label for="type_id"
                                             class="col-sm-4 col-form-label text-right">ชื่อชนิดสินค้า</label>
-                                        <select class="col-sm-6 mx-2" name="type_id"
-                                            id="editModal{{ $dd->id }}-type_id" required>
-                                            @foreach ($type as $types)
 
-                                                {{-- <option value="{{ $dd->type_id }}">{{ $type->type_name }}</option> --}}
-                                                <option value="{{ $dd->type_id }}">{{ $types->type_name }}</option>
-                                                {{-- @else --}}
-                                                {{-- @if ($type->id == $dd->id) --}}
-                                                {{-- <option value="{{$dd->type_id}}" >{{ $types->type_name }}</option> --}}
-                                                {{-- @else --}}
-                                                {{-- <option >{{$dd->id}}</option> --}}
-                                                {{-- @endif --}}
+
+                                        {{-- สร้างตัวเลือกไม่ได้สักที --}}
+                                        {{-- <select class="col-sm-6 mx-2" name="type_id" required>
+                                            @foreach ($type as $types)
+                                                <option value="{{ $types->type_id }}" {{ $dd->type_id == $types->type_id ? 'selected' : '' }}>
+                                                    {{ $types->type_name }}
+                                                </option>
                                             @endforeach
-                                        </select>
+                                        </select> --}}
+
+                                        {{-- <select class="col-sm-6 mx-2" name="type_id" required>
+                                            @if ($type)
+                                                @foreach ($type as $types)
+                                                    <option value="{{ $types->type_id }}"
+                                                        {{ $dd && $dd->type_id == $types->type_id ? 'selected' : '' }}>
+                                                        {{ $types->type_name }}
+                                                    </option>
+                                                @endforeach
+                                            @endif
+                                        </select> --}}
+
+                                        {{-- <select class="col-sm-6 mx-2" value="{{ $dd->type_id }}" name="type_id"
+                                            required>
+                                            @foreach ($type as $types)
+                                                <option value="{{ $dd->type_id }}">{{ $types->type_name }}</option>
+                                            @endforeach
+                                        </select> --}}
 
                                         {{-- <select> // ตัวอย่าง จาก stackoverflow
                                                 <option value="{{ $users->city}}">{{ $users->city_name }}</option>
@@ -144,7 +158,16 @@
                                                     <option value="{{ $city->id }}">{{ $city->name_ru }}</option>
                                                 @endforeach
                                             </select> --}}
+                                        <select class="col-sm-6 mx-2" id="type_id" name="type_id" required>
+                                            @if (isset($type) && is_array($type))
+                                                @foreach ($type as $types)
+                                                    <option value="{{ $types['type_id'] }}">
+                                                        {{ $types['type_name'] }}
+                                                    </option>
+                                                @endforeach
+                                            @endif
                                         </select>
+
                                     </div>
                                 </div>
                             </div>
@@ -160,6 +183,8 @@
         </div>
         {{-- สิ้นสุด Edit Modal --}}
         @endforeach
+
         </table>
     </section>
 @endsection
+<!-- สคริปต์ JavaScript -->

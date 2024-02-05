@@ -10,6 +10,7 @@ use App\Http\Controllers\DetailOrderController;
 use App\Http\Controllers\NewEmployeeController;
 use App\Http\Controllers\EmployeeController;
 
+
 // front
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PageUserController;

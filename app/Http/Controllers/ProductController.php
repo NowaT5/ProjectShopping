@@ -12,7 +12,8 @@ class ProductController extends Controller
 {   ////// type ///////////
     public function type() // pull type from db
     {
-        $types = Type::all();
+        $types = DB::table('types')->get();
+
         return view('admin.type',compact('types'));
     }
     public function deltype($id) // delete type
@@ -41,7 +42,7 @@ class ProductController extends Controller
     ////// product type ///////////
     public function product_type() // pull product type from db
     {
-        $product_type = Product_type::all();
+        $product_type = DB::table('product_types')->get();
         return view('admin.product_type',compact('product_type'));
     }
     public function del_product_type($id) // delete type
@@ -72,7 +73,7 @@ class ProductController extends Controller
     /////// product ///////////////
     public function product() // pull product data from db
     {
-        $product = product::all();
+        $product = DB::table('products')->get();
         // $product = Product::all();
         return view('admin.product', compact('product'));
     }
