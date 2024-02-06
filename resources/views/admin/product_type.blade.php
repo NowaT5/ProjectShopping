@@ -39,7 +39,7 @@
 
                                 {{-- <td><a href="#edittypeModal{{ $dd->id }}" role="button" class="btn btn-sm btn-warning">Edit</a> --}}
 
-                                <a href="{{ route('del.producttype', $dd->id) }}" class="btn btn-sm btn-danger"
+                                <a href="{{ route('del.product', $dd->id) }}" class="btn btn-sm btn-danger"
                                     onclick="return confirm('คุณต้องการลบ {{ $dd->product_type_name }} หรือไม่?')">ลบ</a>
                                 {{-- <button type="button" class="btn btn-sm btn-danger delete-item"
                                 data-id = "">Delete</button> --}}
@@ -49,52 +49,6 @@
                 </tbody>
                 {{-- </table> --}}
         </div>
-
-        {{-- เพิ่มชนิดสินค้า Modal --}}
-        <div class="modal fade" id="addproducttypeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">เพิ่มชนิดสินค้า</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form method="POST" action="/addproducttype">
-                        @csrf
-                        <div class="modal-body">
-                            <div class="box-body">
-                                <div class="form-group row">
-                                    <label for="inputEmail3"
-                                        class="col-sm-4 col-form-label text-right">ชื่อประเภทสินค้า</label>
-                                    <div class="col-sm-6">
-                                        <input type="text" class="form-control" placeholder="" id="product_type_name"
-                                            name="product_type_name" required>
-                                        <p class="text-danger mt-1 name_err"></p>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="inputEmail3"
-                                        class="col-sm-4 col-form-label text-right">ชื่อชนิดสินค้า</label>
-                                    <div class="col-sm-6">
-                                        <input type="text" class="form-control" placeholder="" id="type_id"
-                                            name="type_id" required>
-                                        <p class="text-danger mt-1 name_err"></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div><button type="submit" class="btn btn-success my-2 mx-3">บันทึก</button></div>
-
-                </div>
-                <input type="hidden" class="form-control" id="product_type_id" name="product_type_id" placeholder=""
-                    autocomplete="off" value="">
-                {{-- </form> --}}
-            </div>
-        </div>
-        {{-- สิ้นสุดเพิ่มชนิดสินค้า Modal --}}
-
         {{-- Edit Modal --}}
         <div class="modal fade" id="edittypeModal{{ $dd->id }}" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -124,72 +78,147 @@
                                         <label for="type_id"
                                             class="col-sm-4 col-form-label text-right">ชื่อชนิดสินค้า</label>
                                         <select class="col-sm-6 mx-2" id="type_id" name="type_id" required>
-                                                @foreach ($types as $type)
-                                                    <option value="{{$dd->type_id}}">{{ $type->type_name }}</option>
-                                                @endforeach
+                                            <option value="">{{ $type->type_name }}</option>
+                                            @foreach ($types as $type)
+                                                <option value="{{ $type->id }}">{{ $type->type_name }}</option>
+                                            @endforeach
 
                                         </select>
-
-
-                                        {{-- <select class="col-sm-6 mx-2" id="type_id" name="type_id" required>
-                                            @if (isset($type) && is_array($type))
-                                                @foreach ($type as $types)
-                                                    <option value="{{ $types['type_id'] }}">
-                                                        {{ $types['type_name'] }}
-                                                    </option>
-                                                @endforeach
-                                            @endif
-                                        </select> --}}
-                                        {{-- สร้างตัวเลือกไม่ได้สักที --}}
-                                        {{-- <select class="col-sm-6 mx-2" name="type_id" required>
-                                            @foreach ($type as $types)
-                                                <option value="{{ $types->type_id }}" {{ $dd->type_id == $types->type_id ? 'selected' : '' }}>
-                                                    {{ $types->type_name }}
-                                                </option>
-                                            @endforeach
-                                        </select> --}}
-
-                                        {{-- <select class="col-sm-6 mx-2" name="type_id" required>
-                                            @if ($type)
-                                                @foreach ($type as $types)
-                                                    <option value="{{ $types->type_id }}"
-                                                        {{ $dd && $dd->type_id == $types->type_id ? 'selected' : '' }}>
-                                                        {{ $types->type_name }}
-                                                    </option>
-                                                @endforeach
-                                            @endif
-                                        </select> --}}
-
-                                        {{-- <select class="col-sm-6 mx-2" value="{{ $dd->type_id }}" name="type_id"
-                                            required>
-                                            @foreach ($type as $types)
-                                                <option value="{{ $dd->type_id }}">{{ $types->type_name }}</option>
-                                            @endforeach
-                                        </select> --}}
-
-                                        {{-- <select> // ตัวอย่าง จาก stackoverflow
-                                                <option value="{{ $users->city}}">{{ $users->city_name }}</option>
-                                                @foreach ($cities->whereNotIn('id', [$users->city]) as $city)
-                                                    <option value="{{ $city->id }}">{{ $city->name_ru }}</option>
-                                                @endforeach
-                                            </select> --}}
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div>
                             <button type="submit" class="btn btn-success my-2 mx-3">บันทึก</button>
                         </div>
+                        <div>
+
+                        </div>
                 </div>
-                <input type="hidden" class="form-control" id="type_id" name="type_id" placeholder=""
-                    autocomplete="off" value="">
                 </form>
             </div>
         </div>
-        {{-- สิ้นสุด Edit Modal --}}
         @endforeach
 
         </table>
+        {{-- เพิ่มชนิดสินค้า Modal --}}
+        <div class="modal fade" id="addproducttypeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">เพิ่มชนิดสินค้า</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form method="POST" action="{{ route('addproducttype') }}">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="box-body">
+                                <div class="form-group row">
+                                    <label for="inputEmail3"
+                                        class="col-sm-4 col-form-label text-right">ชื่อประเภทสินค้า</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" name="product_type_name"
+                                            id="product_type_name" required>
+                                        <p class="text-danger mt-1 name_err"></p>
+                                    </div>
+                                </div>
+                                {{-- <div class="form-group row">
+                                    <label for="inputEmail3"
+                                        class="col-sm-4 col-form-label text-right">ชื่อชนิดสินค้า</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" placeholder="" id="type_id"
+                                            name="type_id" required>
+                                        <p class="text-danger mt-1 name_err"></p>
+                                    </div>
+                                </div> --}}
+                                {{-- <div class="col-md-4 mx-5">
+                                    <label for="gender" class="col-form-label">เพศ</label>
+                                    <select class="form-control" name="gender">
+                                        <option value="">กรุณาเลือก..</option>
+                                        <option value="Male">Male</option>
+                                        <option value="female">Female</option>
+
+                                    </select>
+                                </div> --}}
+
+                                <div class="form-group row">
+                                    <label for="type_id" class="col-sm-4 col-form-label text-right">ชื่อชนิดสินค้า</label>
+                                    <select class="form-control col-sm-6" id="type_id" name="type_id" required>
+                                        <option value="">---</option>
+                                        @foreach ($types as $type)
+                                            <option value="{{ $type->id }}">{{ $type->type_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                {{-- <div class="form-group row">
+                                    <label for="{{ $dd->type_id }}"
+                                        class="col-sm-4 col-form-label text-right">ชื่อชนิดสินค้า</label>
+                                    <select class="col-sm-6 mx-2" value="{{ $dd->type_id }}"  id="{{ $dd->type_id }}" name="{{ $dd->type_id }}"
+                                         required>
+                                        @foreach ($types as $type)
+                                            <option value="{{ $type->id }}">{{ $type->type_name }}</option>
+                                        @endforeach
+
+                                </select>
+                            </div> --}}
+                            </div>
+                            <div><button type="submit" value="บันทึก" class="btn btn-success my-2 mx-3">บันทึก</button>
+                            </div>
+                        </div>
+
+                </div>
+            </div>
+        </div>
+        {{-- สิ้นสุดเพิ่มชนิดสินค้า Modal --}}
+
+        {{-- Edit Modal --}}
+        {{-- <div class="modal fade" id="edittypeModal{{ $dd->id }}" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">แก้ไขชนิดสินค้า</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form method="POST" action="{{ route('editproducttype.edit', $dd->id) }}">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="box-body">
+                                <div class="form-group row">
+                                    <label for="product_type_name"
+                                        class="col-sm-4 col-form-label text-right">ชื่อชนิดสินค้า</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" value="{{ $dd->product_type_name }}"
+                                            id="product_type_name" name="product_type_name" required>
+                                        <p class="text-danger mt-1 name_err"></p>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="type_id"
+                                            class="col-sm-4 col-form-label text-right">ชื่อชนิดสินค้า</label>
+                                        <select class="col-sm-6 mx-2" value="{{ $dd->type_id }}" id="type_id"
+                                            name="type_id" required>
+                                            @foreach ($types as $type)
+                                                <option value="{{ $dd->type_id }}">{{ $type->type_name }}</option>
+                                            @endforeach
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-success my-2 mx-3">บันทึก</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div> --}}
+        {{-- สิ้นสุด Edit Modal --}}
+
     </section>
+
 @endsection
-<!-- สคริปต์ JavaScript -->

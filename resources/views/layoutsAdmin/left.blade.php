@@ -39,7 +39,7 @@
                 <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                 <li class="nav-item">
-                    <a href="{{ route('page') }}" class="nav-link">
+                    <a href="{{ route('page') }}" class="nav-link ">
                         <i class="nav-icon fas fa-chart-pie "></i>
                         <p>
                             แดชบอร์ด
@@ -63,7 +63,7 @@
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a href="#" class="nav-link active">
+                    <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-apple-alt"></i>
                         <p>
                             รายการสินค้าทั้งหมด
@@ -71,6 +71,14 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview" style="display: none;">
+                        <li class="nav-item">
+                            <a href="{{ route('product') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>
+                                    สินค้า
+                                </p>
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a href="{{ route('type') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon "></i>
@@ -80,7 +88,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('producttype')}}" class="nav-link">
+                            <a href="{{ route('producttype') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>ประเภทสินค้า</p>
                             </a>
@@ -88,14 +96,14 @@
                     </ul>
                 </li>
 
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a href="{{ route('product') }}" class="nav-link">
                         <i class="nav-icon fas fa-shopping-cart"></i>
                         <p>
                             สินค้า
                         </p>
                     </a>
-                </li>
+                </li> --}}
                 <li class="nav-item">
                     <a href="{{ route('order') }}" class="nav-link">
                         <i class="nav-icon fas fa-dumpster "></i>

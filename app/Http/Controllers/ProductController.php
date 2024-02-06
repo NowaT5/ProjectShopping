@@ -43,7 +43,7 @@ class ProductController extends Controller
     public function product_type() // pull product type from db
     {
         $product_type = DB::table('product_types')->get();
-        $types = DB::table('types')->get();
+        $types        = DB::table('types')->get();
         return view('admin.product_type',compact('product_type','types'));
     }
     public function del_product_type($id) // delete type
@@ -53,18 +53,26 @@ class ProductController extends Controller
     }
     public function add_product_type(Request $request) // add type
     {
+        //kong
+        // $data=[
+        //     'product_type_name'=>$request->product_type_name,
+        //     'type_id'=>$request->type_id
+        // ];
+        // dd($data);
+        // $types  = DB::table('types')->get();
         $new_product_type = new Product_type;
-        $new_product_type->product_type_name = $request->input('product_type_name');
-        $new_product_type->type_id = $request->input('type_id');
+        $new_product_type->product_type_name = $request->product_type_name;
+        $new_product_type->type_id = $request->type_id;
         $new_product_type->save();
-        return redirect()->back();
+        // dd($new_product_type);
+        return redirect('/producttype');
     }
     public function edit_product_type(Request $request,$id) // Edit type
     {
-
-        $ed_type = Product_type::find($id);
-        $ed_type->type_name = $request->type_name;
-        $ed_type->save();
+        $ed_product_type = Product_type::find($id);
+        $ed_product_type->product_type_name = $request->product_type_name;
+        $ed_product_type->type_id = $request->type_id;
+        $ed_product_type->save();
         return redirect()->back();
     }
 
@@ -74,13 +82,19 @@ class ProductController extends Controller
     /////// product ///////////////
     public function product() // pull product data from db
     {
-        $product = DB::table('products')->get();
+        $products = DB::table('products')->get();
+        // $product_types = DB::table('product_types')->get();
+        // $types        = DB::table('types')->get();
         // $product = Product::all();
-        return view('admin.product', compact('product'));
+        return view('admin.product', compact('products'));
     }
     // public function product_type()
     // {
     //     return view('admin.product_type');
     // }
-
+    public function del_product($id) // delete type
+    {
+        Product::find($id)->delete();
+        return redirect()->back();
+    }
 }

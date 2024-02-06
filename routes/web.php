@@ -54,12 +54,13 @@ Route::get('/deltype/{id}',[ProductController::class,'deltype'])->name('deltype'
 
 // Category route
 Route::get('/producttype',[ProductController::class,'product_type'])->name('producttype'); // หน้าประเภทสินค้า
-Route::post('/addproducttype',[ProductController::class,'add_product_type']); // ปุ่มบันทึก
+Route::post('/addproducttype',[ProductController::class,'add_product_type'])->name('addproducttype'); // ปุ่มบันทึก
 Route::post('/editproducttype/{id}',[ProductController::class,'edit_product_type'])->name('editproducttype.edit'); // ปุ่มบันทึกแก้ไข
 Route::get('/delproducttype/{id}',[ProductController::class,'del_product_type'])->name('del.producttype'); // ปุ่มลบ
 
 // product detail route
 Route::get('/product',[ProductController::class,'product'])->name('product'); //แสดงรายการสินค้า
+Route::get('/delproduct/{id}',[ProductController::class,'del_product'])->name('del.product'); // ปุ่มลบ
 
 // Route Order
 Route::get('/order',[OrderController::class,'order'])->name('order');

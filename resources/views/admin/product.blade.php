@@ -28,40 +28,39 @@
                                         <th>ราคา</th>
                                         <th>รูปสินค้า</th>
                                         <th>จำนวนสินค้า</th>
-                                        <th>type_id</th>
-                                        <th>product_type_id</th>
+                                        <th>ประเภท</th>
+                                        <th>ชนิด</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($product as $dd)
-                                    @foreach ($types as $dd1)
-                                    @foreach ($product_type as $dd2)
-
-                                        {{-- @php
+                                    @foreach ($products as $dd)
+                                        @php
                                             $product_type = DB::table('product_types')
                                                 ->where('id', $dd->product_type_id)
                                                 ->first();
                                             $type = DB::table('types')
                                                 ->where('id', $dd->type_id)
                                                 ->first();
-                                        @endphp --}}
+                                        @endphp
                                         <tr>
                                             <td>{{ $dd->id }}</td>
                                             <td>{{ $dd->product_name }}</td>
                                             <td>{{ $dd->product_price }}</td>
                                             <td>{{ $dd->product_image }}</td>
                                             <td>{{ $dd->product_stock }}</td>
-                                            <td>{{ $dd1->type_name }}</td>
-                                            <td>{{ $dd2->product_type_name}}</td>
+                                            <td>{{ $product_type->product_type_name }}</td>
+                                            <td>{{ $type->type_name }}</td>
+
                                             <td>
-                                                <a href="#" role="button" class="btn btn-sm btn-warning">Edit</a>
-                                                {{-- <a href="#" role="button" class="btn btn-sm btn-danger">Delete</a> --}}
-                                                <button type="button" class="btn btn-sm btn-danger delete-item"
-                                                    data-id = "">Delete</button>
+                                                <a href="#" role="button" class="btn btn-sm btn-warning">แก้ไข</a>
+
+                                                <a href="{{ route('del.product', $dd->id) }}"
+                                                    class="btn btn-sm btn-danger delete-item"
+                                                    onclick="return confirm('คุณต้องการลบรายการที่ {{ $dd->id }} หรือไม่?')">ลบ</a>
+                                                {{-- <button type="button" class="btn btn-sm btn-danger delete-item"
+                                                    data-id = "">Delete</button> --}}
                                             </td>
                                         </tr>
-                                    @endforeach
-                                    @endforeach
                                     @endforeach
                                 </tbody>
                             </table>
