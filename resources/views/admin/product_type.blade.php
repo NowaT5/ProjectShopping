@@ -123,8 +123,23 @@
                                     <div class="form-group row">
                                         <label for="type_id"
                                             class="col-sm-4 col-form-label text-right">ชื่อชนิดสินค้า</label>
+                                        <select class="col-sm-6 mx-2" id="type_id" name="type_id" required>
+                                                @foreach ($types as $type)
+                                                    <option value="{{$dd->type_id}}">{{ $type->type_name }}</option>
+                                                @endforeach
+
+                                        </select>
 
 
+                                        {{-- <select class="col-sm-6 mx-2" id="type_id" name="type_id" required>
+                                            @if (isset($type) && is_array($type))
+                                                @foreach ($type as $types)
+                                                    <option value="{{ $types['type_id'] }}">
+                                                        {{ $types['type_name'] }}
+                                                    </option>
+                                                @endforeach
+                                            @endif
+                                        </select> --}}
                                         {{-- สร้างตัวเลือกไม่ได้สักที --}}
                                         {{-- <select class="col-sm-6 mx-2" name="type_id" required>
                                             @foreach ($type as $types)
@@ -158,16 +173,6 @@
                                                     <option value="{{ $city->id }}">{{ $city->name_ru }}</option>
                                                 @endforeach
                                             </select> --}}
-                                        <select class="col-sm-6 mx-2" id="type_id" name="type_id" required>
-                                            @if (isset($type) && is_array($type))
-                                                @foreach ($type as $types)
-                                                    <option value="{{ $types['type_id'] }}">
-                                                        {{ $types['type_name'] }}
-                                                    </option>
-                                                @endforeach
-                                            @endif
-                                        </select>
-
                                     </div>
                                 </div>
                             </div>
