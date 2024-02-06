@@ -43,7 +43,8 @@ class ProductController extends Controller
     public function product_type() // pull product type from db
     {
         $product_type = DB::table('product_types')->get();
-        return view('admin.product_type',compact('product_type'));
+        $types = DB::table('types')->get();
+        return view('admin.product_type',compact('product_type','types'));
     }
     public function del_product_type($id) // delete type
     {
