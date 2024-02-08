@@ -78,9 +78,11 @@
                                         <label for="type_id"
                                             class="col-sm-4 col-form-label text-right">ชื่อชนิดสินค้า</label>
                                         <select class="col-sm-6 mx-2" id="type_id" name="type_id" required>
-                                            <option value="">{{ $type->type_name }}</option>
+                                            {{-- <option value="">{{ $type->type_name }}</option> --}}
                                             @foreach ($types as $type)
-                                                <option value="{{ $type->id }}">{{ $type->type_name }}</option>
+                                            <option value="{{ $type->id }}" {{ $dd->type_id == $type->id ? 'selected' : '' }}>
+                                                {{ $type->type_name }}
+                                            </option>
                                             @endforeach
 
                                         </select>
