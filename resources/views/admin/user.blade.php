@@ -43,9 +43,11 @@
                             <td>{{ $dd->email }}</td>
                             <td>{{ $dd->phone }}</td>
                             <td>
-                            {{-- <a href="#" role="button" class="btn btn-sm btn-warning">Edit</a> --}}
-                                <button type="button" class="btn btn-sm btn-danger delete-item"
-                                    data-id = "">Delete</button>
+                                {{-- <a href="#" role="button" class="btn btn-sm btn-warning">Edit</a> --}}
+                                {{-- <button type="button" class="btn btn-sm btn-danger delete-item"
+                                    data-id = "">Delete</button> --}}
+                                <a href="{{ route('del.product', $dd->id) }}" class="btn btn-sm btn-danger delete-item"
+                                    onclick="return confirm('คุณต้องการลบรายการที่ {{ $dd->fname }} หรือไม่?')">ลบ</a>
                             </td>
                         </tr>
                     @endforeach

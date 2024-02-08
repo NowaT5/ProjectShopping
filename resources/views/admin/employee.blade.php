@@ -170,11 +170,7 @@
                                                 class="btn btn-secondary my-2">ยกเลิก</a>
                                             <button type="submit" class="btn btn-primary">บันทึก</button>
                                         </div>
-                                        {{-- </div> --}}
                                 </form>
-                                {{-- </div>
-                        </div> --}}
-                                {{-- </tbody> --}}
                                 @endforeach
             </table>
         </div>

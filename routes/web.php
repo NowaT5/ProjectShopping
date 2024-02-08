@@ -43,19 +43,18 @@ Route::get('/employee',[AdminController::class,'employee'])->name('employee'); /
 Route::get('/newemp',[NewEmployeeController::class,'newemp']); // หน้ากรอกข้อมูล
 Route::post('/addemp',[NewEmployeeController::class,'addemp']); // ปุ่มบันทึก
 Route::get('/employee/delete/{id}',[AdminController::class,'delemp'])->name('employee.delemp'); // ฟังชั่นลบ
-// Route::get('/editemployee/{id}',[AdminController::class,'edit'])->name('employee.edit'); // หน้าปรับปรุงข้อมูล
 Route::post('/editemp/{id}',[AdminController::class,'editemp'])->name('employee.edit'); // ปุ่ม Edit
 
 // type route
 Route::get('/type',[ProductController::class,'type'])->name('type'); // หน้าชนิดสินค้า
 Route::post('/addtype',[ProductController::class,'addtype']); // ปุ่มบันทึก
-Route::post('/edittype/{id}',[ProductController::class,'edittype'])->name('type.edit'); // ปุ่มบันทึกแก้ไข
+Route::post('/edittype/{id}',[ProductController::class,'edittype'])->name('type.edit'); // ปุ่มแก้ไข
 Route::get('/deltype/{id}',[ProductController::class,'deltype'])->name('deltype'); // ปุ่มลบ
 
 // Category route
 Route::get('/producttype',[ProductController::class,'product_type'])->name('producttype'); // หน้าประเภทสินค้า
 Route::post('/addproducttype',[ProductController::class,'add_product_type'])->name('addproducttype'); // ปุ่มบันทึก
-Route::post('/editproducttype/{id}',[ProductController::class,'edit_product_type'])->name('editproducttype.edit'); // ปุ่มบันทึกแก้ไข
+Route::post('/editproducttype/{id}',[ProductController::class,'edit_product_type'])->name('editproducttype.edit'); // ปุ่มแก้ไข
 Route::get('/delproducttype/{id}',[ProductController::class,'del_product_type'])->name('del.producttype'); // ปุ่มลบ
 
 // product detail route
@@ -65,9 +64,12 @@ Route::post('/addproduct',[ProductController::class,'add_product'])->name('add.p
 Route::post('/editproduct',[ProductController::class,'edit_product'])->name('edit.product'); // ปุ่มแก้ไข
 
 // Route Order
-Route::get('/order',[OrderController::class,'order'])->name('order');
-Route::get('/detail',[DetailOrderController::class,'detailorder'])->name('detail');
-Route::get('/change/{id}',[OrderController::class,'change'])->name('change');
+Route::get('/order',[OrderController::class,'order'])->name('order'); //แสดงรายการสั่งซื้อ
+Route::post('/editorder',[ProductController::class,'edit_order'])->name('edit.order'); // แก้ไข Order
+Route::get('/delorder}/{id}',[OrderController::class,'del_order'])->name('del.order'); // ลบ Order
+
+// Route Detail order
+Route::get('/detail',[DetailOrderController::class,'detailorder'])->name('detail'); //แสดงรายละเอียดคำสั่งซื้อ
 
 //Route Page เอาไว้แสดงหน้าของ Page เท่านั้น
 Route::get('/page',[PageUserController::class,'index'])->name('Home');
