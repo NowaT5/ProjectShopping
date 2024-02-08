@@ -61,6 +61,8 @@ Route::get('/delproducttype/{id}',[ProductController::class,'del_product_type'])
 // product detail route
 Route::get('/product',[ProductController::class,'product'])->name('product'); //แสดงรายการสินค้า
 Route::get('/delproduct/{id}',[ProductController::class,'del_product'])->name('del.product'); // ปุ่มลบ
+Route::post('/addproduct',[ProductController::class,'add_product'])->name('add.product'); // ปุ่มบันทึก
+Route::post('/editproduct',[ProductController::class,'edit_product'])->name('edit.product'); // ปุ่มแก้ไข
 
 // Route Order
 Route::get('/order',[OrderController::class,'order'])->name('order');

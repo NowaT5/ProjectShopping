@@ -83,15 +83,36 @@ class ProductController extends Controller
     public function product() // pull product data from db
     {
         $products = DB::table('products')->get();
-        // $product_types = DB::table('product_types')->get();
-        // $types        = DB::table('types')->get();
+        $product_types = DB::table('product_types')->get();
+        $types        = DB::table('types')->get();
         // $product = Product::all();
-        return view('admin.product', compact('products'));
+        return view('admin.product', compact('products','product_types', 'types'));
     }
-    // public function product_type()
-    // {
-    //     return view('admin.product_type');
-    // }
+    public function add_product(Request $request)
+    {
+        $new_product = new Product;
+        $new_product->product_name = $request->product_name;
+        $new_product->product_price = $request->product_price;
+        $new_product->product_image = $request->product_image;
+        $new_product->product_stock = $request->product_stock;
+        $new_product->type_id = $request->type_id;
+        $new_product->product_type_id = $request->product_type_id;
+        $new_product->save();
+        return redirect()->back();
+    }
+    public function edit_product(Request $request)
+    {
+        $new_product = new Product;
+        $new_product->product_name = $request->product_name;
+        $new_product->product_price = $request->product_price;
+        $new_product->product_image = $request->product_image;
+        $new_product->product_stock = $request->product_stock;
+        $new_product->type_id = $request->type_id;
+        $new_product->product_type_id = $request->product_type_id;
+        $new_product->save();
+        return redirect('/producttype');
+    }
+
     public function del_product($id) // delete type
     {
         Product::find($id)->delete();

@@ -34,7 +34,8 @@
                             <td>{{ $dd->product_type_name }}</td>
                             <td>{{ $type->type_name }}</td>
 
-                            <td><button type="button" class="btn btn-sm btn-warning" data-toggle="modal"
+                            <td>
+                                <button type="button" class="btn btn-sm btn-warning" data-toggle="modal"
                                     data-target="#edittypeModal{{ $dd->id }}">แก้ไข</button>
 
                                 {{-- <td><a href="#edittypeModal{{ $dd->id }}" role="button" class="btn btn-sm btn-warning">Edit</a> --}}
@@ -80,9 +81,10 @@
                                         <select class="col-sm-6 mx-2" id="type_id" name="type_id" required>
                                             {{-- <option value="">{{ $type->type_name }}</option> --}}
                                             @foreach ($types as $type)
-                                            <option value="{{ $type->id }}" {{ $dd->type_id == $type->id ? 'selected' : '' }}>
-                                                {{ $type->type_name }}
-                                            </option>
+                                                <option value="{{ $type->id }}"
+                                                    {{ $dd->type_id == $type->id ? 'selected' : '' }}>
+                                                    {{ $type->type_name }}
+                                                </option>
                                             @endforeach
 
                                         </select>
@@ -91,11 +93,9 @@
                             </div>
                             <button type="submit" class="btn btn-success my-2 mx-3">บันทึก</button>
                         </div>
-                        <div>
-
-                        </div>
+                    </form>
                 </div>
-                </form>
+
             </div>
         </div>
         @endforeach

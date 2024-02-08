@@ -80,17 +80,17 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{ route('producttype') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>ประเภทสินค้า</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ route('type') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon "></i>
                                 <p>
                                     ชนิดสินค้า
                                 </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('producttype') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>ประเภทสินค้า</p>
                             </a>
                         </li>
                     </ul>
