@@ -18,33 +18,75 @@
                         <th scope="col">รหัสสินค้า</th>
                     </tr>
                 </thead>
-                @foreach ($order_detail as $dd)
-                    @php
-                        $product = DB::table('products')->where('id', $dd->product_id)->first();
-                        $order = DB::table('orders')->where('id', $dd->order_id)->first();
-                    @endphp
+                <tbody>
+                    @foreach ($order_details as $dd)
+                        @php
+                            $products = DB::table('products')
+                                ->where('id', $dd->product_id)
+                                ->first();
+                            $orders = DB::table('orders')
+                                ->where('id', $dd->order_id)
+                                ->first();
+                        @endphp
                         <tr>
                             <td>{{ $dd->id }}</td>
                             <td>{{ $dd->quantity }}</td>
                             <td>{{ $dd->price }}</td>
-                            <td>{{ $order->id }}</td>
-                            <td>{{ $product->id }}</td>
-                            {{-- <td>
-                              @if ($dd->status_payment_id == true)
-                                  {{-- <a href="#" class="btn btn-success">ชำระเงิน</a> 
-                                  <a href="{{route('change',$dd->status_payment_id)}}" class="btn btn-success">ชำระเงิน</a>
-                              @else
-                                  {{-- <a href="#" class="btn btn-secondary">On hold</a> 
-                                  <a href="{{route('change',$dd->status_payment_id)}}" class="btn btn-secondary">On hold</a>
-                              @endif 
-                            </td>--}}
-                            <td><a href="#" role="button" class="btn btn-sm btn-warning">Edit</a>
-                                <button type="button" class="btn btn-sm btn-danger delete-item"
-                                    data-id = "">Delete</button>
+                            <td>{{ $orders->id }}</td>
+                            <td>{{ $products->id }}</td>
+                            <td>
+                                <button type="button" class="btn btn-sm btn-success" data-toggle="modal"
+                                    data-target="#viewModal{{ $dd->id }}">View</button>
                             </td>
                         </tr>
-                    @endforeach
-            </table>
+                </tbody>
+                {{-- Edit สินค้า Modal --}}
+                <div class="modal fade" id="viewModal{{ $dd->id }}" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel1" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel1"># {{ $orders->id }}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="box-body">
+                                    <table class="table table-striped-columns">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">รหัสสินค้า</th>
+                                                <th scope="col">จำนวน</th>
+                                                <th scope="col">ราคา</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($order_details as $dd)
+                                                @php
+                                                    $products = DB::table('products')
+                                                        ->where('id', $dd->product_id)
+                                                        ->first();
+                                                    $orders = DB::table('orders')
+                                                        ->where('id', $dd->order_id)
+                                                        ->first();
+                                                @endphp
+                                                <tr>
+                                                    <td>{{ $products->id }}</td>
+                                                    <td>{{ $dd->quantity }}</td>
+                                                    <td>{{ $dd->price }}</td>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{-- สิ้นสุด Edit สินค้า Modal --}}
+        </div>
+        @endforeach
+        </table>
         </div>
     </section>
 @endsection

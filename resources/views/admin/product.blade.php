@@ -47,7 +47,8 @@
                                             <td>{{ $dd->id }}</td>
                                             <td>{{ $dd->product_name }}</td>
                                             <td>{{ $dd->product_price }}</td>
-                                            <td><img src="{{ asset('upload/'.$dd->product_image)}}" style="width: 10%" alt=""></td>
+                                            <td><img src="{{ asset('upload/' . $dd->product_image) }}" style="width: 10%;height:10%"
+                                                    alt=""></td>
                                             <td>{{ $dd->product_stock }}</td>
                                             <td>{{ $product_type->product_type_name }}</td>
                                             <td>{{ $type->type_name }}</td>
@@ -79,7 +80,8 @@
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-                                            <form method="POST" action="{{ route('edit.product',['id'=>$dd->id] ) }}" enctype="multipart/form-data">
+                                            <form method="POST" action="{{ route('edit.product', ['id' => $dd->id]) }}"
+                                                enctype="multipart/form-data">
                                                 @csrf
                                                 <div class="modal-body">
                                                     <div class="box-body">
@@ -114,7 +116,8 @@
                                                                 <select class="form-control" id="product_type_id"
                                                                     name="product_type_id" required>
                                                                     @foreach ($product_types as $pd_type)
-                                                                        <option value="{{ $pd_type->id }}"{{ $dd->product_type_id == $pd_type->id ? 'selected' : '' }}>
+                                                                        <option
+                                                                            value="{{ $pd_type->id }}"{{ $dd->product_type_id == $pd_type->id ? 'selected' : '' }}>
                                                                             {{ $pd_type->product_type_name }}
                                                                         </option>
                                                                     @endforeach
@@ -159,39 +162,6 @@
                             </table>
                         </div>
                     </div>
-                    {{-- <div class="row">
-                        <div class="col-sm-12 col-md-5">
-                            <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Showing 1 to
-                                10 of
-                                57 entries</div>
-                        </div>
-                        <div class="col-sm-12 col-md-7">
-                            <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
-                                <ul class="pagination">
-                                    <li class="paginate_button page-item previous disabled" id="example2_previous"><a
-                                            href="#" aria-controls="example2" data-dt-idx="0" tabindex="0"
-                                            class="page-link">Previous</a>
-                                    </li>
-                                    <li class="paginate_button page-item active"><a href="#" aria-controls="example2"
-                                            data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="example2"
-                                            data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="example2"
-                                            data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="example2"
-                                            data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="example2"
-                                            data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="example2"
-                                            data-dt-idx="6" tabindex="0" class="page-link">6</a></li>
-                                    <li class="paginate_button page-item next" id="example2_next"><a href="#"
-                                            aria-controls="example2" data-dt-idx="7" tabindex="0"
-                                            class="page-link">Next</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div> --}}
                 </div>
             </div>
         </div>
@@ -242,7 +212,6 @@
                                     </div>
                                 </div>
                                 <div class="row">
-
                                     <div class="col">
                                         <label for="type_id" class="col-form-label ">ชนิดสินค้า</label>
                                         <select class="form-control" id="type_id" name="type_id" required>

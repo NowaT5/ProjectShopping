@@ -94,7 +94,8 @@ class ProductController extends Controller
 
         // dd($request->all());
         //อัพโหลดรูปภาพเข้าโฟร์ดเดอร์ ในpubilc/upload
-        if ($request->hasFile('product_image')) {
+        if ($request->hasFile('product_image'))
+        {
             $image = $request->file('product_image');
             $imageName = time() . '_' . $image->getClientOriginalName();
             $image->move(public_path('upload'), $imageName);
@@ -108,9 +109,9 @@ class ProductController extends Controller
         $new_product->product_type_id = $request->product_type_id;
         $new_product->save();
 
-
         return redirect('/product');
     }
+
     public function edit_product(Request $request,$id)
     {
         // dd($request->all());

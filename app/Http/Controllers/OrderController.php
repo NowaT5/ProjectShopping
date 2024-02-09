@@ -13,10 +13,10 @@ class OrderController extends Controller
 {
     public function order()
     {
-        $order = order::all();
+        $orders = order::all();
         $stats = DB::table('status_payments')->get();
         $emps = DB::table('employees')->get();
-        return view('admin.order',compact('order','stats', 'emps'));
+        return view('admin.order',compact('orders','stats', 'emps'));
     }
 
 
@@ -34,4 +34,13 @@ class OrderController extends Controller
         Order::find($id)->delete();
         return redirect('/order');
     }
+
+    public function edit_order(Request $request,$id)
+    {
+        $ed_order = Order::find($id);
+        $ed_order->status_payment_id = $request->status_payment_id; // อัพเดทสถานะการชำระเงิน
+        $ed_order->save(); // บันทึกการเปลี่ยนแปลง
+        return redirect()->back(); // Redirect กลับไปยังหน้าก่อนหน้า
+    }
+
 }

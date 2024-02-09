@@ -12,15 +12,18 @@
                     <tr>
                         <th scope="col">id</th>
                         <th scope="col">วันที่</th>
-                        <th scope="col">Username</th>
+                        <th scope="col">ชื่อลูกค้า</th>
                         <th scope="col">สลิปชำระเงิน</th>
                         <th scope="col">สถานะการชำระเงิน</th>
                         <th scope="col">พนักงานที่ดูแล</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($order as $dd)
+                    @foreach ($orders as $dd)
                         @php
+                            $user = DB::table('users')
+                                ->where('id', $dd->user_id)
+                                ->first();
                             $status_payment = DB::table('status_payments')
                                 ->where('id', $dd->status_payment_id)
                                 ->first();
@@ -30,8 +33,8 @@
                         @endphp
                         <tr>
                             <td>{{ $dd->id }}</td>
-                            <td>{{ $dd->create_at }}</td>
-                            <td>{{ $dd->user_id }}</td>
+                            <td>{{ $dd->created_at }}</td>
+                            <td>{{ $user->fname }} {{ $user->lname }}</td>
                             <td>{{ $dd->payment_image }}</td>
                             <td>{{ $status_payment->status_payment_name }}</td>
                             <td>{{ $employee->fname }}</td>
@@ -60,21 +63,22 @@
                             </div>
                             {{-- {{ route('employee.update', ['id' => $dd->id]) }} --}}
                             <div class="modal-body">
-                                <form method="post" action="{{ route('edit.order', $dd->id) }}">
+                                <form method="post" action="{{ route('edit.order', ['id' => $dd->id]) }}">
                                     @csrf
                                     {{-- @method('PUT') --}}
                                     <div class="col-md-12">
                                         <div class="row">
                                             <div class="col">
                                                 <label for="create_at" class="col-form-label">create_at</label>
-                                                <input type="text" class="form-control" value="{{ $dd->create_at }}"
+                                                <input type="text" class="form-control" value="{{ $dd->created_at }}"
                                                     name="create_at" id="create_at" disabled>
                                             </div>
                                             <div class="col-md-6">
-                                                <label for="user_id" class="col-form-label">user_id
+                                                <label for="user_id" class="col-form-label">ชื่อลูกค้า
                                                 </label>
-                                                <input type="text" class="form-control" value="{{ $dd->user_id }}"
-                                                    name="create_at" id="create_at" disabled>
+                                                <input type="text" class="form-control"
+                                                    value="{{ $user->fname }} {{ $user->lname }}" name="user_id"
+                                                    id="user_id" disabled>
                                                 <label for="user_id" class="col-form-label">
                                                 </label>
 
@@ -83,34 +87,39 @@
                                         </div>
                                         <div class="row">
                                             <div class="col">
-                                                <label for="payment_image" class="col-form-label">payment_image</label>
-                                                <input type="text" class="form-control" value="{{ $dd->payment_image }}"
-                                                    name="payment_image" id="payment_image">
-                                            </div>
-                                            <div class="col">
                                                 <label for="employee_id" class="col-form-label">employee_id</label>
                                                 <input type="text" class="form-control" value="{{ $dd->employee_id }}"
                                                     name="employee_id" id="employee_id" disabled>
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col my-3">
-                                                <a href="{{ route('order') }}" role="button"
-                                                    class="btn btn-secondary my-2">ยกเลิก</a>
-                                                <button type="submit" class="btn btn-success">บันทึก</button>
-                                            </div>
-
-                                            <div class="col col-md-6">
-                                                <label for="status_payment_id" class="col-form-label ">ประเภทสินค้า</label>
+                                            <div class="col">
+                                                <label for="status_payment_id" class="col-form-label ">สถานะชำระเงิน</label>
                                                 <select class="form-control" id="status_payment_id" name="status_payment_id"
                                                     required>
-                                                    @foreach ($stats as $stat)
+
+                                                    <option value="1" {{ $dd->status_payment_id == 1 ? 'selected' : '' }}>ตรวจสอบการชำระเงิน</option>
+                                                    <option value="2" {{ $dd->status_payment_id == 2 ? 'selected' : '' }}>ยืนยันการชำระเงิน</option>
+                                                    {{-- @foreach ($stats as $stat)
                                                         <option value="{{ $stat->id }}"
                                                             {{ $dd->status_payment_id == $stat->id ? 'selected' : '' }}>
                                                             {{ $stat->status_payment_name }}
                                                         </option>
-                                                    @endforeach
+                                                    @endforeach --}}
                                                 </select>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+
+                                            <div class="col">
+                                                <label for="payment_image" class="col-form-label">payment_image</label>
+                                                <img src="{{ asset('upload/payment/' . $dd->payment_image) }}" style="width: 100%"
+                                                    alt="Payment Image">
+                                                {{-- <input type="text" class="form-control" value="{{ $dd->payment_image }}"
+                                                    name="payment_image" id="payment_image"> --}}
+                                            </div>
+                                            <div class="col-my-3">
+                                                <a href="{{ route('order') }}" role="button"
+                                                    class="btn btn-secondary my-2">ยกเลิก</a>
+                                                <button type="submit" value="บันทึก" class="btn btn-success">บันทึก</button>
                                             </div>
                                         </div>
                                     </div>

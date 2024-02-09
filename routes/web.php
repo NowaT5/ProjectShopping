@@ -65,7 +65,7 @@ Route::post('/editproduct/{id}',[ProductController::class,'edit_product'])->name
 
 // Route Order
 Route::get('/order',[OrderController::class,'order'])->name('order'); //แสดงรายการสั่งซื้อ
-Route::post('/editorder',[ProductController::class,'edit_order'])->name('edit.order'); // แก้ไข Order
+Route::post('/editorder/{id}',[OrderController::class,'edit_order'])->name('edit.order'); // แก้ไข Order
 Route::get('/delorder}/{id}',[OrderController::class,'del_order'])->name('del.order'); // ลบ Order
 
 // Route Detail order
