@@ -47,7 +47,7 @@
                                             <td>{{ $dd->id }}</td>
                                             <td>{{ $dd->product_name }}</td>
                                             <td>{{ $dd->product_price }}</td>
-                                            <td>{{ $dd->product_image }}</td>
+                                            <td><img src="{{ asset('upload/'.$dd->product_image)}}" style="width: 10%" alt=""></td>
                                             <td>{{ $dd->product_stock }}</td>
                                             <td>{{ $product_type->product_type_name }}</td>
                                             <td>{{ $type->type_name }}</td>
@@ -69,17 +69,17 @@
 
                                 {{-- Edit สินค้า Modal --}}
                                 <div class="modal fade" id="editproductModal{{ $dd->id }}" tabindex="-1"
-                                    role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">เพิ่มชนิดสินค้า</h5>
+                                                <h5 class="modal-title" id="exampleModalLabel1">แก้ไขสินค้า</h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-                                            <form method="POST" action="{{ route('edit.product') }}">
+                                            <form method="POST" action="{{ route('edit.product',['id'=>$dd->id] ) }}" enctype="multipart/form-data">
                                                 @csrf
                                                 <div class="modal-body">
                                                     <div class="box-body">
@@ -100,13 +100,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col">
-                                                                <label for="product_image"
-                                                                    class="col-form-label">รูปสินค้า</label>
-                                                                <input type="text" class="form-control"
-                                                                    value="{{ $dd->product_image }}" name="product_image"
-                                                                    id="product_image">
-                                                            </div>
+
                                                             <div class="col">
                                                                 <label for="product_stock"
                                                                     class="col-form-label">Stock</label>
@@ -114,21 +108,21 @@
                                                                     value="{{ $dd->product_stock }}" name="product_stock"
                                                                     id="product_stock" required>
                                                             </div>
-                                                        </div>
-                                                        <div class="row">
                                                             <div class="col">
                                                                 <label for="product_type_id"
                                                                     class="col-form-label ">ประเภทสินค้า</label>
                                                                 <select class="form-control" id="product_type_id"
                                                                     name="product_type_id" required>
                                                                     @foreach ($product_types as $pd_type)
-                                                                        <option value="{{ $type->id }}"
-                                                                            {{ $dd->type_id == $pd_type->id ? 'selected' : '' }}>
+                                                                        <option value="{{ $pd_type->id }}"{{ $dd->product_type_id == $pd_type->id ? 'selected' : '' }}>
                                                                             {{ $pd_type->product_type_name }}
                                                                         </option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
+                                                        </div>
+                                                        <div class="row">
+
                                                             <div class="col">
                                                                 <label for="type_id"
                                                                     class="col-form-label ">ชนิดสินค้า</label>
@@ -142,13 +136,20 @@
                                                                     @endforeach
                                                                 </select>
                                                             </div>
+                                                            <div class="col">
+                                                                <label for="product_image"
+                                                                    class="col-form-label">รูปสินค้า</label>
+                                                                <input type="file" class="form-control"
+                                                                    value="{{ $dd->product_image }}" name="product_image"
+                                                                    id="product_image">
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div><button type="submit" value="บันทึก"
                                                             class="btn btn-success my-2 mx-3">บันทึก</button>
                                                     </div>
                                                 </div>
-
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -205,7 +206,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form method="POST" action="{{ route('add.product') }}">
+                    <form method="POST" action="{{ route('add.product') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="modal-body">
                             <div class="box-body">
@@ -222,18 +223,12 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col">
-                                        <label for="product_image" class="col-form-label">รูปสินค้า</label>
-                                        <input type="text" class="form-control" value="" name="product_image"
-                                            id="product_image">
-                                    </div>
+
                                     <div class="col">
                                         <label for="product_stock" class="col-form-label">Stock</label>
                                         <input type="number" class="form-control" value="" name="product_stock"
                                             id="product_stock" required>
                                     </div>
-                                </div>
-                                <div class="row">
                                     <div class="col">
                                         <label for="product_type_id" class="col-form-label ">ประเภทสินค้า</label>
                                         <select class="form-control" id="product_type_id" name="product_type_id"
@@ -245,6 +240,9 @@
                                             @endforeach
                                         </select>
                                     </div>
+                                </div>
+                                <div class="row">
+
                                     <div class="col">
                                         <label for="type_id" class="col-form-label ">ชนิดสินค้า</label>
                                         <select class="form-control" id="type_id" name="type_id" required>
@@ -254,7 +252,11 @@
                                             @endforeach
                                         </select>
                                     </div>
-
+                                    <div class="col">
+                                        <label for="product_image" class="col-form-label">รูปสินค้า</label>
+                                        <input type="file" class="form-control" value="" name="product_image"
+                                            id="product_image">
+                                    </div>
                                 </div>
 
                                 {{-- <div class="form-group row">
@@ -272,7 +274,7 @@
                             <div><button type="submit" value="บันทึก" class="btn btn-success my-2 mx-3">บันทึก</button>
                             </div>
                         </div>
-
+                    </form>
                 </div>
             </div>
         </div>
