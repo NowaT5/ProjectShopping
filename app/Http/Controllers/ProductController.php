@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Product;
 use App\Models\Product_type;
 use App\Models\Type;
@@ -14,7 +15,7 @@ class ProductController extends Controller
     {
         $types = DB::table('types')->get();
 
-        return view('admin.type',compact('types'));
+        return view('admin.type', compact('types'));
     }
     public function deltype($id) // delete type
     {
@@ -28,7 +29,7 @@ class ProductController extends Controller
         $newtype->save();
         return redirect()->back();
     }
-    public function edittype(Request $request,$id) // Edit type
+    public function edittype(Request $request, $id) // Edit type
     {
 
         $ed_type = Type::find($id);
@@ -44,7 +45,7 @@ class ProductController extends Controller
     {
         $product_type = DB::table('product_types')->get();
         $types        = DB::table('types')->get();
-        return view('admin.product_type',compact('product_type','types'));
+        return view('admin.product_type', compact('product_type', 'types'));
     }
     public function del_product_type($id) // delete type
     {
@@ -67,7 +68,7 @@ class ProductController extends Controller
         // dd($new_product_type);
         return redirect('/producttype');
     }
-    public function edit_product_type(Request $request,$id) // Edit type
+    public function edit_product_type(Request $request, $id) // Edit type
     {
         $ed_product_type = Product_type::find($id);
         $ed_product_type->product_type_name = $request->product_type_name;
@@ -86,31 +87,49 @@ class ProductController extends Controller
         $product_types = DB::table('product_types')->get();
         $types        = DB::table('types')->get();
         // $product = Product::all();
-        return view('admin.product', compact('products','product_types', 'types'));
+        return view('admin.product', compact('products', 'product_types', 'types'));
     }
     public function add_product(Request $request)
     {
+
+        // dd($request->all());
+        //อัพโหลดรูปภาพเข้าโฟร์ดเดอร์ ในpubilc/upload
+        if ($request->hasFile('product_image')) {
+            $image = $request->file('product_image');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $image->move(public_path('upload'), $imageName);
+        }
         $new_product = new Product;
         $new_product->product_name = $request->product_name;
         $new_product->product_price = $request->product_price;
-        $new_product->product_image = $request->product_image;
+        $new_product->product_image = $imageName;
+        $new_product->product_stock = $request->product_stock;
+        $new_product->type_id = $request->type_id;
+        $new_product->product_type_id = $request->product_type_id;
+        $new_product->save();
+
+
+        return redirect('/product');
+    }
+    public function edit_product(Request $request,$id)
+    {
+        // dd($request->all());
+        //  อัพโหลดรูปภาพเข้าโฟร์ดเดอร์ ในpubilc/upload
+         if ($request->hasFile('product_image')) {
+            $image = $request->file('product_image');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $image->move(public_path('upload'), $imageName);
+        }
+
+        $new_product = Product::find($id);
+        $new_product->product_name = $request->product_name;
+        $new_product->product_price = $request->product_price;
+        $new_product->product_image = $imageName;
         $new_product->product_stock = $request->product_stock;
         $new_product->type_id = $request->type_id;
         $new_product->product_type_id = $request->product_type_id;
         $new_product->save();
         return redirect()->back();
-    }
-    public function edit_product(Request $request)
-    {
-        $new_product = new Product;
-        $new_product->product_name = $request->product_name;
-        $new_product->product_price = $request->product_price;
-        $new_product->product_image = $request->product_image;
-        $new_product->product_stock = $request->product_stock;
-        $new_product->type_id = $request->type_id;
-        $new_product->product_type_id = $request->product_type_id;
-        $new_product->save();
-        return redirect('/producttype');
     }
 
     public function del_product($id) // delete type
