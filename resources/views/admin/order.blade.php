@@ -1,6 +1,6 @@
 @extends('layoutsAdmin.app')
 
-@section('Order', 'page')
+@section('title', 'Order')
 @section('content')
     <section class="content">
         <div class="card">
@@ -39,6 +39,8 @@
                             <td>{{ $status_payment->status_payment_name }}</td>
                             <td>{{ $employee->fname }}</td>
                             <td>
+                                <a href="{{ route('detail', $dd->id) }}" role="button"
+                                    class="btn btn-sm btn-success">View</a>
 
                                 <button type="button" class="btn btn-sm btn-warning" data-toggle="modal"
                                     data-target="#editModal{{ $dd->id }}">แก้ไข</button>
@@ -96,8 +98,12 @@
                                                 <select class="form-control" id="status_payment_id" name="status_payment_id"
                                                     required>
 
-                                                    <option value="1" {{ $dd->status_payment_id == 1 ? 'selected' : '' }}>ตรวจสอบการชำระเงิน</option>
-                                                    <option value="2" {{ $dd->status_payment_id == 2 ? 'selected' : '' }}>ยืนยันการชำระเงิน</option>
+                                                    <option value="1"
+                                                        {{ $dd->status_payment_id == 1 ? 'selected' : '' }}>
+                                                        ตรวจสอบการชำระเงิน</option>
+                                                    <option value="2"
+                                                        {{ $dd->status_payment_id == 2 ? 'selected' : '' }}>
+                                                        ยืนยันการชำระเงิน</option>
                                                     {{-- @foreach ($stats as $stat)
                                                         <option value="{{ $stat->id }}"
                                                             {{ $dd->status_payment_id == $stat->id ? 'selected' : '' }}>
@@ -111,15 +117,16 @@
 
                                             <div class="col">
                                                 <label for="payment_image" class="col-form-label">payment_image</label>
-                                                <img src="{{ asset('upload/payment/' . $dd->payment_image) }}" style="width: 100%"
-                                                    alt="Payment Image">
+                                                <img src="{{ asset('upload/payment/' . $dd->payment_image) }}"
+                                                    style="width: 100%" alt="Payment Image">
                                                 {{-- <input type="text" class="form-control" value="{{ $dd->payment_image }}"
                                                     name="payment_image" id="payment_image"> --}}
                                             </div>
                                             <div class="col-my-3">
                                                 <a href="{{ route('order') }}" role="button"
                                                     class="btn btn-secondary my-2">ยกเลิก</a>
-                                                <button type="submit" value="บันทึก" class="btn btn-success">บันทึก</button>
+                                                <button type="submit" value="บันทึก"
+                                                    class="btn btn-success">บันทึก</button>
                                             </div>
                                         </div>
                                     </div>

@@ -47,8 +47,8 @@
                                             <td>{{ $dd->id }}</td>
                                             <td>{{ $dd->product_name }}</td>
                                             <td>{{ $dd->product_price }}</td>
-                                            <td><img src="{{ asset('upload/' . $dd->product_image) }}" style="width: 10%;height:10%"
-                                                    alt=""></td>
+                                            <td><img src="{{ asset('upload/' . $dd->product_image) }}"
+                                                    style="width: 10%;height:10%" alt=""></td>
                                             <td>{{ $dd->product_stock }}</td>
                                             <td>{{ $product_type->product_type_name }}</td>
                                             <td>{{ $type->type_name }}</td>

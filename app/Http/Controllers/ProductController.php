@@ -114,24 +114,64 @@ class ProductController extends Controller
 
     public function edit_product(Request $request,$id)
     {
-        // dd($request->all());
-        //  อัพโหลดรูปภาพเข้าโฟร์ดเดอร์ ในpubilc/upload
-         if ($request->hasFile('product_image')) {
-            $image = $request->file('product_image');
-            $imageName = time() . '_' . $image->getClientOriginalName();
-            $image->move(public_path('upload'), $imageName);
+    $imageName = null; // กำหนดค่าเริ่มต้นของ $imageName เป็น null
+
+    // ตรวจสอบว่ามีการส่งภาพสินค้ามาหรือไม่
+    if ($request->hasFile('product_image'))
+        {
+        $image = $request->file('product_image');
+        $imageName = time() . '_' . $image->getClientOriginalName();
+        $image->move(public_path('upload'), $imageName);
         }
 
+    // ดำเนินการเฉพาะกรณีที่มีการส่งภาพสินค้ามา
+    if ($imageName !== null)
+        {
         $new_product = Product::find($id);
         $new_product->product_name = $request->product_name;
         $new_product->product_price = $request->product_price;
-        $new_product->product_image = $imageName;
+        $new_product->product_image = $imageName; // กำหนดรูปภาพเฉพาะเมื่อมีการส่งมา
         $new_product->product_stock = $request->product_stock;
         $new_product->type_id = $request->type_id;
         $new_product->product_type_id = $request->product_type_id;
         $new_product->save();
-        return redirect()->back();
+        }
+    else
+        {
+        // กรณีที่ไม่มีการส่งภาพสินค้ามา
+        $new_product = Product::find($id);
+        $new_product->product_name = $request->product_name;
+        $new_product->product_price = $request->product_price;
+        // ไม่กำหนดรูปภาพเพราะไม่มีการส่งมา
+        $new_product->product_stock = $request->product_stock;
+        $new_product->type_id = $request->type_id;
+        $new_product->product_type_id = $request->product_type_id;
+        $new_product->save();
+        }
+
+    return redirect()->back();
     }
+
+    // public function editproduct(Request $request,$id)
+    // {
+    //     // dd($request->all());
+    //     //  อัพโหลดรูปภาพเข้าโฟร์ดเดอร์ ในpubilc/upload
+    //      if ($request->hasFile('product_image')) {
+    //         $image = $request->file('product_image');
+    //         $imageName = time() . '_' . $image->getClientOriginalName();
+    //         $image->move(public_path('upload'), $imageName);
+    //     }
+
+    //     $new_product = Product::find($id);
+    //     $new_product->product_name = $request->product_name;
+    //     $new_product->product_price = $request->product_price;
+    //     $new_product->product_image = $imageName;
+    //     $new_product->product_stock = $request->product_stock;
+    //     $new_product->type_id = $request->type_id;
+    //     $new_product->product_type_id = $request->product_type_id;
+    //     $new_product->save();
+    //     return redirect()->back();
+    // }
 
     public function del_product($id) // delete type
     {

@@ -112,14 +112,14 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a href="{{ route('detail') }}" class="nav-link">
                         <i class="nav-icon fas fa-truck "></i>
                         <p>
                             รายละเอียดคำสั่งซื้อ
                         </p>
                     </a>
-                </li>
+                </li> --}}
                 {{-- <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fa fa-shopping-basket"></i>
