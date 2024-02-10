@@ -69,7 +69,7 @@ Route::post('/editorder/{id}',[OrderController::class,'edit_order'])->name('edit
 Route::get('/delorder}/{id}',[OrderController::class,'del_order'])->name('del.order'); // ลบ Order
 
 // Route Detail order
-Route::get('/detail',[DetailOrderController::class,'detail_order'])->name('detail'); //แสดงรายละเอียดคำสั่งซื้อ
+Route::get('/detail/{id}',[DetailOrderController::class,'detail_order'])->name('detail'); //แสดงรายละเอียดคำสั่งซื้อ
 
 //Route Page เอาไว้แสดงหน้าของ Page เท่านั้น
 Route::get('/page',[PageUserController::class,'index'])->name('Home');

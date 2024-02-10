@@ -15,21 +15,37 @@
             <table class="table table-striped-columns">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
+                        <th scope="col">id</th>
+                        <th scope="col">ชื่อสินค้า</th>
                         <th scope="col">จำนวน</th>
-                        <th scope="col">ราคา</th>
-                        <th scope="col">เลขที่ออเดอร์</th>
-                        <th scope="col">รหัสสินค้า</th>
+                        <th scope="col">ราคา/ชิ้น</th>
                         <th scope="col">ยอดรวม</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($order_details as $dd)
+                    @foreach ($order_details as $detail)
+                        @php
+                            $products = DB::table('products')
+                                ->where('id', $detail->product_id)
+                                ->first();
+                            // $de_orders = DB::table('orders')
+                            //     ->where('id', $dd->order_id)
+                            //     ->first();
+                        @endphp
+                        <tr>
+                            <td>{{ $products->id }}</td>
+                            <td>{{ $products->product_name }}</td>
+                            <td>{{ $detail->quantity }}</td>
+                            <td>{{ $detail->price }}</td>
+                            <td>{{ $detail->quantity * $products->product_price }}</td>
+                        </tr>
+                        {{-- @endforeach
+                    @foreach ($orders as $dd)
                         @php
                             $products = DB::table('products')
                                 ->where('id', $dd->product_id)
                                 ->first();
-                            $orders = DB::table('orders')
+                            $de_orders = DB::table('orders')
                                 ->where('id', $dd->order_id)
                                 ->first();
                             // ทำการคำนวณ quantity * product_price
@@ -37,12 +53,11 @@
                         @endphp
                         <tr>
                             <td>{{ $dd->id }}</td>
+                            <td>{{ $products->id }}</td>
                             <td>{{ $dd->quantity }}</td>
                             <td>{{ $products->product_price }}</td>
-                            <td>{{ $orders->id }}</td>
-                            <td>{{ $products->id }}</td>
-                            <td>{{ $total_price }}</td> <!-- แสดงผลราคารวม -->
-                            {{-- <td>
+                            <td>{{ $total_price }}</td> <!-- แสดงผลราคารวม --> --}}
+                        {{-- <td>
 
                                 <button type="button" class="btn btn-sm btn-success" data-toggle="modal"
                                     data-target="#viewModal{{ $dd->id }}">View</button>

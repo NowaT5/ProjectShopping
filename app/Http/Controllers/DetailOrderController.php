@@ -4,16 +4,25 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\DetailOrder;
+use App\Models\Order;
+use App\Models\Product;
 
 use Illuminate\Support\Facades\DB;
 
 class DetailOrderController extends Controller
 {
-    public function detail_order()
+    public function detail_order($id)
     {
-        $order_details = DB::table('detail_orders')->get();
-        // dd($order_details);
-        return view('admin.detail',compact('order_details'));
+        $order = Order::findOrFail($id);
+        $order_details = DetailOrder::where('order_id', $id)->get();
+
+        return view('admin.detail', compact('order', 'order_details'));
+        // $order_details = DB::table('detail_orders')->get();
+        // $orders = DB::table('detail_orders')
+        //         ->where('id', $id)
+        //         ->get();
+        // // dd($order_details);
+        // return view('admin.detail',compact('orders'));
     }
 
 
