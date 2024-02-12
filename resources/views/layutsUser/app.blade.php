@@ -26,7 +26,11 @@
     <link href="{{ asset('template/assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
     <link href="{{ asset('template/assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
     <link href="{{ asset('template/assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
-
+    {{-- Template Shopping --}}
+    <link href="{{ asset('templateshop/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="{{ asset('templateshop/css/tiny-slider.css') }}" rel="stylesheet">
+    <link href="{{ asset('templateshop/css/style.css') }}" rel="stylesheet">
     <!-- Template Main CSS File -->
     <link href="{{ asset('template/assets/css/style.css') }}" rel="stylesheet">
 
@@ -53,16 +57,20 @@
     </div>
 </body>
 @stack('script')
-<script src="{{ asset('template/assets/vendor/purecounter/purecounter_vanilla.js')}}"></script>
-<script src="{{ asset('template/assets/vendor/aos/aos.js')}}"></script>
-<script src="{{ asset('template/assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-<script src="{{ asset('template/assets/vendor/glightbox/js/glightbox.min.js')}}"></script>
-<script src="{{ asset('template/assets/vendor/isotope-layout/isotope.pkgd.min.js')}}"></script>
-<script src="{{ asset('template/assets/vendor/swiper/swiper-bundle.min.js')}}"></script>
-<script src="{{ asset('template/assets/vendor/waypoints/noframework.waypoints.js')}}"></script>
-<script src="{{ asset('template/assets/vendor/php-email-form/validate.js')}}"></script>
+<script src="{{ asset('template/assets/vendor/purecounter/purecounter_vanilla.js') }}"></script>
+<script src="{{ asset('template/assets/vendor/aos/aos.js') }}"></script>
+<script src="{{ asset('template/assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('template/assets/vendor/glightbox/js/glightbox.min.js') }}"></script>
+<script src="{{ asset('template/assets/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
+<script src="{{ asset('template/assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
+<script src="{{ asset('template/assets/vendor/waypoints/noframework.waypoints.js') }}"></script>
+<script src="{{ asset('template/assets/vendor/php-email-form/validate.js') }}"></script>
 
 <!-- Template Main JS File -->
-<script src="{{ asset('template/assets/js/main.js')}}"></script>
+<script src="{{ asset('template/assets/js/main.js') }}"></script>
+{{-- Template Shopping --}}
+<script src="{{ asset('templateshop/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{ asset('templateshop/js/tiny-slider.js')}}"></script>
+<script src="{{ asset('templateshop/js/custom.js')}}"></script>
 
 </html>

@@ -2,7 +2,7 @@
     <div class="container d-flex justify-content-between align-items-center">
 
         <div class="logo">
-            <h1 class="text-light"><a href=""><span>MU-TAE-CUTE</span></a></h1>
+            <h1 class="text-light"><a href="{{route('Home')}}"><span>MU-TAE-CUTE</span></a></h1>
             <!-- Uncomment below if you prefer to use an image logo -->
             <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
         </div>
@@ -19,6 +19,7 @@
                         <li class="dropdown"><a href="#"><span>หินทับทิม</span></a></li>
                     </ul>
                 </li> --}}
+                <li><a href="{{route('page.shopping')}}">Shopping</a></li>
                 <li><a href="">Services</a></li>
                 <li class="dropdown"><a href="">Proflie</a>
                     <ul>
@@ -29,6 +30,10 @@
                 </li>
 
                 <i class="bi bi-list mobile-nav-toggle"></i>
+            </ul>
+            <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
+                <li><a class="nav-link" href="{{route('shop.cart')}}"><i class="fa fa-shopping-cart" aria-hidden="true" style="font-size:18px;"></i></a></li>
+            </ul>
         </nav><!-- .navbar -->
 
     </div>
