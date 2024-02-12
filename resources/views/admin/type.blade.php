@@ -41,41 +41,7 @@
                 {{-- </table> --}}
         </div>
 
-        {{-- เพิ่มชนิดสินค้า Modal --}}
-        <div class="modal fade" id="addtypeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
 
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">เพิ่มชนิดสินค้า</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form method="POST" action="/addtype">
-                        @csrf
-                        <div class="modal-body">
-                            <div class="box-body">
-                                <div class="form-group row">
-                                    <label for="inputEmail3"
-                                        class="col-sm-4 col-form-label text-right">ชื่อชนิดสินค้า</label>
-                                    <div class="col-sm-6">
-                                        <input type="text" class="form-control" placeholder="" id="type_name"
-                                            name="type_name" required>
-                                        <p class="text-danger mt-1 name_err"></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div><button type="submit" class="btn btn-success my-2 mx-3">บันทึก</button></div>
-                </div>
-                <input type="hidden" class="form-control" id="type_id" name="type_id" placeholder="" autocomplete="off"
-                    value="">
-                </form>
-            </div>
-        </div>
-        {{-- สิ้นสุดเพิ่มชนิดสินค้า Modal --}}
 
         {{-- Edit Modal --}}
         <div class="modal fade" id="edittypeModal{{ $dd->id }}" tabindex="-1" role="dialog"
@@ -116,6 +82,41 @@
         {{-- สิ้นสุด Edit Modal --}}
         @endforeach
         </table>
+        {{-- เพิ่มชนิดสินค้า Modal --}}
+        <div class="modal fade" id="addtypeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">เพิ่มชนิดสินค้า</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form method="POST" action="/addtype">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="box-body">
+                                <div class="form-group row">
+                                    <label for="inputEmail3"
+                                        class="col-sm-4 col-form-label text-right">ชื่อชนิดสินค้า</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" placeholder="" id="type_name"
+                                            name="type_name" required>
+                                        <p class="text-danger mt-1 name_err"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div><button type="submit" class="btn btn-success my-2 mx-3">บันทึก</button></div>
+                </div>
+                <input type="hidden" class="form-control" id="type_id" name="type_id" placeholder="" autocomplete="off"
+                    value="">
+                </form>
+            </div>
+        </div>
+        {{-- สิ้นสุดเพิ่มชนิดสินค้า Modal --}}
     </section>
 @endsection
 {{-- @push('script')

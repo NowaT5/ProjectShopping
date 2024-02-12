@@ -9,7 +9,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\DetailOrderController;
 use App\Http\Controllers\NewEmployeeController;
 use App\Http\Controllers\EmployeeController;
-
+use App\Http\Controllers\CartController;
 
 // front
 use App\Http\Controllers\LoginController;
@@ -76,3 +76,6 @@ Route::get('/page',[PageUserController::class,'index'])->name('Home');
 Route::get('/about',[PageUserController::class,'about'])->name('About');
 Route::get('/portfolio',[PageUserController::class,'portfolio'])->name('Portfolio');
 Route::get('/portfoliodetails',[PageUserController::class,'portfoliodetails'])->name('Portfoliodetails');
+Route::get('/page/shopping',[PageUserController::class,'shopping'])->name('page.shopping');
+
+Route::get('/shopping/cart',[CartController::class,'cart'])->name('shop.cart');
