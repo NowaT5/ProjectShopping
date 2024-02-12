@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Product_type;
 use App\Models\Type;
+use App\Models\Order;
+use App\Models\DetailOrder;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -177,5 +179,16 @@ class ProductController extends Controller
     {
         Product::find($id)->delete();
         return redirect()->back();
+    }
+    ////////////////// dashboard
+    public function index()
+    {
+        $products = Product::all();
+        $detailorders = DetailOrder::all();
+        // $products = DB::table('products')->get();
+        // $product_types = DB::table('product_types')->get();
+        // $orders        = DB::table('orders')->get();
+        // $product = Product::all();
+        return view('admin.index', compact('products', 'detailorders'));
     }
 }

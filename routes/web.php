@@ -33,7 +33,7 @@ use App\Http\Controllers\PageUserController;
 Route::get('/',[LoginController::class,'index'])->name('login');
 Route::get('/registers',[LoginController::class,'register'])->name('register');
 
-Route::get('/admin',[AdminController::class,'index'])->name('page'); //หน้าแดชบอร์ด
+Route::get('/admin',[ProductController::class,'index'])->name('page'); //หน้าแดชบอร์ด
 
 //Route User
 Route::get('/user',[AdminController::class,'user'])->name('user'); // รายชื่อลูกค้า
