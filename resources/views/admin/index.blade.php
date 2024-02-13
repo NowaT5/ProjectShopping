@@ -5,7 +5,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-6">
-                {{-- <div class="card">
+                <div class="card">
                     <div class="card-header border-0">
                         <div class="d-flex justify-content-between">
                             <h3 class="card-title">Online Store Visitors</h3>
@@ -14,16 +14,19 @@
                     </div>
                     <div class="card-body">
                         <div class="d-flex">
+                            @foreach ($detailorders as $detailorder)
+
                             <p class="d-flex flex-column">
-                                <span class="text-bold text-lg">820</span>
+                                <span class="text-bold text-lg">{{ $detailorder->price }}</span>
                                 <span>Visitors Over Time</span>
                             </p>
                             <p class="ml-auto d-flex flex-column text-right">
                                 <span class="text-success">
-                                    <i class="fas fa-arrow-up"></i> 12.5%
+                                    <i class=""></i>
                                 </span>
-                                <span class="text-muted">Since last week</span>
+                                <span class="text-muted"></span>
                             </p>
+                            @endforeach
                         </div>
 
                         <div class="position-relative mb-4">
@@ -46,9 +49,12 @@
                             <span>
                                 <i class="fas fa-square text-gray"></i> Last Week
                             </span>
+
                         </div>
+
                     </div>
-                </div> --}}
+
+                </div>
 
                 {{-- ยอดขายแต่ละ product --}}
                 <div class="card">
@@ -75,14 +81,13 @@
                             </thead>
                             <tbody>
                                 @foreach ($products as $product)
-
                                     {{-- ดึงข้อมูลตำแหน่งพนักงาน --}}
                                     {{-- @php
                                         $detailorder = DB::table('detail_orders')
                                             ->where('id', $product->order_id)
                                             ->get();
                                     @endphp --}}
-                                    
+
                                     <tr>
                                         <td>{{ $product->product_name }}</td>
                                         <td>
@@ -228,15 +233,18 @@
                     </div>
                     <div class="card-body">
                         <div class="d-flex">
+                            <?php $totalSell = $detailorders->sum('price'); ?>
                             <p class="d-flex flex-column">
-                                <span class="text-bold text-lg">$18,230.00</span>
-                                <span>Sales Over Time</span>
+                                <span class="text-bold text-lg">{{ $totalSell }} baht</span>
+                                <span>Sell over time</span>
                             </p>
+                            <?php $LW_order = $orders->where('product_id', $product->id)->sum('quantity'); ?>
+                            <?php $LW_sell = $detailorders->where('created_at = INTERVAL 1 WEEK) and now()')->sum('price'); ?>
                             <p class="ml-auto d-flex flex-column text-right">
                                 <span class="text-success">
-                                    <i class="fas fa-arrow-up"></i> 33.1%
+                                    <i class=""></i>
                                 </span>
-                                <span class="text-muted">Since last month</span>
+                                <span class="text-muted">Since last week</span>
                             </p>
                         </div>
 

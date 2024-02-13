@@ -187,8 +187,8 @@ class ProductController extends Controller
         $detailorders = DetailOrder::all();
         // $products = DB::table('products')->get();
         // $product_types = DB::table('product_types')->get();
-        // $orders        = DB::table('orders')->get();
+        $orders        = Order::all();
         // $product = Product::all();
-        return view('admin.index', compact('products', 'detailorders'));
+        return view('admin.index', compact('products', 'detailorders', 'orders'));
     }
 }
