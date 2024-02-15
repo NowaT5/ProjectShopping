@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\Tambon;
 
 // back
 use App\Http\Controllers\AdminController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\DetailOrderController;
 use App\Http\Controllers\NewEmployeeController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\TambonController;
 
 // front
 use App\Http\Controllers\LoginController;
@@ -79,3 +81,11 @@ Route::get('/portfoliodetails',[PageUserController::class,'portfoliodetails'])->
 Route::get('/page/shopping',[PageUserController::class,'shopping'])->name('page.shopping');
 
 Route::get('/shopping/cart',[CartController::class,'cart'])->name('shop.cart');
+
+// api ดึงจังหวัด
+Route::get('/tambon', function () {
+    $provinces = Tambon::select('province')->distinct()->get();
+    $amphoes = Tambon::select('amphoe')->distinct()->get();
+    $tambons = Tambon::select('tambon')->distinct()->get();
+    return view("tambon/index", compact('provinces','amphoes','tambons'));
+});
