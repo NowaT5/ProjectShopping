@@ -2,6 +2,10 @@
 
 @section('title', 'page')
 @section('content')
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-6">
@@ -14,19 +18,20 @@
                     </div>
                     <div class="card-body">
                         <div class="d-flex">
-                            @foreach ($detailorders as $detailorder)
 
-                            <p class="d-flex flex-column">
-                                <span class="text-bold text-lg">{{ $detailorder->price }}</span>
-                                <span>Visitors Over Time</span>
-                            </p>
-                            <p class="ml-auto d-flex flex-column text-right">
-                                <span class="text-success">
-                                    <i class=""></i>
-                                </span>
-                                <span class="text-muted"></span>
-                            </p>
-                            @endforeach
+                            <?php $productOrder = $detailorders->sum('price'); ?>
+
+                                <p class="d-flex flex-column">
+                                    <span class="text-bold text-lg">{{ ($productOrder)}}</span>
+                                    <span>Visitors Over Time</span>
+                                </p>
+                                <p class="ml-auto d-flex flex-column text-right">
+                                    <span class="text-success">
+                                        <i class=""></i>
+                                    </span>
+                                    <span class="text-muted"></span>
+                                </p>
+
                         </div>
 
                         <div class="position-relative mb-4">
@@ -38,22 +43,40 @@
                                     <div class=""></div>
                                 </div>
                             </div>
-                            <canvas id="visitors-chart" height="220" width="444"
-                                style="display: block; height: 200px; width: 404px;"
-                                class="chartjs-render-monitor"></canvas>
+                            <canvas id="totalsales"></canvas>
                         </div>
-                        <div class="d-flex flex-row justify-content-end">
+                        {{-- <div class="d-flex flex-row justify-content-end">
                             <span class="mr-2">
                                 <i class="fas fa-square text-primary"></i> This Week
                             </span>
                             <span>
                                 <i class="fas fa-square text-gray"></i> Last Week
                             </span>
-
-                        </div>
-
+                        </div> --}}
                     </div>
 
+                    <script>
+                        const ctx = document.getElementById('totalsales');
+
+                        new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                                datasets: [{
+                                    label: 'Total sale per Product',
+                                    data: [12, 19, 3, 5, 2, 3],
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    y: {
+                                        beginAtZero: true
+                                    }
+                                }
+                            }
+                        });
+                    </script>
                 </div>
 
                 {{-- ยอดขายแต่ละ product --}}
