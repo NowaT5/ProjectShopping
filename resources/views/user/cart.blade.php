@@ -35,7 +35,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($products as $dd)
+                                    @foreach ($viewCart as $dd)
+                                    @php
+                                        $product = DB::table('products')
+                                                ->where('id', $dd->product_id)
+                                                ->first();
+                                    @endphp
                                     <tr>
                                         <td class="product-thumbnail">
                                             <img src="{{ asset('upload/'.$dd->product_image)}}" alt="Image" class="img-fluid">

@@ -81,6 +81,7 @@ Route::get('/portfoliodetails',[PageUserController::class,'portfoliodetails'])->
 Route::get('/page/shopping',[PageUserController::class,'shopping'])->name('page.shopping');
 
 Route::get('/shopping/cart',[CartController::class,'cart'])->name('shop.cart');
+Route::post('/shopping/cart/{id}',[CartController::class,'in_cart'])->name('shop.in_cart');
 
 // api ดึงจังหวัด
 Route::get('/tambon', function () {
