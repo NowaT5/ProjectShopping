@@ -33,20 +33,22 @@
                                 <tbody>
                                     @if ($order)
                                         @foreach ($order->order_detail as $dd)
-                                        @php
-                                             $products = DB::table('products')
-                                                ->where('id', $dd->product_id)
-                                                ->first();
-                                        @endphp
+                                            @php
+                                                $products = DB::table('products')
+                                                    ->where('id', $dd->product_id)
+                                                    ->first();
+                                            @endphp
                                             <tr>
                                                 <td class="product-thumbnail">
-                                                    <img src="{{ asset('upload/'.$products->product_image)}}" alt="Image" class="img-fluid">
+                                                    <img src="{{ asset('upload/' . $products->product_image) }}"
+                                                        alt="Image" class="img-fluid">
                                                 </td>
                                                 <td class="product-name">
-                                                    <h2 class="h5 text-black">{{$products->product_name}}</h2>
+                                                    <h2 class="h5 text-black">{{ $products->product_name }}</h2>
                                                 </td>
                                                 <td>{{ $dd->price }}</td>
-                                                <td>{{$dd->quantity}}</td>
+                                                <td>{{ $dd->quantity }}
+                                                </td>
                                                 {{-- <td>
                                                     <div class="input-group mb-3 d-flex align-items-center quantity-container"
                                                         style="max-width: 120px;">
@@ -64,8 +66,9 @@
                                                         </div>
                                                     </div>
                                                 </td> --}}
-                                                <td>{{$dd->quantity * $dd->price}}</td>
-                                                <td><a href="{{route('del.in_cart', $dd->id)}}" class="btn btn-black btn-sm">ลบ</a></td>
+                                                <td>{{ $dd->quantity * $dd->price }}</td>
+                                                <td><a href="{{ route('del.in_cart', $dd->id) }}"
+                                                        class="btn btn-black btn-sm">ลบ</a></td>
                                             </tr>
                                         @endforeach
                                     @endif

@@ -77,7 +77,7 @@ class CartController extends Controller
         ]);
 
 
-        return redirect()->route('shop.cart');
+        return redirect()->route('page.shopping');
     }
     public function del_inCart($id){
         // dd($id);
