@@ -13,6 +13,7 @@ class Order extends Model
     //     return $this->belongsTo(order::class, 'status_payment_id');
     // }
     protected $guarded = [];
+    
     public function order_detail()
     {
         return $this->hasMany(DetailOrder::class);

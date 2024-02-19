@@ -65,7 +65,7 @@
                                                     </div>
                                                 </td> --}}
                                                 <td>{{$dd->quantity * $dd->price}}</td>
-                                                <td><a href="#" class="btn btn-black btn-sm">X</a></td>
+                                                <td><a href="{{route('del.in_cart', $dd->id)}}" class="btn btn-black btn-sm">ลบ</a></td>
                                             </tr>
                                         @endforeach
                                     @endif

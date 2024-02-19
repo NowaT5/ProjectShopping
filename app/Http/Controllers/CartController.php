@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
-    public function cart()
+    public function cart() // เลือกสินค้า ลงตระกร้า
     {
         // $products = Product::all();
         // $totalOrder = $products->count();
@@ -33,7 +33,8 @@ class CartController extends Controller
                 $orderDetail->update([
                     'quantity' => $amountNew
                 ]);
-            } else {
+            }
+            else {
                 $prepareCartDetail = [
                     'order_id' => $order->id,
                     'product_id' => $product->id,
@@ -49,7 +50,6 @@ class CartController extends Controller
                 // 'total'  => $request->price,
                 'user_id' => Auth::id()
             ];
-
 
 
             $order = Order::create($prepareCart);
@@ -78,5 +78,11 @@ class CartController extends Controller
 
 
         return redirect()->route('shop.cart');
+    }
+    public function del_inCart($id){
+        // dd($id);
+        DetailOrder::find($id)->delete();
+        // dd($id);
+        return redirect('/shopping/cart') ;
     }
 }
