@@ -10,8 +10,5 @@ use App\Models\Product;
 class DetailOrder extends Model
 {
     use HasFactory;
-    public function detailorder()
-    {
-        return $this->belongsTo(detail_orders::class,'order_id', 'product_id');
-    }
+    protected $guarded = [];
 }

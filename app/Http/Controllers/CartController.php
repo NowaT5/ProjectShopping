@@ -9,33 +9,74 @@ use App\Models\Product_type;
 use App\Models\Type;
 use App\Models\Order;
 use App\Models\DetailOrder;
-
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
-
 {
-    public function cart($carts)
+    public function cart()
     {
         // $products = Product::all();
         // $totalOrder = $products->count();
-        $viewCart = $carts;
 
-        return view('user.cart', compact('viewCart'));
+       // 0 = ตะกร้า , 1 = เช็คเอ้า
+       $order = Order::where('user_id', Auth::id())->where('status', 0)->first();
+       return view('user.cart')->with('order', $order);
     }
-    public function in_cart(Request $request,$id)
+    public function in_cart(Request $request)
     {
+        $product = Product::find($request->id);
+        $order = Order::where('user_id', Auth::id())->where('status', 0)->first();
+        if ($order) {
+            $orderDetail = $order->order_detail()->where('product_id', $product->id)->first();
+            if ($orderDetail) {
+                $amountNew = $orderDetail->quantity + 1;
+                $orderDetail->update([
+                    'quantity' => $amountNew
+                ]);
+            } else {
+                $prepareCartDetail = [
+                    'order_id' => $order->id,
+                    'product_id' => $product->id,
+                    // 'product_name' => $product->product_name,
+                    'quantity' => 1,
+                    'price' => $product->product_price,
+                ];
+                $orderDetail = DetailOrder::create($prepareCartDetail);
+            }
+        } else {
+            $prepareCart = [
+                'status' => 0,
+                // 'total'  => $request->price,
+                'user_id' => Auth::id()
+            ];
 
-        $carts =
-        [
-            $request->input($id)
-        ];
 
-        $new_order = new DetailOrder;
-        $new_order->product_id = $request->id;
-        $new_order->type_id = $request->type_id;
-        $new_order->save();
 
-        // dd($cart);
-        return view('user.cart',compact('carts'));
+            $order = Order::create($prepareCart);
+
+            $product = Product::find($request->product_id);
+            $prepareCartDetail = [
+                'order_id' => $order->id,
+                'product_id' => $product->product_id,
+                // 'product_name' => $product->name,
+                'quantity' => 1,
+                'price' => $product->product_price,
+            ];
+            $orderDetail = DetailOrder::create($prepareCartDetail);
+        }
+
+        $totalRaw = 0;
+        $total = $order->order_detail->map(function ($orderDetail) use ($totalRaw) {
+            // totalRaw = totalRaw +  $orderDetail->amount * $orderDetail->price;
+            $totalRaw += $orderDetail->quantity * $orderDetail->price;
+            return $totalRaw;
+        })->toarray();
+
+        $order->update([
+            'total' => array_sum($total)
+        ]);
+
+
+        return redirect()->route('shop.cart');
     }
 }
