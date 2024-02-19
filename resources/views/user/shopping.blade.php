@@ -29,10 +29,10 @@
                                         class="img-fluid product-thumbnail">
                                     <h3 class="product-title">{{ $dd->product_name }}</h3>
                                     <strong class="product-price">{{ $dd->product_price }}</strong>
-
-                                    <span class="icon-cross">
+                                    <input type="hidden" name="type_id" id="type_id" value="{{$dd->type_id}}">
+                                    <button class="icon-cross" type="submit">
                                         <img src="{{ asset('templateshop/images/cross.svg') }}" class="img-fluid">
-                                    </span>
+                                    </button>
                                 </a>
                             </form>
                         </div>
