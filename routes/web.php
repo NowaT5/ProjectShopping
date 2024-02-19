@@ -12,6 +12,8 @@ use App\Http\Controllers\NewEmployeeController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\TambonController;
+use App\Http\Controllers\DashboardController;
+
 
 // front
 use App\Http\Controllers\LoginController;
@@ -35,7 +37,7 @@ use App\Http\Controllers\PageUserController;
 Route::get('/',[LoginController::class,'index'])->name('login');
 Route::get('/registers',[LoginController::class,'register'])->name('register');
 
-Route::get('/admin',[ProductController::class,'index'])->name('page'); //หน้าแดชบอร์ด
+Route::get('/admin',[DashboardController::class,'index'])->name('dashboard'); //หน้าแดชบอร์ด
 
 //Route User
 Route::get('/user',[AdminController::class,'user'])->name('user'); // รายชื่อลูกค้า

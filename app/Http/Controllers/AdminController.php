@@ -13,10 +13,10 @@ use Illuminate\Support\Facades\DB;
 class AdminController extends Controller
 {
     // หน้าแดชบอร์ด
-    public function index()
-    {
-        return view('admin.index');
-    }
+    // public function index()
+    // {
+    //     return view('admin.index');
+    // }
     // แสดงรายชื่อลูกค้า
     public function user()
     {
