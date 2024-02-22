@@ -29,12 +29,14 @@ class DashboardController extends Controller
 
         $orders = Order::all();
 
-
         $totalorders = $orders->where('status_payment_id',6 )->count();
+        $chart_total_order = $orders->where('status_payment_id',6 );
+        $dateorders = Order::where('created_at','2024');
         // $product = Product::all();
+        // dd($dateorders);
 
 
-        return view('admin.index', compact('products','detailorders', 'orders','productLabels','detailordersQuantity','totalorders'));
+        return view('admin.index', compact('products','detailorders', 'orders','productLabels','detailordersQuantity','totalorders','dateorders', 'chart_total_order'));
 
     }
 }

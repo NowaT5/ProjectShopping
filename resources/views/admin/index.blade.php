@@ -238,7 +238,7 @@
 
                             <p class="d-flex flex-column">
                                 <span>จำนวนคำสั่งซื้อ</span>
-                                <span class="text-bold text-lg">{{$totalorders}} รายการ</span>
+                                <span class="text-bold text-lg">{{ $totalorders }} รายการ</span>
 
                             </p>
 
@@ -259,9 +259,7 @@
                                     <div class=""></div>
                                 </div>
                             </div>
-                            <canvas id="totalorders" height="220" width="444"
-                                style="display: block; height: 200px; width: 404px;"
-                                class="chartjs-render-monitor"></canvas>
+                            <canvas id="totalorders" height="220" width="444"></canvas>
                         </div>
                         <div class="d-flex flex-row justify-content-end">
                             <span class="mr-2">
@@ -333,14 +331,44 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
+        // กราฟยอดขาย รายสินค้า
         const ctx = document.getElementById('totalsales');
-
+        // console.log('xxx'+ $detailordersQuantity)
         new Chart(ctx, {
             type: 'bar',
             data: {
                 labels: {!! json_encode($productLabels) !!},
                 datasets: [{
                     label: 'Total Sales',
+                    data: {!! json_encode($detailordersQuantity) !!},
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)', // สีพื้นหลังกราฟ
+                    borderColor: 'rgba(255, 99, 132, 1)', // สีเส้นกราฟ
+                    borderWidth: 1
+                }]
+
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+    </script>
+
+    <script>
+        // กราฟยอดขายทั้งหมด
+        const ctx1 = document.getElementById('totalorders');
+
+
+        new Chart(ctx1, {
+            type: 'line',
+            data: {
+                labels: {!! json_encode($productLabels) !!},
+                datasets: [{
+                    label: 'Total Orders',
                     data: {!! json_encode($detailordersQuantity) !!},
                     backgroundColor: 'rgba(255, 99, 132, 0.2)', // สีพื้นหลังกราฟ
                     borderColor: 'rgba(255, 99, 132, 1)', // สีเส้นกราฟ
@@ -355,45 +383,5 @@
                 }
             }
         });
-    </script>
-    <script>
-        // กราฟยอดปิดการขาย
-        // const ctx = document.getElementById('totalorders');
-        // const labels = Utils.months({
-        //     count: 3,
-        //     reverse: true
-        // });
-        const data = {
-            labels: {!! $orders->pluck('created_at')->toJson() !!},
-            datasets: [{
-                label: 'Total Orders',
-                data: {!! json_encode($totalorders) !!},
-                fill: false,
-                borderColor: 'rgb(75, 192, 192)',
-                tension: 0.1
-            }]
-        };
-        const config = {
-            type: 'line',
-            data: data,
-        };
-        var myChart = new Chart(
-            document.getElementById('totalorders'),
-            config
-        );
-        // const ctx = document.getElementById('totalorders');
-        // const labels = Utils.months({
-        //     count: 7
-        // });
-        // const data = {
-        //     labels: {!! json_encode($productLabels) !!},
-        //     datasets: [{
-        //         label: 'Total Orders',
-        //         data: {!! json_encode($totalorders) !!},
-        //         fill: false,
-        //         borderColor: 'rgb(75, 192, 192)',
-        //         tension: 0.1
-        //     }]
-        // };
     </script>
 @endsection
