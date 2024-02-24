@@ -284,18 +284,31 @@
                             </a>
                         </div>
                     </div>
+
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
+                            <p class="text-danger text-xl">
+                                <i class="ion ion-ios-people-outline"></i>
+                            </p>
+                            <p class="d-flex flex-column text-right">
+                                <span class="font-weight-bold">
+                                    <i class="ion text-danger"></i> {{$total_users}}
+                                </span>
+                                <span class="text-muted">จำนวนผู้ซื้อ</span>
+                            </p>
+                        </div>
+
+                        {{-- <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
                             <p class="text-success text-xl">
                                 <i class="ion ion-ios-refresh-empty"></i>
                             </p>
                             <p class="d-flex flex-column text-right">
                                 <span class="font-weight-bold">
-                                    <i class="ion ion-android-arrow-up text-success"></i> 12%
+                                    <i class="ion text-success"></i> ยังไม่เสร็จ
                                 </span>
                                 <span class="text-muted">CONVERSION RATE</span>
                             </p>
-                        </div>
+                        </div> --}}
 
                         <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
                             <p class="text-warning text-xl">
@@ -303,24 +316,11 @@
                             </p>
                             <p class="d-flex flex-column text-right">
                                 <span class="font-weight-bold">
-                                    <i class="ion ion-android-arrow-up text-warning"></i> 0.8%
+                                    <i class="ion text-warning"></i> {{$salesRate}} %
                                 </span>
-                                <span class="text-muted">SALES RATE</span>
+                                <span class="text-muted">อัตราการขายสินค้า</span>
                             </p>
                         </div>
-
-                        <div class="d-flex justify-content-between align-items-center mb-0">
-                            <p class="text-danger text-xl">
-                                <i class="ion ion-ios-people-outline"></i>
-                            </p>
-                            <p class="d-flex flex-column text-right">
-                                <span class="font-weight-bold">
-                                    <i class="ion ion-android-arrow-down text-danger"></i> 1%
-                                </span>
-                                <span class="text-muted">REGISTRATION RATE</span>
-                            </p>
-                        </div>
-
                     </div>
                 </div>
             </div>
@@ -341,8 +341,8 @@
                 datasets: [{
                     label: 'Total Sales',
                     data: {!! json_encode($detailordersQuantity) !!},
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)', // สีพื้นหลังกราฟ
-                    borderColor: 'rgba(255, 99, 132, 1)', // สีเส้นกราฟ
+                    backgroundColor: 'rgba(173, 216, 230, 0.7)', // สีพื้นหลังกราฟ
+
                     borderWidth: 1
                 }]
 
@@ -355,7 +355,6 @@
                 }
             }
         });
-
     </script>
 
     <script>
@@ -366,12 +365,12 @@
         new Chart(ctx1, {
             type: 'line',
             data: {
-                labels: {!! json_encode($productLabels) !!},
+                labels: {!! json_encode($date_order) !!},
                 datasets: [{
                     label: 'Total Orders',
-                    data: {!! json_encode($detailordersQuantity) !!},
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)', // สีพื้นหลังกราฟ
-                    borderColor: 'rgba(255, 99, 132, 1)', // สีเส้นกราฟ
+                    data: {!! json_encode($chart_total_order) !!},
+                    backgroundColor: 'Green', // สีพื้นหลังกราฟ
+                    borderColor: 'Green', // สีเส้นกราฟ
                     borderWidth: 1
                 }]
             },
