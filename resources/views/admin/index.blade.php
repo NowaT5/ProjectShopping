@@ -7,10 +7,10 @@
         <div class="row">
             <div class="col-lg-6">
                 <div class="card">
-                    <div class="card-header border-0">
+                    <div class="card-header border-1">
                         <div class="d-flex justify-content-between">
-                            <h3 class="card-title">Online Store Visitors</h3>
-                            <a href="javascript:void(0);">View Report</a>
+                            <h3>ยอดขายรายสินค้า</h3>
+                            {{-- <a href="javascript:void(0);">View Report</a> --}}
                         </div>
                     </div>
                     <div class="card-body">
@@ -59,16 +59,16 @@
 
                 {{-- ยอดขายแต่ละ product --}}
                 <div class="card">
-                    <div class="card-header border-0">
-                        <h3 class="card-title">Products</h3>
-                        <div class="card-tools">
+                    <div class="card-header border-1">
+                        <h4 class="card-title">Top 5</h4>
+                        {{-- <div class="card-tools">
                             <a href="#" class="btn btn-tool btn-sm">
                                 <i class="fas fa-download"></i>
                             </a>
                             <a href="#" class="btn btn-tool btn-sm">
                                 <i class="fas fa-bars"></i>
                             </a>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="card-body table-responsive p-0">
                         <table class="table table-striped table-valign-middle">
@@ -227,26 +227,17 @@
             {{-- เปิดฝั่งขวา --}}
             <div class="col-lg-6">
                 <div class="card">
-                    <div class="card-header border-0">
+                    <div class="card-header border-1">
                         <div class="d-flex justify-content-between">
-                            <h3 class="card-title">Sales</h3>
-                            <a href="javascript:void(0);">View Report</a>
+                            <h3>ยอดขาย</h3>
+                            {{-- <a href="javascript:void(0);">View Report</a> --}}
                         </div>
                     </div>
                     <div class="card-body">
                         <div class="d-flex">
-
                             <p class="d-flex flex-column">
                                 <span>จำนวนคำสั่งซื้อ</span>
                                 <span class="text-bold text-lg">{{ $totalorders }} รายการ</span>
-
-                            </p>
-
-                            <p class="ml-auto d-flex flex-column text-right">
-                                <span class="text-success">
-                                    <i class=""></i>
-                                </span>
-                                <span class="text-muted">Since last week</span>
                             </p>
                         </div>
 
@@ -273,14 +264,14 @@
                 </div>
 
                 <div class="card">
-                    <div class="card-header border-0">
-                        <h3 class="card-title">Online Store Overview</h3>
+                    <div class="card-header border-1">
+                        <h3 class="card-title">Store Overview</h3>
                         <div class="card-tools">
-                            <a href="#" class="btn btn-sm btn-tool">
+                            {{-- <a href="#" class="btn btn-sm btn-tool">
                                 <i class="fas fa-download"></i>
                             </a>
                             <a href="#" class="btn btn-sm btn-tool">
-                                <i class="fas fa-bars"></i>
+                                <i class="fas fa-bars"></i> --}}
                             </a>
                         </div>
                     </div>
@@ -292,7 +283,7 @@
                             </p>
                             <p class="d-flex flex-column text-right">
                                 <span class="font-weight-bold">
-                                    <i class="ion text-danger"></i> {{$total_users}}
+                                    <i class="ion text-danger"></i> {{ $total_users }}
                                 </span>
                                 <span class="text-muted">จำนวนผู้ซื้อ</span>
                             </p>
@@ -316,7 +307,7 @@
                             </p>
                             <p class="d-flex flex-column text-right">
                                 <span class="font-weight-bold">
-                                    <i class="ion text-warning"></i> {{$salesRate}} %
+                                    <i class="ion text-warning"></i> {{ $salesRate }} %
                                 </span>
                                 <span class="text-muted">อัตราการขายสินค้า</span>
                             </p>
@@ -367,12 +358,20 @@
             data: {
                 labels: {!! json_encode($date_order) !!},
                 datasets: [{
-                    label: 'Total Orders',
-                    data: {!! json_encode($chart_total_order) !!},
-                    backgroundColor: 'Green', // สีพื้นหลังกราฟ
-                    borderColor: 'Green', // สีเส้นกราฟ
-                    borderWidth: 1
-                }]
+                        label: 'ยอดปิดการขาย',
+                        data: {!! json_encode($chart_total_order) !!},
+                        backgroundColor: 'Green', // สีพื้นหลังกราฟ
+                        borderColor: 'Green', // สีเส้นกราฟ
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'คำสั่งซื้อทั้งหมด',
+                        data: {!! json_encode($sum_all_orders) !!},
+                        backgroundColor: 'Red', // สีพื้นหลังกราฟ
+                        borderColor: 'Red', // สีเส้นกราฟ
+                        borderWidth: 1
+                    }
+                ]
             },
             options: {
                 scales: {

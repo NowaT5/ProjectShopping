@@ -31,6 +31,7 @@ class DashboardController extends Controller
         $orders = Order::all();
         $chart_total_order = $orders->where('status_payment_id',6 )->pluck('total');
         $date_order = $orders->where('status_payment_id',6 )->pluck('created_at');
+        $sum_all_orders = $orders->pluck('total');
 
         $totalorders = $orders->where('status_payment_id',6 )->count();//แสดงตัวเลขเฉยๆ
 
@@ -55,7 +56,7 @@ class DashboardController extends Controller
             $salesRate = 0;
         }
 
-        return view('admin.index', compact('products','detailorders', 'orders','productLabels','detailordersQuantity','totalorders','dateorders', 'chart_total_order','date_order','total_users','salesRate'));
+        return view('admin.index', compact('products','detailorders', 'orders','productLabels','detailordersQuantity','totalorders','dateorders', 'chart_total_order','date_order','total_users','salesRate', 'sum_all_orders'));
 
     }
     // public function calculateSalesRate($startDate, $endDate)
