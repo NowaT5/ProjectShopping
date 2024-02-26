@@ -76,7 +76,12 @@ class CartController extends Controller
             'total' => array_sum($total)
         ]);
 
-
+        // dd($order);
+        // if ($request->expectsJson()) {
+        //     return response()->json(['total' => $order]);
+        // } else {
+        //     return redirect()->route('page.shopping');
+        // }
         return redirect()->route('page.shopping');
     }
     public function del_inCart($id){
@@ -84,5 +89,8 @@ class CartController extends Controller
         DetailOrder::find($id)->delete();
         // dd($id);
         return redirect('/shopping/cart') ;
+    }
+    public function buy($id){
+
     }
 }

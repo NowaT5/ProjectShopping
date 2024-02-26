@@ -21,7 +21,6 @@
                             <p class="d-flex flex-column">
                                 <span>ยอดขายรวม</span>
                                 <span class="text-bold text-lg">{{ $productOrder }} บาท</span>
-
                             </p>
                             <p class="ml-auto d-flex flex-column text-right">
                                 <span class="text-success">
@@ -74,10 +73,10 @@
                         <table class="table table-striped table-valign-middle">
                             <thead>
                                 <tr>
-                                    <th>Product</th>
-                                    <th>Price</th>
-                                    <th>Sales</th>
-                                    <th>More</th>
+                                    <th>ชื่อสินค้า</th>
+                                    <th>ยอดขาย</th>
+                                    <th>ยอดขายต่อชิ้น</th>
+                                    {{-- <th>More</th> --}}
                                 </tr>
                             </thead>
                             <tbody>
@@ -97,13 +96,13 @@
                                         <td>
                                             <!-- ตัวอย่างการคำนวณยอดขาย -->
                                             <!-- จำนวน order ที่มี product นี้อยู่ -->
-                                            {{ $productOrder }} Sold
+                                            {{ $productOrder }} ชิ้น
                                         </td>
-                                        <td>
+                                        {{-- <td>
                                             <a href="#" class="text-muted">
                                                 <i class="fas fa-search"></i>
                                             </a>
-                                        </td>
+                                        </td> --}}
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -333,15 +332,13 @@
                     label: 'Total Sales',
                     data: {!! json_encode($detailordersQuantity) !!},
                     backgroundColor: 'rgba(173, 216, 230, 0.7)', // สีพื้นหลังกราฟ
-
                     borderWidth: 1
                 }]
-
             },
             options: {
                 scales: {
                     y: {
-                        beginAtZero: true
+                        beginAtZero: false
                     }
                 }
             }
@@ -351,7 +348,6 @@
     <script>
         // กราฟยอดขายทั้งหมด
         const ctx1 = document.getElementById('totalorders');
-
 
         new Chart(ctx1, {
             type: 'line',

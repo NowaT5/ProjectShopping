@@ -83,25 +83,34 @@
                     <div class="col-md-6 pl-5">
                         <div class="row justify-content-end">
                             <div class="col-md-7">
-                                <div class="row">
-                                    <div class="col-md-12 text-right border-bottom mb-5">
-                                        <h3 class="text-black h4 text-uppercase">Cart Totals</h3>
+                                @php
+                                    $gg = DB::table('orders')
+                                        ->where('id', $dd->id)
+                                        ->first();
+                                @endphp
+
+                                <form method="POST" action="#" enctype="multipart/form-data">
+                                    <div class="row">
+                                        <div class="col-md-12 text-right border-bottom mb-5">
+                                            <h3 class="text-black h4 text-uppercase">Cart Totals  </h3>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-md-6">
-                                        <span class="text-black">Subtotal</span>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <span class="text-black">Subtotal</span>
+                                        </div>
+                                        <div class="col-md-6 text-right">
+                                            <strong class="text-black"></strong>
+                                        </div>
                                     </div>
-                                    <div class="col-md-6 text-right">
-                                        <strong class="text-black"></strong>
+                                    <div class="row">
+                                        <div class="col-md-12 text-center">
+                                            <button class="btn btn-black btn-lg py-1 btn-block"
+                                                onclick="window.location='checkout.html'">Buy</button>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12 text-center">
-                                        <button class="btn btn-black btn-lg py-1 btn-block"
-                                            onclick="window.location='checkout.html'">Buy</button>
-                                    </div>
-                                </div>
+                                </form>
+
                             </div>
                         </div>
                     </div>

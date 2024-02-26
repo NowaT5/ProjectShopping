@@ -29,11 +29,11 @@ class DashboardController extends Controller
         // $product_types = DB::table('product_types')->get();
 
         $orders = Order::all();
-        $chart_total_order = $orders->where('status_payment_id',6 )->pluck('total');
-        $date_order = $orders->where('status_payment_id',6 )->pluck('created_at');
-        $sum_all_orders = $orders->pluck('total');
+        $date_order = $orders->where('status_payment_id',6 )->pluck('created_at'); // label line chart
+        $chart_total_order = $orders->where('status_payment_id',6 )->pluck('total'); // ยอดปิดการขาย
+        $sum_all_orders = $orders->pluck('total'); //ยอดคำสั่งซื้อทั้งหมด
 
-        $totalorders = $orders->where('status_payment_id',6 )->count();//แสดงตัวเลขเฉยๆ
+        $totalorders = $orders->where('status_payment_id',6 )->count();//ดึงไปแสดงตัวเลขเฉยๆ
 
         // $chart_total_order = $orders->where('status_payment_id',6 );
         $dateorders = Order::where('created_at','2024');
