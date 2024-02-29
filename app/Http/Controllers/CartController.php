@@ -90,7 +90,11 @@ class CartController extends Controller
         // dd($id);
         return redirect('/shopping/cart') ;
     }
-    public function buy($id){
 
+    public function checkout(Request $request)
+    {
+        $order = Order::find('total');
+        dd($order);
+        // return ('kuy') ;
     }
 }
