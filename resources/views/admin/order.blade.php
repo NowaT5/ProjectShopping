@@ -14,6 +14,7 @@
                         <th scope="col">วันที่</th>
                         <th scope="col">ชื่อลูกค้า</th>
                         <th scope="col">สลิปชำระเงิน</th>
+                        <th scope="col">ยอดรวม</th>
                         <th scope="col">สถานะการชำระเงิน</th>
                         <th scope="col">พนักงานที่ดูแล</th>
                     </tr>
@@ -34,9 +35,10 @@
                         <tr>
                             <td>{{ $dd->id }}</td>
                             <td>{{ $dd->created_at }}</td>
-                            <td>{{ $user->fname }} {{ $user->lname }}</td>
+                            <td>{{ $dd->user_id}}</td>
                             <td>{{ $dd->payment_image }}</td>
-                            <td>{{ $status_payment->status_payment_name }}</td>
+                            <td>{{ $dd->total }}</td>
+                            <td>{{ $status_payment->status_payment_name  }}</td>
                             <td>{{ $employee->fname }}</td>
                             <td>
                                 <a href="{{ route('detail', $dd->id) }}" role="button"
