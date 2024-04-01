@@ -53,12 +53,12 @@
                                                     </td>
                                                     <td>{{ $dd->price }}</td>
                                                     <td class="product-quantity">
-                                                        <button class="quantity-update small-button" data-id="{{ $dd->id }}"
-                                                            data-type="decrease"
+                                                        <button type="button" class="quantity-update small-button"
+                                                            data-id="{{ $dd->id }}" data-type="decrease"
                                                             style="border: none; outline: none;font-size: 15px;">-</button>
                                                         <span class="quantity">{{ $dd->quantity }}</span>
-                                                        <button class="quantity-update small-button" data-id="{{ $dd->id }}"
-                                                            data-type="increase"
+                                                        <button type="button" class="quantity-update small-button"
+                                                            data-id="{{ $dd->id }}" data-type="increase"
                                                             style="border: none; outline: none;font-size: 15px;">+</button>
 
                                                     </td>
@@ -80,7 +80,8 @@
                                                         </div>
                                                     </div>
                                                 </td> --}}
-                                                    <td>{{ $dd->quantity * $dd->price }}</td>
+                                                    <td id="total-{{ $dd->id }}">
+                                                        {{ number_format($dd->quantity * $dd->price, 2) }}</td>
                                                     <td><a href="{{ route('del.in_cart', $dd->id) }}"
                                                             class="btn btn-black btn-sm">ลบ</a></td>
                                                 </tr>
@@ -102,11 +103,14 @@
                                         <div class="row justify-content-end">
                                             <div class="col-md-7">
                                                 <div class="row">
+
                                                     <div class="col-md-12 text-right border-bottom mb-5">
                                                         <h3 class="text-black h4 text-uppercase">Cart Totals</h3>
                                                         <h2>{{ $order->total }}</h2>
                                                     </div>
+
                                                 </div>
+
                                                 <div class="row mb-3">
                                                     <div class="col-md-6 text-right">
                                                         <strong class="text-black"></strong>
@@ -159,32 +163,36 @@
     </main>
 @endsection
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('.quantity-update').forEach(function(button) {
-            button.addEventListener('click', function(e) {
-                const detailId = e.target.getAttribute('data-id');
-                const type = e.target.getAttribute('data-type'); // 'increase' หรือ 'decrease'
+    document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.quantity-update').forEach(function(button) {
+        button.addEventListener('click', function(e) {
+            e.preventDefault(); // ป้องกันการส่งฟอร์ม
 
-                fetch(`/cart/update/${detailId}`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}' // Laravel CSRF Token
-                        },
-                        body: JSON.stringify({
-                            type: type
-                        })
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            // อัปเดต UI ของจำนวนสินค้า
-                            e.target.parentElement.querySelector('.quantity').textContent =
-                                data.newQuantity;
-                            // อาจจะมีการอัปเดตราคารวมที่นี่ด้วย
-                        }
-                    });
+            const detailId = e.target.getAttribute('data-id');
+            const type = e.target.getAttribute('data-type'); // 'increase' หรือ 'decrease'
+
+            fetch(`/cart/update/${detailId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}' // Laravel CSRF Token
+                },
+                body: JSON.stringify({ type: type })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(data.success) {
+                    // อัปเดตจำนวนสินค้าใน UI
+                    const quantityElement = e.target.parentElement.querySelector('.quantity');
+                    quantityElement.textContent = data.newQuantity;
+
+                    // อัปเดตราคารวมใน UI
+                    const totalPriceElement = document.getElementById(`total-${detailId}`);
+                    const newTotalPrice = data.newQuantity * data.price; // 'data.price' ควรส่งมาจาก backend หรือคำนวณใน frontend ถ้ามีราคาต่อหน่วยใน data
+                    totalPriceElement.textContent = newTotalPrice.toFixed(2); // แสดงเป็นรูปแบบทศนิยม 2 ตำแหน่ง
+                }
             });
         });
     });
+});
 </script>

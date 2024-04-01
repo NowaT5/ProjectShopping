@@ -100,11 +100,11 @@ class CartController extends Controller
     public function checkout(Request $request)
     {
         $order = Order::Where('total');
-        dd($order);
-        // return ('kuy') ;
+        // dd($order);
+        return ('kuy') ;
     }
 
-    public function updateQuantity(Request $request, $detailId) // ปุ่มเพิ่มจำนวนในหน้า cart 
+    public function updateQuantity(Request $request, $detailId) // ปุ่มเพิ่มจำนวนในหน้า cart
 {
     $detail = DetailOrder::find($detailId);
     if (!$detail) {
