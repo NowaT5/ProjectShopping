@@ -25,6 +25,12 @@ class CartController extends Controller
     public function in_cart(Request $request)
     {
         $product = Product::find($request->id);
+        if (!$product) {
+            // หากไม่พบ Product, ส่งกลับ response หรือ redirect พร้อมข้อความแจ้งเตือน
+            // ส่งต่อตัวแปร $order ไปยัง view, แม้ว่าจะเป็น null ก็ตาม
+            return view('user.cart')->with('order', $order);
+        }
+
         $order = Order::where('user_id', Auth::id())->where('status', 0)->first();
         if ($order) {
             $orderDetail = $order->order_detail()->where('product_id', $product->id)->first();
@@ -93,8 +99,27 @@ class CartController extends Controller
 
     public function checkout(Request $request)
     {
-        $order = Order::find('total');
+        $order = Order::Where('total');
         dd($order);
         // return ('kuy') ;
     }
+
+    public function updateQuantity(Request $request, $detailId) // ปุ่มเพิ่มจำนวนในหน้า cart 
+{
+    $detail = DetailOrder::find($detailId);
+    if (!$detail) {
+        return response()->json(['success' => false]);
+    }
+
+    if ($request->type == 'increase') {
+        $detail->quantity++;
+    } else if ($request->type == 'decrease' && $detail->quantity > 1) { // ตรวจสอบไม่ให้จำนวนน้อยกว่า 1
+        $detail->quantity--;
+    }
+
+    $detail->save();
+
+    return response()->json(['success' => true, 'newQuantity' => $detail->quantity]);
+}
+
 }

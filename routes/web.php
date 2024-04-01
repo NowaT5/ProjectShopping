@@ -87,6 +87,7 @@ Route::get('/shopping/cart',[CartController::class,'cart'])->name('shop.cart');
 Route::post('/shopping/cart/{id}',[CartController::class,'in_cart'])->name('shop.in_cart');
 Route::get('/delin_cart/{id}',[CartController::class,'del_inCart'])->name('del.in_cart'); // ลบ สินค้าในตระกร้า
 Route::post('/shopping/checkout',[CartController::class,'checkout'])->name('shop.checkout'); // ปุ่มBUY
+Route::post('/cart/update/{detail}', 'CartController@updateQuantity')->name('cart.update'); // ปุ่มเพิ่มจำนวนในหน้า cart 
 
 // api ดึงจังหวัด
 Route::get('/tambon', function () {

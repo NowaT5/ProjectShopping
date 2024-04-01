@@ -23,36 +23,47 @@
 
                     <div class="row mb-5">
                         <div class="site-blocks-table">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th class="product-thumbnail"></th>
-                                        <th class="product-name">Product</th>
-                                        <th class="product-price">Price</th>
-                                        <th class="product-quantity">Quantity</th>
-                                        <th class="product-total">Total</th>
-                                        <th class="product-remove">Remove</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @if ($order)
-                                        @foreach ($order->order_detail as $dd)
-                                            @php
-                                                $products = DB::table('products')
-                                                    ->where('id', $dd->product_id)
-                                                    ->first();
-                                            @endphp
-                                            <tr>
-                                                <td class="product-thumbnail">
-                                                    <img src="{{ asset('upload/' . $products->product_image) }}"
-                                                        alt="Image" class="img-fluid">
-                                                </td>
-                                                <td class="product-name">
-                                                    <h2 class="h5 text-black">{{ $products->product_name }}</h2>
-                                                </td>
-                                                <td>{{ $dd->price }}</td>
-                                                <td>{{ $dd->quantity }} </td>
-                                                {{-- <td>
+                            @if ($order && count($order->order_detail) > 0)
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th class="product-thumbnail"></th>
+                                            <th class="product-name">Product</th>
+                                            <th class="product-price">Price</th>
+                                            <th class="product-quantity">Quantity</th>
+                                            <th class="product-total">Total</th>
+                                            <th class="product-remove">Remove</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if ($order)
+                                            @foreach ($order->order_detail as $dd)
+                                                @php
+                                                    $products = DB::table('products')
+                                                        ->where('id', $dd->product_id)
+                                                        ->first();
+                                                @endphp
+                                                <tr>
+                                                    <td class="product-thumbnail">
+                                                        <img src="{{ asset('upload/' . $products->product_image) }}"
+                                                            alt="Image" class="img-fluid">
+                                                    </td>
+                                                    <td class="product-name">
+                                                        <h2 class="h5 text-black">{{ $products->product_name }}</h2>
+                                                    </td>
+                                                    <td>{{ $dd->price }}</td>
+                                                    <td class="product-quantity">
+                                                        <button class="quantity-update small-button" data-id="{{ $dd->id }}"
+                                                            data-type="decrease"
+                                                            style="border: none; outline: none;font-size: 15px;">-</button>
+                                                        <span class="quantity">{{ $dd->quantity }}</span>
+                                                        <button class="quantity-update small-button" data-id="{{ $dd->id }}"
+                                                            data-type="increase"
+                                                            style="border: none; outline: none;font-size: 15px;">+</button>
+
+                                                    </td>
+                                                    {{-- <td>{{ $dd->quantity }} </td> --}}
+                                                    {{-- <td>
                                                     <div class="input-group mb-3 d-flex align-items-center quantity-container"
                                                         style="max-width: 120px;">
                                                         <div class="input-group-prepend">
@@ -69,41 +80,50 @@
                                                         </div>
                                                     </div>
                                                 </td> --}}
-                                                <td>{{ $dd->quantity * $dd->price }}</td>
-                                                <td><a href="{{ route('del.in_cart', $dd->id) }}"
-                                                        class="btn btn-black btn-sm">ลบ</a></td>
-                                            </tr>
-                                        @endforeach
-                                    @endif
-                                </tbody>
-                            </table>
-                            <div class="row">
-                                <div class="col-md-6">
+                                                    <td>{{ $dd->quantity * $dd->price }}</td>
+                                                    <td><a href="{{ route('del.in_cart', $dd->id) }}"
+                                                            class="btn btn-black btn-sm">ลบ</a></td>
+                                                </tr>
+                                            @endforeach
+                                        @endif
+                                    </tbody>
+                                </table>
+                            @else
+                                <!-- แสดงข้อความว่าไม่มีสินค้าในตะกร้า -->
+                                <div class="alert alert-warning" role="alert">
+                                    <h2>ไม่มีสินค้าในตะกร้า</h2>
                                 </div>
-                                <div class="col-md-6 pl-5">
-                                    <div class="row justify-content-end">
-                                        <div class="col-md-7">
-                                            <div class="row">
-                                                <div class="col-md-12 text-right border-bottom mb-5">
-                                                    <h3 class="text-black h4 text-uppercase">Cart Totals </h3>
-                                                    <h2> {{ $order->total }} </h2>
+                            @endif
+                            @if ($order && count($order->order_detail) > 0)
+                                <div class="row">
+                                    <div class="col-md-6">
+                                    </div>
+                                    <div class="col-md-6 pl-5">
+                                        <div class="row justify-content-end">
+                                            <div class="col-md-7">
+                                                <div class="row">
+                                                    <div class="col-md-12 text-right border-bottom mb-5">
+                                                        <h3 class="text-black h4 text-uppercase">Cart Totals</h3>
+                                                        <h2>{{ $order->total }}</h2>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="row mb-3">
-                                                <div class="col-md-6 text-right">
-                                                    <strong class="text-black"></strong>
+                                                <div class="row mb-3">
+                                                    <div class="col-md-6 text-right">
+                                                        <strong class="text-black"></strong>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12 text-center">
-                                                    <button type='submit'
-                                                        class="btn btn-black btn-lg py-1 btn-block">Buy</button>
+                                                <div class="row">
+                                                    <div class="col-md-12 text-center">
+                                                        <button type='submit'
+                                                            class="btn btn-black btn-lg py-1 btn-block">Buy</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endif
+
                 </form>
             </div>
             {{-- <div class="row">
@@ -138,3 +158,33 @@
         </div>
     </main>
 @endsection
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.quantity-update').forEach(function(button) {
+            button.addEventListener('click', function(e) {
+                const detailId = e.target.getAttribute('data-id');
+                const type = e.target.getAttribute('data-type'); // 'increase' หรือ 'decrease'
+
+                fetch(`/cart/update/${detailId}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}' // Laravel CSRF Token
+                        },
+                        body: JSON.stringify({
+                            type: type
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            // อัปเดต UI ของจำนวนสินค้า
+                            e.target.parentElement.querySelector('.quantity').textContent =
+                                data.newQuantity;
+                            // อาจจะมีการอัปเดตราคารวมที่นี่ด้วย
+                        }
+                    });
+            });
+        });
+    });
+</script>
