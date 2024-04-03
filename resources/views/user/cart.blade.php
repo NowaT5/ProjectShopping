@@ -32,7 +32,7 @@
                                             <th class="product-price">Price</th>
                                             <th class="product-quantity">Quantity</th>
                                             <th class="product-total">Total</th>
-                                            <th class="product-remove">Remove</th>
+                                            <th class="product-remove"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -60,26 +60,8 @@
                                                         <button type="button" class="quantity-update small-button"
                                                             data-id="{{ $dd->id }}" data-type="increase"
                                                             style="border: none; outline: none;font-size: 15px;">+</button>
-
                                                     </td>
                                                     {{-- <td>{{ $dd->quantity }} </td> --}}
-                                                    {{-- <td>
-                                                    <div class="input-group mb-3 d-flex align-items-center quantity-container"
-                                                        style="max-width: 120px;">
-                                                        <div class="input-group-prepend">
-                                                            <button class="btn btn-outline-black decrease"
-                                                                type="button">&minus;</button>
-                                                        </div>
-                                                        <input type="text"
-                                                            class="form-control text-center quantity-amount" value="{{$dd->quantity}}"
-                                                            placeholder="" aria-label="Example text with button addon"
-                                                            aria-describedby="button-addon1">
-                                                        <div class="input-group-append">
-                                                            <button class="btn btn-outline-black increase"
-                                                                type="button">&plus;</button>
-                                                        </div>
-                                                    </div>
-                                                </td> --}}
                                                     <td id="total-{{ $dd->id }}">
                                                         {{ number_format($dd->quantity * $dd->price, 2) }}</td>
                                                     <td><a href="{{ route('del.in_cart', $dd->id) }}"
@@ -103,17 +85,9 @@
                                         <div class="row justify-content-end">
                                             <div class="col-md-7">
                                                 <div class="row">
-
                                                     <div class="col-md-12 text-right border-bottom mb-5">
                                                         <h3 class="text-black h4 text-uppercase">Cart Totals</h3>
                                                         <h2>{{ $order->total }}</h2>
-                                                    </div>
-
-                                                </div>
-
-                                                <div class="row mb-3">
-                                                    <div class="col-md-6 text-right">
-                                                        <strong class="text-black"></strong>
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -127,7 +101,6 @@
                                     </div>
                                 </div>
                             @endif
-
                 </form>
             </div>
             {{-- <div class="row">
@@ -136,19 +109,6 @@
                 <div class="col-md-6 pl-5">
                     <div class="row justify-content-end">
                         <div class="col-md-7">
-                            <div class="row">
-                                <div class="col-md-12 text-right border-bottom mb-5">
-                                    <h3 class="text-black h4 text-uppercase">Cart Totals </h3>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <span class="text-black">Subtotal</span>
-                                </div>
-                                <div class="col-md-6 text-right">
-                                    <strong class="text-black"></strong>
-                                </div>
-                            </div>
                             <div class="row">
                                 <div class="col-md-12 text-center">
                                     <button class="btn btn-black btn-lg py-1 btn-block"
@@ -163,36 +123,42 @@
     </main>
 @endsection
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('.quantity-update').forEach(function(button) {
-        button.addEventListener('click', function(e) {
-            e.preventDefault(); // ป้องกันการส่งฟอร์ม
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.quantity-update').forEach(function(button) {
+            button.addEventListener('click', function(e) {
+                e.preventDefault(); // ป้องกันการส่งฟอร์ม
 
-            const detailId = e.target.getAttribute('data-id');
-            const type = e.target.getAttribute('data-type'); // 'increase' หรือ 'decrease'
+                const detailId = e.target.getAttribute('data-id');
+                const type = e.target.getAttribute('data-type'); // 'increase' หรือ 'decrease'
 
-            fetch(`/cart/update/${detailId}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}' // Laravel CSRF Token
-                },
-                body: JSON.stringify({ type: type })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if(data.success) {
-                    // อัปเดตจำนวนสินค้าใน UI
-                    const quantityElement = e.target.parentElement.querySelector('.quantity');
-                    quantityElement.textContent = data.newQuantity;
+                fetch(`/cart/update/${detailId}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}' // Laravel CSRF Token
+                        },
+                        body: JSON.stringify({
+                            type: type
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            // อัปเดตจำนวนสินค้าใน UI
+                            const quantityElement = e.target.parentElement.querySelector(
+                                '.quantity');
+                            quantityElement.textContent = data.newQuantity;
 
-                    // อัปเดตราคารวมใน UI
-                    const totalPriceElement = document.getElementById(`total-${detailId}`);
-                    const newTotalPrice = data.newQuantity * data.price; // 'data.price' ควรส่งมาจาก backend หรือคำนวณใน frontend ถ้ามีราคาต่อหน่วยใน data
-                    totalPriceElement.textContent = newTotalPrice.toFixed(2); // แสดงเป็นรูปแบบทศนิยม 2 ตำแหน่ง
-                }
+                            // อัปเดตราคารวมใน UI
+                            const totalPriceElement = document.getElementById(
+                                `total-${detailId}`);
+                            const newTotalPrice = data.newQuantity * data
+                                .price; // 'data.price' ควรส่งมาจาก backend หรือคำนวณใน frontend ถ้ามีราคาต่อหน่วยใน data
+                            totalPriceElement.textContent = newTotalPrice.toFixed(
+                                2); // แสดงเป็นรูปแบบทศนิยม 2 ตำแหน่ง
+                        }
+                    });
             });
         });
     });
-});
 </script>
